@@ -1,0 +1,9 @@
+package main
+object Program
+    public func run {
+        var p = Person clone;
+        var String name = "Renato Araujo";        
+        p setName: name;
+        Out println: (p getName);
+    }
+end

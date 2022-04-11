@@ -1,0 +1,7 @@
+package main
+object Program
+    public func run {
+        var name = "Hello Person";     
+        name println;
+    }
+end
