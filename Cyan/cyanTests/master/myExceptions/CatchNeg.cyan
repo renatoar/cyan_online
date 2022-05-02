@@ -1,8 +1,0 @@
-package myExceptions
-
-object CatchNeg
-    func eval: (ExceptionNeg e) {
-        // Out println: "negative number";
-        TestException trace: "CatchNeg(" ++ e number ++ ")"
-    }
-end

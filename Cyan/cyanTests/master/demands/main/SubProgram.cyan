@@ -1,7 +1,0 @@
-package demands.main
-
-open
-object SubProgram extends Program 
-
-    
-end

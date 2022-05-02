@@ -1,9 +1,0 @@
-package abstractPackage
-
-abstract object A
-
-    abstract func run -> Int
-    abstract func run: Int a -> Int
-    abstract func run: Int a with: String s -> Int
-
-end

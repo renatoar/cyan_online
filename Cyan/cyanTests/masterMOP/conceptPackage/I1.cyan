@@ -1,7 +1,0 @@
-package conceptPackage
-
-interface I1
-    func i1_m1: Int -> String
-    func i1_m2: Int i1_m3: String
-    func i1_m4 -> String
-end

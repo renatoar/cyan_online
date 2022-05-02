@@ -1,7 +1,0 @@
-package myExceptions
-
-object ExceptionFive extends ExceptionNum
-    func init: Int _number {
-        super init: _number
-    }
-end

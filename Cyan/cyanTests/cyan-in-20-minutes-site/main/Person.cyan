@@ -1,8 +1,0 @@
-package main
-
-object Person(@property String name, @property Int age)
-    func init { 
-        name = "noname";
-        age = 0
-    }
-end

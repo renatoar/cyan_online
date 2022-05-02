@@ -1,8 +1,0 @@
-package main
-
-object Program
-
-    func run {
-    }
-
-end

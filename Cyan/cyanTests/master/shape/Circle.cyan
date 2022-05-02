@@ -1,6 +1,0 @@
-package shape
-
-object Circle  extends Shape
-    override
-    func draw { }
-end

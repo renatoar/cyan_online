@@ -1,5 +1,0 @@
-package inter
-
-interface IAA
-    func eq: String s s1: Int a -> Int
-end

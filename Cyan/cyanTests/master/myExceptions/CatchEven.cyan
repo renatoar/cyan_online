@@ -1,8 +1,0 @@
-package myExceptions
-
-object CatchEven
-    func eval: (ExceptionEven e) {
-        //Out println: "even number";
-        TestException trace: "CatchEven(" ++ e number ++ ")"
-    }
-end

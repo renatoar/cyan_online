@@ -1,9 +1,0 @@
-package generic02.ga
-
-object WithStrParam<U, V, W>
-    func U -> Char = 'a';
-    func V -> String = "z";
-    
-    func getStr -> String = "[" ++ ( @symbolToString(W) ) ++ "]";
-    
-end

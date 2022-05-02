@@ -1,6 +1,0 @@
-program at "C:\Cyan\cyanTests\metaobject"
-
-    package generic at "C:\Cyan\cyanTests\metaobject\generic"
-    package main at "C:\Cyan\cyanTests\metaobject\main"
-    package metaobjectTest at "C:\Cyan\cyanTests\metaobject\metaobjectTest"
-    package untainted at "C:\Cyan\cyanTests\metaobject\untainted"

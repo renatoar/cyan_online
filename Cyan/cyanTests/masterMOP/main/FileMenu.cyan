@@ -1,7 +1,0 @@
-package main
-
-object FileMenu
-
-    func open -> Int = 1;
-    
-end

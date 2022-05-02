@@ -1,6 +1,0 @@
-package demands.cp
-
-
-interface Openable
-    func open    
-end

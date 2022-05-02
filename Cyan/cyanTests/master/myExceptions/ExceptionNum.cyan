@@ -1,6 +1,0 @@
-package myExceptions
-
-open
-object ExceptionNum(Int _number) extends CyException
-    func number -> Int = _number;
-end

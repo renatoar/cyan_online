@@ -1,9 +1,0 @@
-package inter
-
-interface InterJ extends InterI
-    func sum: Int a 
-        mult: Int b 
-            -> Int
-    func sum: Int a, Int b 
-        mult: Int c -> Int
-end

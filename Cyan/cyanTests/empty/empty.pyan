@@ -1,7 +1,0 @@
-program 
-
-    package main at "C:\Dropbox\Cyan\cyanTests\empty\main"
-    package cyan.reflect at "C:\Dropbox\Cyan\lib\cyan\reflect"
-    package cyan.io at "C:\Dropbox\Cyan\lib\cyan\io"
-    package cyan.math at "C:\Dropbox\Cyan\lib\cyan\math"
-    

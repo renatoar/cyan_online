@@ -1,6 +1,0 @@
-package initNewTests
-
-object ProtoD extends ProtoC
-
-end
-

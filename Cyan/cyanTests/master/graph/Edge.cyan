@@ -1,7 +1,0 @@
-package graph
-
-@init(from, to)
-object Edge
-    @annot( #f1 ) @property Int from
-    @annot( #f2 ) @property Int to
-end

@@ -1,7 +1,0 @@
-package conceptPackage
-
-interface PE
-    func e_m1: Int -> String
-    func e_m2: Int e_m3: String
-    func e_m4 -> String
-end

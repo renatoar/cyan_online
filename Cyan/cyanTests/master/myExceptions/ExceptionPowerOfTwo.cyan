@@ -1,8 +1,0 @@
-package myExceptions
-
-object ExceptionPowerOfTwo extends ExceptionNum
-    func init {
-        super init: 2
-    }
-
-end

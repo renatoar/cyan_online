@@ -1,6 +1,0 @@
-package shape
-
-interface IColor
-    func color -> Int
-    func color: Int
-end

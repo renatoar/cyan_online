@@ -1,9 +1,0 @@
-package main
-
-
-object SubOtherRestrictOverrideTo extends SubRestrictOverrideTo
-
-    override
-    func myprint { }
-    
-end

@@ -1,8 +1,0 @@
-package generic02.ga
-
-object R<Int, shape.Square><shape.Circle>
-    func init { 
-    }
-    func str -> String = "Int-Square-Circle";
-    func getZero -> Int = 0;
-end

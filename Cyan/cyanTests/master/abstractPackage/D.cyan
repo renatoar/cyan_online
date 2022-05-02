@@ -1,8 +1,0 @@
-package abstractPackage
-
-abstract object D extends C 
-
-    abstract func m0: Int a m1: Char ch -> Int 
-    
-    
-end

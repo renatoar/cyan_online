@@ -1,9 +1,0 @@
-package unionTest
-
-
-object BoxOther implements IBox
-
-    override
-    func get -> BoxB|Nil = BoxB("ibox");
-    
-end

@@ -1,8 +1,0 @@
-package people
-
-
-interface IName
-
-    func getName -> String
-    
-end

@@ -1,6 +1,0 @@
-package generic02.gb
-
-interface I1<T>
-    func noop: I2<T> -> Array<T>
-    func succ: T n -> T
-end

@@ -1,1 +1,0 @@
-"C:\Program Files\Java\jdk1.8.0_241\bin\java" -cp "C:/Dropbox/Cyan/lib/sacilib.jar";"C:/Dropbox/Cyan/lib/cyanruntime.jar";"C:/Program Files/Java/jdk1.8.0_241/jre/lib/rt.jar";"C:\Dropbox\Cyan\lib\java-for-cyan_lang";"C:\Dropbox\Cyan\lib";"C:\Dropbox\Cyan\cyanTests\java-for-empty";"C:\Dropbox\Cyan\lib\cyanruntime.jar"  main.CompileCyanLang

@@ -1,9 +1,0 @@
-package abstractPackage
-
-abstract object AbstractA 
-    abstract func sum: mult: -> Int
-    abstract func sum: Int a mult: -> Int
-    abstract func sum: mult: Int b -> Int
-    abstract func sum: Int a mult: Int b -> Int
-    abstract func sum: Int a, Int b mult: Int c -> Int
-end

@@ -1,8 +1,0 @@
-program at "C:\Cyan\cyanTests\masterMOP"
-
-    package bank at "C:\Cyan\cyanTests\masterMOP\bank"
-    package conceptPackage at "C:\Cyan\cyanTests\masterMOP\conceptPackage"
-    package grammar at "C:\Cyan\cyanTests\masterMOP\grammar"
-    package main at "C:\Cyan\cyanTests\masterMOP\main"
-    package other at "C:\Cyan\cyanTests\masterMOP\other"
-    package testPluggableTypes at "C:\Cyan\cyanTests\masterMOP\testPluggableTypes"

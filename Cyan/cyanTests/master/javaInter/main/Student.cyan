@@ -1,9 +1,0 @@
-package javaInter.main
-
-object Student extends Person 
-
-    override
-    func myprint: String s {
-    }
-
-end

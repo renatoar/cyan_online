@@ -1,6 +1,0 @@
-package generic02.gb
-
-object Empty<M>
-
-end
-

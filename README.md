@@ -1,6 +1,6 @@
 # cyan_online
 
-Cyan Online é um projeto para disponibilizar o compilador Cyan na Web para ser usado por qualquer um na comunidade. 
+Cyan Online é um projeto com objetivo de levar o compilador Cyan para Web e ser usado por qualquer um na comunidade. 
 O projeto é composto por uma interface web simples construída em PHP que disponibiliza um editor e campo para input de argumentos para seu código Cyan, sendo possível compilar e verificar o resultado diretamente nesta interface. 
 O compilador Cyan que acompanha o projeto é usado para efetuar a compilação em tempo real e o PHP cuida de levar o código para ser compilado e trazer o resultado para a interface.
 

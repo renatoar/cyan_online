@@ -1,8 +1,0 @@
-package unionTest
-
-
-interface IBox
-
-    func get -> BoxB|Nil
-    
-end

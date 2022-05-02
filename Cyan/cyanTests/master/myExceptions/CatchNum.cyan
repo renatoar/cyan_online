@@ -1,8 +1,0 @@
-package myExceptions
-
-object CatchNum
-    func eval: (ExceptionNum e) {
-        // Out println: "number < 0, == 0, > 1000, or even";
-        TestException trace: "CatchNum(" ++ e number ++ ")"
-    }
-end

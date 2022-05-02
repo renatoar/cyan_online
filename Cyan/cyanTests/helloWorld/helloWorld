@@ -1,1 +1,0 @@
-"/usr/lib/jvm/java-11-openjdk-amd64/bin/java" -cp "/home/renato/Cyan/lib/cyan.lang.jar":"/home/renato/Cyan/lib":"/home/renato/Cyan/cyanTests/java-for-helloWorld":"/home/renato/Cyan/lib/cyanruntime.jar"  main.Project

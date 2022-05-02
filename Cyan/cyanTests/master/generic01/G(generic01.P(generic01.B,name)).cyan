@@ -1,8 +1,0 @@
-package generic01
-
-
-object G<generic01.P<generic01.B, name>>
-   
-   
-end
-

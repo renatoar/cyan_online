@@ -1,8 +1,0 @@
-package myExceptions
-
-object ExceptionTest1Int(Int _value) extends CyException 
-
-    func value -> Int = _value;
-    
-end
-
