@@ -27,6 +27,8 @@ Apache Web Server
 
 - Inicie o Apache Web Server
 
+- Acesse o Cyan Online em http://localhost/cyan_online
+
 ## Atualizar compilador Cyan
 
 Tanto as bibliotecas como o próprio compilador de Cyan estão localizados no diretório "Cyan/". Para atualizá-lo basta substituir qualquer arquivo deste diretório e copiar novamente para o diretório "/var/www/html" do servidor.
