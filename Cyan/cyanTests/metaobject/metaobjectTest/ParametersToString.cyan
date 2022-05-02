@@ -1,0 +1,35 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'parametersToString' takes any number of parameters
+  and produces a string with all of them. This is a demonstration
+  metaobject.
+*}
+open
+object ParametersToString
+    
+    func run {
+        var allParametersToString = @parametersToString( 
+            0,
+            'a',
+            "Newton",
+            Newton,  // identifier, counts as string
+            [ 0, 1, 2 ],
+            [ "zero" -> 0, "one" -> 1 ],
+            [. "Newton", 1643 .],
+            [. Newton, 1643 .],
+                // mixed literals
+
+            [ [. Newton, 1643 .], [. Turing, 1912 .] ],
+            [ 1 -> [ [. "one", "english".],  [. "um", "portugues"   .] ], 
+              2 -> [ [. "two", "english" .], [. "dois", "portugues" .] ] ]
+            ){*
+              Text of 'parameters'
+              more text
+             *};
+    
+        printexpr allParametersToString;
+    }
+end
+

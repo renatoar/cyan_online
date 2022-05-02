@@ -1,0 +1,17 @@
+package other
+
+/*
+@concept{*
+    R in [ S ]
+*}
+*/
+object G<R, S>
+
+    func teste {
+        
+        var R r = "error";
+        var S s = 0;
+        
+    }
+
+end

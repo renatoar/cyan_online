@@ -1,0 +1,10 @@
+package myExceptions
+
+object ExceptionZeroWithCatch extends ExceptionNum
+    func init {
+        super init: 0
+    }
+    func eval: ExceptionZeroWithCatch e {
+        TestException trace: "0-with-catch"
+    }
+end

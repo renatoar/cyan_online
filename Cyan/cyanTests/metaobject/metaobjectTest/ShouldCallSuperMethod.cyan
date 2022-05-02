@@ -1,0 +1,49 @@
+package metaobjectTest
+
+
+@doc{*
+  Metaobject 'shouldCallSuperMethod' is an action function. Its 
+  associated metaobject declares a method 'eval' that may be 
+  called by other metaobjects. It cannot be associated to 
+  an annotation:
+        // compile-time error
+        @shouldCallSuperMethod
+        
+  This action function can be called by method 'call:' of
+  Myan or Tyan (interpreted Cyan) or by the following 
+  statements:
+         WrEnv env = compiler.getEnv();
+         IActionFunction f = env.searchActionFunction("shouldCallSuperMethod");
+         f.eval(input);
+         
+  'input' is a saci.Tuple6 (saci is a Cyan Compiler package) whose elements 
+  are:
+    - the compiler passed as parameter to a metaobject method
+    - the metaobject
+    - the list of annotation parameters
+    - a symbol to be used if there is an error
+    - the current method
+    - the environment
+    
+  All of these parameters are automatically passed when using method
+  'call:' of Myan or Tyan, as in the example of annotation 'onOverride'
+  below.
+*}
+open
+object ShouldCallSuperMethod
+
+    @onOverride{*
+        // the overridden method should call 
+        // this method in its first statement
+        // shouldCallSuperMethod is an action function
+        // of package cyan.lang
+        call: #shouldCallSuperMethod;
+    *}
+    func run {
+    }
+
+end
+
+
+
+

@@ -1,0 +1,11 @@
+package context
+
+object SumPercent(Int sum) extends Function<Int, Nil>
+
+     override
+     func eval: Int x {
+          sum = sum + x
+     }
+     
+end
+

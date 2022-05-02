@@ -1,0 +1,14 @@
+package bank
+
+
+open
+object SpecialClient extends Client
+
+    func init: String name {
+        super init: name
+    }
+
+    override    
+    func withdraw: Int amount { }
+    
+end

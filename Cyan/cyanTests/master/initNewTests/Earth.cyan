@@ -1,0 +1,8 @@
+package initNewTests
+
+
+object Earth
+    private func init { } 
+    override
+    func clone -> Earth = Earth;
+end

@@ -1,0 +1,312 @@
+package javaInter.main
+
+import java.io
+import java.lang
+import java.util
+import javaInter.other
+
+open
+object Program 
+
+    //func eq: Dyn other { return true }
+
+    // func a2: Array<Array<Int>> aaa {  } 
+    
+    func zeroJavaLangInteger -> java.lang.Integer = 0;
+    func oneJavaLangInteger -> java.lang.Integer = 1;
+    
+    package Int nnn = 0;
+        
+    func init { }
+    
+    private func init: Int n { }     
+    func init: String s { }
+    public func init: Double d { }   
+        
+    func aabc: Int n { }
+    func cbaa -> Int = 0;
+    
+    func run {
+    
+        var java.lang.Integer integer = Integer(5);
+        var java.util.Set<Int> iset = java.util.HashSet<Int>();
+        
+        let a56 = GP<Integer>(9);
+        assert a56 getStr == "9";
+        // printexpr a56 getStr;
+        a56 set: Integer(5);
+        assert a56 getStr == "5";
+        // printexpr a56 getStr;
+        
+        iset add: 0;
+        iset add: 1;
+        iset add: 2;
+        var Boolean b = iset contains: 0;
+        assert b;
+        //Out println: "0 is in set? " ++ b;
+        b = iset contains: 1;
+        assert b;
+        
+        //Out println: "1 is in set? " ++ b;
+        b = iset contains: 2;
+        assert b;
+        //Out println: "2 is in set? " ++ b;
+        b = iset contains: 3;
+        assert !b;
+        //Out println: "3 is in set? " ++ b;
+        b = iset contains: -1;
+        assert !b;
+        //Out println: "-1 is in set? " ++ b;
+        b = iset contains: 4;
+        assert !b;
+
+        /*
+        @cep(1, "Prototype 'integer' was not found")        
+        var Integer ii88 = integer(6);
+        @cep(1, "The receiver is a Java object. It should be a Java class name")
+        intArray new;
+        */
+        
+        let Integer iii = Integer new: 9;
+        let aaaii = ArrayList<Int> new: 10;
+        
+        let Int bc = Integer bitCount: 7;
+    
+    
+        var ArrayList<Int> intArray = ArrayList<Int> new;
+        intArray add: 88;
+        intArray add: 99;
+        var Int n = intArray get: 0;
+        assert n == 88;
+        n = intArray get: 1;
+        assert n == 99;
+        
+        
+
+        var  sbfArray = ArrayList<StringBuffer> new;
+        
+        sbfArray add: StringBuffer("000");
+        sbfArray add: StringBuffer("111");
+        sbfArray add: StringBuffer("222");
+        var StringBuffer sb = sbfArray get: 0;
+        var String s = sb toString;
+        assert s == "000";
+        // printexpr s;
+        sb = sbfArray get: 1;
+        s = sb toString;
+        assert s == "111";
+        // printexpr s;
+        sb = sbfArray get: 2;
+        s = sb toString;
+        assert s == "222";
+        // printexpr s;
+
+            
+        var t = Program new;
+        var t2 = Program new: 0;    
+        
+        var dn = DoNotSum(0);
+        dn eval: 5;
+        assert dn getSum == 5;
+        
+        
+        
+        {
+            Throw(ExceptionStr("with throw"));
+        } catch: { (: ExceptionStr e :) 
+            assert e message == "with throw";
+        };
+        
+        Other() test;
+        SubProgram() test;
+        WorkerOther() test;
+        @callTestMethods;
+        
+    }
+    
+    func intIntegerArrayTest {
+    
+        
+    
+        var intArray = [ 7, 2, 3 ];
+
+        // c[j] = j
+        intArray[ self zeroJavaLangInteger ] = self oneJavaLangInteger;
+        assert intArray[0] == 1;
+        // c[j] = c
+        intArray[ self oneJavaLangInteger ] = 9;
+        assert intArray[1] == 9;
+        // c[c] = j
+        intArray[ 2 ] = self oneJavaLangInteger;
+        assert intArray[2] == 1;
+        
+        intArray = [ 9, 8, 7 ];
+        let java.lang.Integer nine = Integer new: 9;
+        assert intArray[0] == java.lang.Integer(9);
+        assert intArray[0] == nine;
+        let Integer eight = 8;
+        assert intArray[1] == eight;
+        let java.lang.Integer seven = Integer new: 7;
+        assert intArray[2] == seven;
+        
+        var value = intArray[ 9 - nine ];
+        assert value == 9;
+        value = intArray[ 8 - seven ];
+        assert value == 8;
+        value = intArray[ 7 - 5 ];
+        assert value == 7;
+        
+        var valueInteger = java.lang.Integer new: 0;
+        assert intArray[valueInteger] == 9;
+        valueInteger = Integer new: 1;
+        assert intArray[valueInteger] == 8;
+        valueInteger = Integer(2);
+        assert intArray[valueInteger] == 7;
+        
+        assert intArray[zeroJavaLangInteger] == 9;
+        assert intArray[oneJavaLangInteger] == 8;
+
+        intArray = [ 7, 2, 3 ];
+          // convertion from Java Integer(0) to Cyan 0
+        assert intArray[ Integer(0) ] == 7;
+        assert intArray[0] == 7;
+          // convertion from Java Integer(9) to Cyan 9
+        intArray[0] = Integer(9);
+        assert intArray[0] == 9;
+        assert intArray[Integer new: 2] == 3;
+
+
+        var valueArray = [ 7, 8, 9 ];
+        let Int elem0 = valueArray[ java.lang.Integer(0) ];
+        assert elem0 == seven;
+        assert valueArray[ java.lang.Integer(1) ] == 8;
+        assert valueArray[ 3 - (Integer new: 1) ] == nine;
+        assert valueArray[ 2 ] == java.lang.Integer(9);
+        
+        
+        
+    }
+
+    func messagePassingJavaTest {
+    
+        var File file;
+        file = File new: "C:\\Dropbox\\Cyan";
+        if file isDirectory { 
+            // Out println: (file getCanonicalPath), " is a directory" 
+        }
+        file setReadable: true;
+        let ok = true;
+        file setReadable: ok;
+        let File [] fileList = file listFiles;
+        for  n in 1..<fileList length {
+            let File ff2 = fileList[n];
+            // Out println: ff2 getCanonicalPath;
+        }
+        
+        
+        var java.lang.StringBuffer sb = java.lang.StringBuffer();
+        
+        sb append: "Append in String Buffer!";
+        let String ssss = sb toString;
+        assert ssss == "Append in String Buffer!";
+        
+        var java.lang.String js = "abcdef";
+        js = "a b c d";
+           // strArray has type String[]
+        var strArray = js split: " ";
+        var String cyanStr = strArray[0];
+        assert cyanStr == "a";
+        cyanStr = strArray[1];
+        assert cyanStr == "b";
+        cyanStr = strArray[2];
+        assert cyanStr == "c";
+        
+        
+    }
+    
+    func ifWhileTest {
+        var java.lang.Boolean b = false;
+        
+        if b { assert false; }
+        else {
+            assert true;
+        }
+        b = true;
+        if b { assert true; }
+        else {
+            assert false;
+        }
+        while b {
+            b = false
+        }
+        var Boolean ok = b;
+        assert !ok;
+    }
+    
+    func callIntIntegerTest {
+        var v0 = java.lang.Integer(0); 
+        var v1 = java.lang.Integer new: 1; 
+        var v2 = Integer(2); 
+        var v3 = Integer new: 3;
+        assert self aaInt: v0 bbInt: v1 ccInt: v2 == 3;
+        var Int n = self aaInteger: 1 bbInteger: 2 ccInteger: 3;
+        assert  n == 6;
+        n = self aaInteger: v1 bbInteger: v2 ccInteger: v3;
+        assert n == 6;
+        n = aaInteger: 1 bbInt: (Integer new: 2)  ccInteger: 3;
+        assert n == 6;
+        n = aaInteger: (Integer new: 1) bbInt: v2  ccInteger: 3;
+        assert n == 6;
+        n = self aaInteger: 1 bbInteger: 2 ccInt: v3;
+        assert n == 6;
+        n = self aaInteger: v1 bbInteger: v2 ccInt: v3;
+        assert n == 6;
+        n = aaInt: 1 bbInteger: 2 ccInt: v3;
+        assert n == 6;
+        n = aaInt: v1 bbInteger: v2 ccInt: 3;
+        assert n == 6;
+        n = self aaInt: v0 bbInt: v1 ccInteger: 2;
+        assert n == 3;
+        
+    }
+    
+    func aaInt: Int a 
+         bbInt: Int b 
+         ccInt: Int c -> Int { return a + b + c }
+    func aaInteger: Integer a 
+         bbInteger: Integer b
+         ccInteger: Integer c -> Integer { 
+            let Int a0 = a; let Int b0 = b; let Int c0 = c;
+            return a0 + b0 + c0 
+         }
+    
+    func aaInteger: Integer a 
+         bbInt: Int b
+         ccInteger: Integer c -> Integer { 
+            let Int a0 = a; let Int b0 = b; let Int c0 = c;
+            return a0 + b0 + c0 
+         }
+
+    func aaInteger: Integer a 
+         bbInteger: Integer b
+         ccInt: Int c -> Int { 
+            let Int a0 = a; let Int b0 = b; let Int c0 = c;
+            return a0 + b0 + c0 
+         }
+
+    func aaInt: Int a 
+         bbInteger: Integer b
+         ccInt: Int c -> Integer { 
+            let Int a0 = a; let Int b0 = b; let Int c0 = c;
+            return a0 + b0 + c0 
+         }
+
+    func aaInt: Int a 
+         bbInt: Int b
+         ccInteger: Integer c -> Int { 
+            let Int a0 = a; let Int b0 = b; let Int c0 = c;
+            return a0 + b0 + c0 
+         }
+
+
+end

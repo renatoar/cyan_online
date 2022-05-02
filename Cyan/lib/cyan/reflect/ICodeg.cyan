@@ -1,0 +1,26 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface ICodeg
+
+    func getFileInfoExtension -> String
+    
+    func getUserInput:
+            ICompiler_ded compiler_ded, 
+            Array<Byte> previousCodegFileText
+            -> Array<Byte>
+            
+    func demandsLabel -> Boolean
+    
+    func newCodegAnnotation -> String
+    
+    func getNewFirstParameter -> String
+    
+    func getStartOffset -> Int
+    
+    func getEndOffset -> Int
+    
+end

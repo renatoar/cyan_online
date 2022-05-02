@@ -1,0 +1,43 @@
+package grammar
+
+
+object ArrayIS
+
+    
+    @grammarMethod{*
+        (add: (Int | String)*) 
+    *}
+    func addMany: Array<Int|String> unArray {
+        for intStr in unArray {
+            type intStr
+                case Int elem    { array add: elem }
+                case String elem { array add: elem }
+        }
+    }
+    
+    @grammarMethod{*
+        (addElem: Int | addElem: String | addElem: Any )+
+    *}
+    func addManyElem: Array<Union<f1, Int, f2, String, f3, Any>> unArray {
+        for anyIntStr in unArray {
+            type anyIntStr 
+                case Int    f1 { array add: f1 }
+                case String f2 { array add: f2 }
+                case Any    f3 {  }
+        }
+    }
+    
+    override 
+    func asString -> String {
+        let Array<Any> anyArray = Array<Any>();
+        for intStr in array {
+            type intStr
+                case Int elem    { anyArray add: elem }
+                case String elem { anyArray add: elem }
+        }
+        return anyArray asString
+    }
+    
+    
+    @property let Array<Int|String> array = Array<Int|String>();
+end

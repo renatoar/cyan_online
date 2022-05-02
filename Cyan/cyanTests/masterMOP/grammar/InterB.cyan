@@ -1,0 +1,8 @@
+package grammar
+
+interface InterB extends InterA
+
+    func color -> Int
+
+
+end

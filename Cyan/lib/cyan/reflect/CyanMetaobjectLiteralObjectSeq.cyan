@@ -1,0 +1,27 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open 
+object CyanMetaobjectLiteralObjectSeq extends CyanMetaobjectLiteralObject 
+
+
+    func init: String leftCharSequence {
+        @javacode{*
+            super( new meta.CyanMetaobjectLiteralObjectSeq(_leftCharSequence.s) );
+        *}
+    }
+    override
+    func getHidden -> meta.CyanMetaobjectLiteralObjectSeq { @javacode{* return (meta.CyanMetaobjectLiteralObjectSeq) super._getHidden(); *} } 
+
+
+    func myClone  -> meta.CyanMetaobjectLiteralObjectSeq {
+        return self getHidden myClone
+    }
+
+    func leftCharSequence  -> String {
+        return self getHidden leftCharSequence
+    }
+end

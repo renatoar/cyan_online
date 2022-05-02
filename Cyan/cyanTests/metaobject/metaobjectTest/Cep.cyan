@@ -1,0 +1,33 @@
+package metaobjectTest
+
+
+@doc{*
+  This annotation takes two parameters. The first is a number. There should be
+  an error from the line of the annotation plus this number. The second parameter 
+  is the error message that the compiler should issue (or a similar message).
+  The compiler checks if there is an error in the indicated line. If not,
+  an error message is issued. That is, suppose the code
+        @cep(1, "Expression expected)
+        var k = 1 + ;
+  is in a file being compiled. The compiler will point the error and print 
+  a message that a metaobject pointed out that there is an error in the line 
+  with the real error. If there were no error, the compiler would issue an 
+  error telling that it itself should have pointed out an error in the line
+  "var k = 1 + ;".
+
+*}
+object Cep
+
+    func run {
+        /* uncomment to test metaobject cep
+        
+        @cep(3, "Type error")
+        @cep(1, "Expression expected")
+        var k = 1 + ;
+        1 + "A string cannot be added to an Int";
+        
+        */
+    }
+
+end
+

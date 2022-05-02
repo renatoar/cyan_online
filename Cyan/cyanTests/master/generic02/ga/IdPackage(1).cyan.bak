@@ -1,0 +1,57 @@
+package generic02.ga
+
+/*
+   test the rules 
+       QualifId ::= Id { "." Id }
+       ExprPrimary ::= "self" [ "." Id ]  |
+                       "super" UnaryId |
+                       QualifId { "<" TypeList ">" }+ [ ObjectCreation ] |
+                       "typeof" "(" QualifId [ "<" TypeList ">" ] ")"
+       MetSigUnary ::= Id
+       SelecWithParam ::= IdColon |
+                          IdColon [ "[]" ] ParamList 
+       MessageSendNonUnary ::= { [ BACKQUOTE ] IdColon [ RealParamters ] }+
+       SingleType ::= QualifId { "<" TypeList ">" } | BasicType |
+                      "typeof" "(" QualifId [ "<" TypeList ">" ] ")"
+*/
+
+object IdPackage<M> extends IdPackageSuper<M>
+      // M should be "mult"
+    @firstBelongsTo(M, "mult")
+    fun init {
+    }
+    fun test {
+        var M.MultiA a = M.MultiA new;
+        const M.MultiA b = M.MultiA();
+        var typeof( M.MultiA ) c = M.MultiA();
+        assert a sum: 0 == 0;
+        assert c sum: 1 == 1;
+        
+        const selfM = self M;
+        const superM = super M;
+        const superMdot = super M:;
+        const superMdotabcde = super M: "abcde";
+        const numberM = #M;        
+        const selfMdot = M:;
+        const superMabc = super M: "abc";
+        const selfMabc = self M: "abc";
+        
+        assert selfM == "mult";
+        
+        assert superM == "" + numberM + numberM &&
+               superMdot == "ab" &&
+               superMdotabcde == "abcde";
+        
+        assert superMabc == "abc" &&
+               selfMdot == "abc";
+        assert selfMabc == "mult:abc" &&
+               selfMdot == "abc";
+    }
+    override
+    fun M -> String = "" + #M;
+    override
+    fun M: -> String = "abc";
+    override
+    fun M: String s -> String = "mult:" + s;
+end
+

@@ -1,0 +1,47 @@
+package initNewTests
+
+object OtherInitTest
+
+    let Int which
+    func getWhich -> Int = which;
+
+    func init { 
+        which = 0
+    }
+    func init: ProtoA {
+        which = 6
+    }
+
+    func init: Int, ProtoB {
+        which = 7
+    }
+
+    func init: ProtoC, String {
+        which = 8
+    }
+
+    func run {
+        let ProtoA pa = ProtoA();
+        let ProtoA pb = ProtoB();
+        let ProtoA pc = ProtoC();
+        
+        assert OtherInitTest(ProtoA) getWhich == 6;
+        assert OtherInitTest(ProtoB) getWhich == 6;
+        assert OtherInitTest(0, ProtoC) getWhich == 7;
+        assert OtherInitTest(ProtoD, "") getWhich == 8;
+        assert (OtherInitTest new: ProtoD) getWhich == 6;
+        assert OtherInitTest(1, ProtoD) getWhich == 7;
+        assert (OtherInitTest new: 1, ProtoD) getWhich == 7;
+        assert OtherInitTest(pa) getWhich == 6;
+        assert OtherInitTest(pb) getWhich == 6;
+        assert OtherInitTest(pc) getWhich == 6;   
+
+        assert OtherInitTest(0, ProtoC new) getWhich == 7;   
+        assert OtherInitTest(ProtoD(), "") getWhich == 8;   
+
+        assert Earth == Earth clone;
+        var Earth earth = Earth clone;
+        assert earth == Earth;
+    }
+
+end

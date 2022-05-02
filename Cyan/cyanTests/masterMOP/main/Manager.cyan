@@ -1,0 +1,12 @@
+package main
+
+@init(person, company)
+object Manager
+    
+    @annot( #f1 ) 
+    @property Person person
+    
+    @annot( #f2 ) 
+    @property String company
+    
+end

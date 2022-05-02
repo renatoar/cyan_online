@@ -1,0 +1,21 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionFieldMissing_semAn
+
+    func semAn_replaceGetMissingField:
+            WrExprSelfPeriodIdent fieldToGet, 
+            WrEnv env
+        -> Tuple<String, String, String>
+
+
+    func semAn_replaceSetMissingField:
+            WrExprSelfPeriodIdent fieldToSet, 
+            WrExpr rightHandSideAssignment, 
+            WrEnv env
+        -> String
+
+end

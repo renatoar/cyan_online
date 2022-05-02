@@ -1,0 +1,56 @@
+package cyan.lang
+
+
+@doc{*
+    This prototype is useful only for assuring that package cyan.lang 
+    creates some prototype because they are instantiated here.
+*}
+
+object AssurePrototypesAreCreated
+    func assure: 
+        Array<Any> anyArray, 
+        Array<Dyn> dynArray,
+        Array<Boolean> boolArray,
+        Array<Char> charArray,
+        Array<Byte> byteArray,
+        Array<Int> intArray,
+        Array<Short> shortArray,
+        Array<Long> longArray,
+        Array<Float> floatArray,
+        Array<Double> doubleArray,
+        Array<Tuple<Dyn, Array<Dyn>>>  arrayTupleDynArrayDyn,
+        Array<Tuple<String, Array<String>>> arrayTupleStringArrayString,
+        Array<Tuple<String, String>> arrayTupleStringString,
+        Array<Tuple<String, String, Boolean>> arrayTupleStringStringBoolean,
+        Array<String> stringArray,
+        
+        Function<Dyn> dynFunc, 
+        Function<Dyn, Dyn> dynDynFunc,
+        Function<Dyn, Dyn, Dyn> dyn3Func,
+        Function<Dyn, Dyn, Dyn, Dyn> dyn4Func,
+        Function<Dyn, Dyn, Dyn, Dyn, Dyn> dyn5Func,
+        Function<Dyn, Dyn, Dyn, Dyn, Dyn, Dyn> dyn6Func,
+        Function<Dyn, Dyn, Dyn, Dyn, Dyn, Dyn, Dyn> dyn7Func,
+        
+        Tuple<Dyn, Dyn> dyn2Tuple,
+        Tuple<Dyn, Dyn, Dyn> dyn3Tuple,
+        Tuple<Dyn, Dyn, Dyn, Dyn> dyn4Tuple, 
+        Tuple<Dyn, Dyn, Dyn, Dyn, Dyn> dyn5Tuple, 
+        Tuple<Dyn, Dyn, Dyn, Dyn, Dyn, Dyn> dyn6Tuple, 
+        Tuple<Dyn, Dyn, Dyn, Dyn, Dyn, Dyn, Dyn> dyn7Tuple,
+        Tuple<String, String, String> sssTuple,
+        
+        Interval<Byte> byteInterval,
+        Interval<Int> intInterval,
+        Interval<Short> shortInterval,
+        Interval<Long> longInterval,
+        Interval<Char> charInterval,
+        
+        Set<Tuple<Dyn, Dyn, Dyn, Dyn>> stdddd,
+        Set<Tuple<String, Int, Int, Dyn>> stsiid,
+        HashMap<String, String> hashMap
+//        Tuple<Dyn, Dyn, Dyn, Dyn, Dyn, Dyn, Dyn, Dyn> dyn8Tuple 
+//        Tuple<Dyn, Dyn, Dyn, Dyn, Dyn, Dyn, Dyn, Dyn, Dyn> dyn9Tuple 
+        { 
+    }
+end

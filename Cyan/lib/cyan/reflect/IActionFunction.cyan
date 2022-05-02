@@ -1,0 +1,15 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionFunction
+
+	func eval: Dyn input -> Dyn
+
+	func getPackageOfType -> String
+
+    func getPrototypeOfType -> String
+
+end

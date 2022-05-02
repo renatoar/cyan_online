@@ -1,0 +1,33 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'type' should be attached to a type. It works 
+  much like a language-C typedef but without the explicit 
+  declaration. Every type  T@type(id)  is compatible only with literals
+  and types annotated with T@type(id) (both should have the same 'id'). 
+*}
+object Type
+
+    func run {
+        var Int@type(inBytes) size = 100;
+        var Int@type(inBytes) otherSize = size;
+           // the line below, if uncommented, 
+           // causes a compiler error
+        // var Int@type(inKbytes) sizeKb = size; 
+        // ok, inBytes to Int
+        var Int n = size; 
+          // if uncommented, compiler error:
+          // value of raw type, Int, is assigned
+          // to inBytes
+        // size = n; 
+          // if uncommented, compiler error:
+          // value of inKbytes is assigned
+          // to inBytes
+        
+        // size = sizeKb;
+    
+    }
+
+end
+

@@ -1,0 +1,28 @@
+package initNewTests
+
+open
+object AInit
+
+    
+    func init: Int elem {
+        intArray = Array<Int> new; 
+        intArray add: elem
+    }
+    
+    func init: IMap<Int, String> map, Int elem {
+        intArray = Array<Int> new; 
+        intArray add: elem;
+        map add: elem, "elem";
+    }
+
+    
+    func init {
+        intArray = Array<Int> new;
+    }
+
+    func test: BInit b {
+    }
+
+    Array<Int> intArray
+    
+end

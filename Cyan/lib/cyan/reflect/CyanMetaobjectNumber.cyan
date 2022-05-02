@@ -1,0 +1,37 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open 
+object CyanMetaobjectNumber extends CyanMetaobjectLiteralObject 
+
+
+    func init: Array<String> suffixNameList {
+        @javacode{*
+            super( new meta.CyanMetaobjectNumber( 
+               meta.CyanMetaobjectAtAnnot.fromCyanArrayStringToJavaArrayString(_suffixNameList)
+               ));
+        *}
+    }
+    override
+    func getHidden -> meta.CyanMetaobjectNumber { @javacode{* return (meta.CyanMetaobjectNumber) super._getHidden(); *} } 
+
+
+    func getStartOffset  -> java.lang.Integer {
+        return self getHidden getStartOffset
+    }
+
+    func getEndOffset  -> java.lang.Integer {
+        return self getHidden getEndOffset
+    }
+
+    func getSuffixNameList  -> java.lang.String[] {
+        return self getHidden getSuffixNameList
+    }
+
+    func myClone  -> meta.CyanMetaobjectNumber {
+        return self getHidden myClone
+    }
+end

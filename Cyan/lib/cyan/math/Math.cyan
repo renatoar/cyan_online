@@ -1,0 +1,112 @@
+package cyan.math
+
+object Math
+
+    func intAbs: Int x -> Int {
+        if x >= 0 { return x } 
+        else {
+            return -x
+        }
+    }
+    
+    func abs: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.abs(_x.n) );
+        *}
+    }
+
+    func sin: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.sin(_x.n) );
+        *}
+    }
+    
+    func cos: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.cos(_x.n) );
+        *}
+    }
+
+    func exp: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.exp(_x.n) );
+        *}
+    }
+
+    func log: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.log(_x.n) );
+        *}
+    }
+
+
+    func log10: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.log10(_x.n) );
+        *}
+    }
+
+
+
+    func floor: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.floor(_x.n) );
+        *}
+    }
+
+
+    func ceil: Double x -> Double {
+        @javacode{*
+            return new CyDouble( java.lang.Math.ceil(_x.n) );
+        *}
+    }
+
+    func nextDouble -> Double {
+        @javacode{*
+            return new CyDouble( random.nextDouble() );
+        *}
+    }
+
+    func nextDouble: Double bound -> Double {
+        @javacode{*
+            return new CyDouble( random.nextDouble(_bound.n) );
+        *}
+    }
+
+    func nextInt -> Int {
+        @javacode{*
+            return new CyInt( random.nextInt() );
+        *}
+    }
+
+    @doc{* return a random Int number n such that 0 <= n && n < max *}
+    func nextInt: Int bound -> Int {
+        @javacode{*
+            return new CyInt( random.nextInt(_bound.n) );
+        *}
+    }
+
+    func nextLong -> Long {
+        @javacode{*
+            return new CyLong( random.nextLong() );
+        *}
+    }
+
+    @doc{* return a random Long number n such that 0 <= n && n < max *}
+    func nextLong: Long bound -> Long {
+        @javacode{*
+            return new CyLong( random.nextLong(_bound.n) );
+        *}
+    }
+
+    func sqrt: Double x -> Double { 
+        @javacode{*
+            return new CyDouble( java.lang.Math.sqrt(_x.n) );
+        *}
+    }
+    
+    @javacode{*
+        private java.util.concurrent.ThreadLocalRandom random = java.util.concurrent.ThreadLocalRandom.current();
+    *}
+    
+end

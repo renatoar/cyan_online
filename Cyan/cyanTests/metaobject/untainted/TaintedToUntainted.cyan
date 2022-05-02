@@ -1,0 +1,10 @@
+package untainted
+
+
+object TaintedToUntainted
+
+    func toUntaintedSql: String@tainted(sql) s -> String@untainted(sql) = s;
+    
+    func toUntaintedHtml: String@tainted(html) s -> String@untainted(html) = s;
+
+end

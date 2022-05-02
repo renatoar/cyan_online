@@ -1,0 +1,16 @@
+package main
+
+object MenuItem
+
+    func init {
+        onMouseClick = { ^9 }
+    }
+
+    func onMouseClick:  Function<Int> b {
+        self.onMouseClick = b
+    }
+    
+    func action -> Int = onMouseClick eval;
+    
+    var Function<Int> onMouseClick
+end

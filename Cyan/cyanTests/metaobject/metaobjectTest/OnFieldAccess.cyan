@@ -1,0 +1,65 @@
+package metaobjectTest
+
+
+@doc{*
+    Annotations of this metaobject are attached to a field. 
+    The attached DSL code is made in Myan, which supports interpreted Cyan
+    within parameterless methods declared with 'func': 
+    
+        func afterResTypes_codeToAdd {    
+            // interpreted Cyan code
+        }
+    
+    According to the method name, the Cyan code is interpreted in phase
+    afterResTypes or semAn. Methods of interfaces
+        IAction_semAn
+        IActionNewPrototypes_semAn
+        IAction_afterResTypes
+        IActionNewPrototypes_afterResTypes
+        IParseWithCyanCompiler_parsing 
+        ICommunicateInPrototype_afterResTypes_semAn_afterSemAn    
+        IActionFieldAccess_semAn
+        
+    can be implemented. To better understand this, see the documentation 
+    for action_afterResTypes_semAn.
+*}
+object OnFieldAccess
+
+    func run {
+        alwaysZero = 10;
+        var value = alwaysZero;
+        assert value == 0;
+        assert howManyTimesCounterWasSet == 0;
+        counter = 1;
+        assert howManyTimesCounterWasSet == 1;
+    }
+    
+
+    /* Each time the variable is set, field
+       howManyTimesCounterWasSet is  incremented by 1. 
+    */    
+    @onFieldAccess{*
+        func semAn_replaceSetField {
+            var String name = fieldToSet asString;
+            var String value = rightHandSideAssignment asString;
+            return name ++ " = " ++ value ++ """;   ++howManyTimesCounterWasSet;""";
+        }
+    *}
+    
+    
+    var Int counter = 0;
+    var Int howManyTimesCounterWasSet = 0;
+
+    /* Even if this field is set to another value, 
+       its value will always be 0
+    */    
+    @onFieldAccess{*
+        func semAn_replaceGetField {
+            return "0";
+        }
+    *}
+    var Int alwaysZero = 9;
+
+
+end
+

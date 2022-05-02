@@ -1,0 +1,139 @@
+package cyan.lang
+
+@javacode{*
+import java.util.Formatter;
+*}
+
+
+object Out
+    func println: (Any any) {
+        print: any;
+        @javacode<<<
+            System.out.print( "\n" );
+            System.out.flush();
+        >>>
+        return Nil
+    }
+    func print: (Any any) {
+        @javacode<<<
+            System.out.print( _any._asString().s );
+            System.out.flush();
+        >>>
+        return Nil
+    }
+    
+
+    func println: (Any p1, Any p2) {
+        print: p1;
+        println: p2;
+    }
+    func print: (Any p1, Any p2) {
+        print: p1;
+        print: p2;
+    }
+    
+    func println: (Any p1, Any p2, Any p3) {
+        print: p1;
+        print: p2;
+        println: p3;
+    }
+    func print: (Any p1, Any p2, Any p3) {
+        print: p1;
+        print: p2;
+        print: p3
+    }
+
+    func println: (Any p1, Any p2, Any p3, Any p4) {
+        print: p1;
+        print: p2;
+        print: p3;
+        println: p4;
+    }
+    func print: (Any p1, Any p2, Any p3, Any p4) {
+        print: p1;
+        print: p2;
+        print: p3;
+        print: p4
+    }
+
+
+    func println: (Any p1, Any p2, Any p3, Any p4, Any p5) {
+        print: p1;
+        print: p2;
+        print: p3;
+        print: p4;
+        println: p5;
+    }
+    func print: (Any p1, Any p2, Any p3, Any p4, Any p5) {
+        print: p1;
+        print: p2;
+        print: p3;
+        print: p4;
+        print: p5
+    }
+
+
+    @grammarMethod{*
+        ( printlnf: (Any)+ )
+        checkPrintf
+    *}
+    func printlnfAll: Array<Any> array {
+        printfAll: array;
+        "" println;
+    }
+
+    @grammarMethod{*
+        ( printf: (Any)+ )
+        checkPrintf
+    *}
+    func printfAll: Array<Any> array {
+        @javacode{*
+            Object []list = new Object[_array.array.size()];
+            int i = 0;
+            String format = ((CyString ) _array._at_1( new CyInt(0) )).s;
+            //StringBuilder sb = new StringBuilder();
+            //Formatter formatter = new Formatter(sb);
+        *}
+        for elem in array {
+            @javacode{*
+                if ( i > 0 ) {
+                    if ( _elem instanceof CyInt ) {
+                        list[i-1] = ((CyInt ) _elem).n;
+                    }
+                    if ( _elem instanceof CyShort ) {
+                        list[i-1] = ((CyShort ) _elem).n;
+                    }
+                    if ( _elem instanceof CyByte ) {
+                        list[i-1] = ((CyByte ) _elem).n;
+                    }
+                    if ( _elem instanceof CyChar ) {
+                        list[i-1] = ((CyChar ) _elem).c;
+                    }
+                    if ( _elem instanceof CyLong ) {
+                        list[i-1] = ((CyLong ) _elem).n;
+                    }
+                    if ( _elem instanceof CyBoolean ) {
+                        list[i-1] = ((CyBoolean ) _elem).b;
+                    }
+                    if ( _elem instanceof CyFloat ) {
+                        list[i-1] = ((CyFloat ) _elem).n;
+                    }
+                    if ( _elem instanceof CyDouble ) {
+                        list[i-1] = ((CyDouble ) _elem).n;
+                    }
+                    else if ( _elem instanceof CyString ) {
+                        list[i-1] = ((CyString ) _elem).s;
+                    }
+                }
+                ++i;
+            *}
+            //self print: elem
+        }
+        @javacode{*
+            System.out.printf(format, list);
+        *}
+        return Nil
+    }
+    
+end
+

@@ -1,0 +1,22 @@
+package metaobjectTest
+
+@doc{*
+    callTestMethods generates code that calls all methods of
+    the current prototype whose name ends with 'Test'. It
+    is the same as to use annotation @callUnaryMethods(".*Test")
+*}
+object CallTestMethods
+
+    func run {
+    
+        @callTestMethods ;
+        assert count == 3;
+    }
+    
+    func oneTest { ++count }
+    func twoTest { ++count }
+    func threeTest { ++count }
+    
+    var Int count = 0;
+    
+end

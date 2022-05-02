@@ -1,0 +1,6 @@
+package inter
+
+interface InterK extends InterJ
+    func sum: Int a, Int b mult: Int -> Int
+    func sum: Int, Int, Int mult: Int -> Int
+end

@@ -1,0 +1,23 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open
+object CyanMetaobjectErrorActionFunction extends CyanMetaobjectActionFunction
+
+    func init {
+        super init: "errorAction"
+    }
+    
+    override
+    func getName -> String = "error";
+
+    override
+    func eval: Dyn input -> Dyn {
+        "Error when calling action function 'error'" println;
+        return Nil
+    }
+
+end

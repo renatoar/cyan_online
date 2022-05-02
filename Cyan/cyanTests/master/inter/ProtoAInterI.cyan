@@ -1,0 +1,9 @@
+package inter
+
+open
+object ProtoAInterI implements InterI
+    override
+    func sum: Int a 
+         mult: Int b 
+            -> Int = a*b;
+end

@@ -1,0 +1,9 @@
+package cyan.lang
+
+@doc{*
+    See the Cyan manual for help with this prototype
+*}
+@createCatchExit
+object CatchExit<T+>
+    
+end

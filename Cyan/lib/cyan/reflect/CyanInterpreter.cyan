@@ -1,0 +1,226 @@
+package cyan.reflect
+
+import saci
+import java.lang
+
+@doc{*
+    The Cyan interpreter to be used inside Cyan code.
+*}
+
+
+object CyanInterpreter
+
+    /*
+        evaluate 'cyanCode' which is supposed to be a Cyan expression or
+        a list of Cyan statements. 'selfObject' is the value of 'self'
+        in 'cyanCode'. 'varList' is a list of (varName, value) in which
+        varName is the name of a variable and 'value' its value.
+        The value returned is the result of the evaluation, which is
+        expected to be a subtype of Any or Nil. If the result is a Java
+        object, exception ExceptionStr is thrown.
+    */
+
+    func eval:        String cyanCode
+         self:        Any selfObject
+         varList:     Array<Tuple<String, Dyn>> varList
+         -> Any|Nil {
+
+        let CyanCodeSnippet saci = CyanCodeSnippet();
+        var java.lang.String []varNameList;
+        var java.lang.Object []objList;
+        var Int sizeVarList = varList size;
+        @javacode{*
+        int i = 0;
+        _varNameList = new String[_sizeVarList.n];
+        _objList = new Object[_sizeVarList.n];
+        *}
+        for t in varList {
+            var java.lang.String varName = t f1;
+            var Dyn value = t f2;
+            @javacode{*
+            _varNameList[i] = _varName;
+            _objList[i] = _value;
+            ++i;
+            *}
+        }
+        
+        var Object r;
+        @javacode{*
+            _r = _saci.evalCyanCode(_cyanCode.s, 
+                     _selfObject, _varNameList, _objList); 
+        *}        
+        var Dyn obj = fromJava: r;
+        if Null equalNull: obj { 
+            return Nil
+        }
+        type obj 
+            case Any any {
+                return any
+            }
+            case Nil nil {
+                return Nil
+            }
+        return Nil
+    }
+
+    func eval:        String cyanCode
+         self:        Any selfObject
+         nameValue:   String name, Dyn value
+         -> Any|Nil {
+         
+         var varList = Array<Tuple<String, Dyn>>();
+         varList add: [. name, value .];
+         
+         return eval: cyanCode
+                self: selfObject
+                varList: varList;
+    }
+
+
+    /*
+        evaluate 'cyanCode' which is supposed to be a Cyan expression or
+        a list of Cyan statements. 'selfObject' is the value of 'self'
+        in 'cyanCode'. The value returned is the result of 
+        the evaluation, which is expected to be a subtype of Any or Nil. 
+        If the result is a Java object, exception ExceptionStr is thrown.
+    */
+    func eval:        String cyanCode
+         self:        Any selfObject
+         -> Any|Nil {
+
+        let CyanCodeSnippet saci = CyanCodeSnippet();
+
+        var java.lang.Object obj;
+        obj = saci evalCyanCode: cyanCode, selfObject;
+        if Null equalNull: obj { 
+            return Nil
+        }
+        
+        type fromJava: obj
+            case Any any {
+                return any
+            }
+            case Nil nil {
+                return Nil
+            }
+        return Nil
+    }
+
+    /*
+        evaluate 'cyanCode' which is supposed to be a Cyan expression or
+        a list of Cyan statements. The value returned is the result of 
+        the evaluation, which is expected to be a subtype of Any or Nil. 
+        If the result is a Java object, exception ExceptionStr is thrown.
+    */
+
+    func eval: String cyanCode
+         -> Any|Nil {
+
+        let CyanCodeSnippet saci = CyanCodeSnippet();
+        var java.lang.String cyanCodeJS = cyanCode;
+        
+        
+        var Object obj;
+        obj = saci evalCyanCode: cyanCodeJS;
+        if Null equalNull: obj { 
+            return Nil
+        }
+        
+        type fromJava: obj
+            case Any any {
+                return any
+            }
+            case Nil nil {
+                return Nil
+            }
+        return Nil
+    }
+
+
+
+
+    /*
+        evaluate 'cyanCode' which is supposed to be a Cyan expression or
+        a list of Cyan statements. 'selfObject' is Any. 
+        The value returned is the result of 
+        the evaluation, which may be a Java object.
+    */
+    func javaEval:    String cyanCode
+         -> java.lang.Object {
+
+        let CyanCodeSnippet saci = CyanCodeSnippet();
+        
+        return saci evalCyanCode: cyanCode, Any;
+    }
+    
+
+    /*
+        evaluate 'cyanCode' which is supposed to be a Cyan expression or
+        a list of Cyan statements. 'selfObject' is the value of 'self'
+        in 'cyanCode'. The value returned is the result of 
+        the evaluation, which may be a Java object.
+    */
+    func javaEval:    String cyanCode
+         self:        Any selfObject
+         -> java.lang.Object {
+
+        let CyanCodeSnippet saci = CyanCodeSnippet();
+        
+        return saci evalCyanCode: cyanCode, selfObject;
+    }
+    
+    
+    /*
+        evaluate 'cyanCode' which is supposed to be a Cyan expression or
+        a list of Cyan statements. 'selfObject' is the value of 'self'
+        in 'cyanCode'. 'varList' is a list of (varName, value) in which
+        varName is the name of a variable and 'value' its value.
+        The value returned is the result of the evaluation, which may
+        be a Java object.
+    */
+
+    func javaEval:        String cyanCode
+         self:        Any selfObject
+         varList:     Array<Tuple<String, Dyn>> varList
+         -> Object {
+
+        let CyanCodeSnippet saci = CyanCodeSnippet();
+        var java.lang.String []varNameList;
+        var java.lang.Object []objList;
+        var Int sizeVarList = varList size;
+        @javacode{*
+        int i = 0;
+        _varNameList = new String[_sizeVarList.n];
+        _objList = new Object[_sizeVarList.n];
+        *}
+        for t in varList {
+            var java.lang.String varName = t f1;
+            var Dyn value = t f2;
+            @javacode{*
+            _varNameList[i] = _varName;
+            _objList[i] = _value;
+            ++i;
+            *}
+        }
+        
+        @javacode{*
+        return _saci.evalCyanCode(_cyanCode.s, 
+                 _selfObject, _varNameList, _objList); 
+        *}        
+    }
+    
+    
+    
+    private 
+    func fromJava: java.lang.Object value -> Dyn {
+        @javacode{*
+            if ( _value instanceof _Any || _value instanceof _Nil ) {
+                return _value;    
+            }
+        *}
+        throw: ExceptionStr("A non-Cyan object was returned")
+    }
+    
+
+
+end

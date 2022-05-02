@@ -1,0 +1,32 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+abstract 
+object CyanMetaobjectActionFunction extends CyanMetaobject implements IActionFunction
+
+    func init: String name { 
+        @javacode{*
+            super( new meta.CyanMetaobjectActionFunction(_name.s) );
+        *}
+    } 
+    
+    override
+    func getHidden -> meta.CyanMetaobjectActionFunction { 
+        @javacode{* return (meta.CyanMetaobjectActionFunction) super._getHidden(); *} 
+    } 
+
+    
+    override 
+    abstract 
+    func eval: Dyn value -> Dyn 
+
+    override
+    func getPackageOfType -> String = "cyan.lang";
+    
+    override
+    func getPrototypeOfType -> String = "Nil";
+
+end

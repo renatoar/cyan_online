@@ -1,0 +1,28 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'createFieldIfAccessed' should be attached to a prototype.
+  It will simulates the existence of fields using a hash table.
+  If the prototype does not declare field 'iv' and 'self.iv' is used in the 
+  prototype, it is replaced by a get or set in the hash table. The type of 
+  'iv' will be considered 'Int' if its name starts with 'i', 
+  'String' if it starts with 's', or 'Dyn' otherwise.
+  
+  This is a demonstration metaobject
+
+*}
+@createFieldIfAccessed
+object CreateFieldIfAccessed
+
+    func run {
+        self.iv = 0;
+        var Int var_iv = self.iv;
+        assert var_iv == 0;
+        self.str = "abc";
+        var String var_str = self.str;
+        assert var_str == "abc";
+    }
+
+end
+

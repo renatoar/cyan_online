@@ -1,0 +1,12 @@
+package cyan.lang
+
+object ExceptionStackEmpty extends CyException
+
+    public func eval: ExceptionStackEmpty e {
+        Out println: (e message);
+    }
+    
+    func message -> String = "Attempt to pop an element from an empty stack";
+    
+end
+

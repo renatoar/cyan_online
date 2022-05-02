@@ -1,0 +1,17 @@
+package graph
+
+object GraphTest
+
+    func run {
+    
+        var g = MakeGraph numVertices: 5
+                   edge: 1, 4
+                   edge: 3, 1
+                   edge: 1, 2
+                   edge: 2, 4;
+               
+        assert g asString == "{ (1, 4), (3, 1), (1, 2), (2, 4) }";
+    }
+    
+    
+end

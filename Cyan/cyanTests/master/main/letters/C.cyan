@@ -1,0 +1,9 @@
+package main.letters
+
+open
+object C extends A
+    override
+    func println { 
+        "C" println;
+    }
+end

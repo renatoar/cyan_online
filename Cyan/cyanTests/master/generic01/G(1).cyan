@@ -1,0 +1,8 @@
+package generic01
+
+object G<M>
+   
+    @property var M _value
+    
+end
+

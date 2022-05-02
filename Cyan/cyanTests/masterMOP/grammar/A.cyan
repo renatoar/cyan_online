@@ -1,0 +1,12 @@
+package grammar
+
+object A implements InterA
+
+    override
+    func get -> Int = 0;
+    override    
+    func set: Int n = Nil;
+
+    override
+    func asString -> String = "A(0)";
+end

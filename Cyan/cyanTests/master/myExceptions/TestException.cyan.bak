@@ -1,0 +1,47 @@
+package myExceptions
+
+object TestException 
+
+    const Int maxN = 1000
+    shared var String _traceString = ""
+    
+    fun traceString -> String = _traceString;
+    fun resetTraceString { _traceString = "" }
+    
+    fun trace: String s {
+        _traceString = _traceString + s
+    }
+
+    fun test: Int n {
+           
+        {  
+           process: n
+        } catch: CatchZeroBig
+          catch: CatchEven
+          catch: CatchNum;
+		TestException trace: " endTest";
+    }
+    private fun process: (Int n) {
+        {  
+           check: n;
+           if n > maxN {
+               throw: ExceptionBig(n)
+           }
+        } catch: CatchNeg;
+        TestException trace: " endProcess";
+    }
+    private fun check: (Int n) {
+        if n == 0 {
+            throw: ExceptionZero()
+        }
+        if n < 0 {
+            throw: ExceptionNeg(n)
+        }
+        if n%2 == 0 {
+            throw: ExceptionEven(n)
+        }
+		if n == 5 {
+            throw: ExceptionFive(n)
+		}
+    }
+end

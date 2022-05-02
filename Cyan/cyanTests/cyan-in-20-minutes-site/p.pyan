@@ -1,0 +1,9 @@
+/*
+   compile this program as follows:
+   
+   C:\Cyan\>saci "C:\Dropbox\Cyan\cyanTests\cyan-in-20-minutes-site\p.pyan"  -java -cp "C:\Dropbox\Cyan\lib\sacilib.jar" -cp "C:\Dropbox\Cyan\lib\cyanruntime.jar"
+*/
+program 
+
+    package cyan.math at "C:\Dropbox\Cyan\lib\cyan\math"
+    package cyan.reflect at "C:\Dropbox\Cyan\lib\cyan\reflect"

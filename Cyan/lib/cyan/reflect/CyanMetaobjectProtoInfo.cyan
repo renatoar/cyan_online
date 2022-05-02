@@ -1,0 +1,65 @@
+package cyan.reflect
+
+import meta
+import java.lang
+import java.util
+
+
+object CyanMetaobjectProtoInfo extends CyanMetaobjectAtAnnot
+            implements IAction_afterResTypes
+
+    func init {
+        super init: "protoInfo", "ZeroParameters", [ "prototype" ]
+    }
+    
+    
+    override
+    func afterResTypes_codeToAdd:
+            ICompiler_afterResTypes compiler, 
+            Array<
+               Tuple< WrAnnotation,
+                      Array<ISlotSignature>
+               >
+            > infoList
+            -> Tuple<String, String> {
+            
+            
+        var WrEnv env = compiler getEnv; 
+        var pu = compiler getEnv getCurrentPrototype;
+        var String currentProtoName = pu getName;
+        var Int numberOfFields =  (pu getFieldList: env) size;
+        var Int numberOfMethods = (pu getMethodDecList: env) size;
+        var String superprototype =  (pu getSuperobject: env) getName;
+                    
+        var s = |"""
+                | { name              = $currentProtoName,
+                |   number of fields  = $numberOfFields,
+                |   number of methods = $numberOfMethods,
+                |   superprototype    = $superprototype
+                | }
+                """;
+        return [. "func protoInfo -> String = \"" ++ s ++ "\"; ",
+            "func protoInfo -> String"
+           .]
+    }
+        
+    override
+    func runUntilFixedPoint -> java.lang.Boolean = false;
+    
+    
+    override
+    func afterResTypes_beforeMethodCodeList:
+            meta.ICompiler_afterResTypes compiler
+            -> Array<Tuple<String, String, Boolean>> {
+        return Array<Tuple<String, String, Boolean>>()
+    }
+            
+    override
+    func afterResTypes_renameMethod:
+            meta.ICompiler_afterResTypes compiler_afterResTypes
+            -> Array<Tuple<String, Array<String>>> {
+        return Array<Tuple<String, Array<String>>>()
+    }
+    
+    
+end

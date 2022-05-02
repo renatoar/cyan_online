@@ -1,0 +1,11 @@
+package inter
+
+object AAAA implements InterA
+
+    override
+    func get -> Int = 0;
+    override    
+    func set: Int n = Nil;
+
+
+end

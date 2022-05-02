@@ -1,0 +1,79 @@
+package initNewTests
+
+
+object InitArrayMapTest 
+
+    private func initOnce {
+        shInt0 = 0;
+        shInt1 = Int;
+        shInt2 = -1;
+        shArInt0 = [ 0, 1, 2, 3 ];
+        shArInt1 = Array<Int>( +5 );
+        shMap0 = [ 0 -> "zero", 1 -> "one" ];
+        shMap1 = HashMap<Int, String>();
+        shMap1 = [ 0 -> "zero", 1 -> "um" ];
+        mypi = +3.14;
+    }
+    
+    func init {
+        map = [ 5 -> "five" ];
+        a = AInit( [ 0 -> "zero", 1 -> "um" ], 5 );
+        a = AInit new: [ Int -> "zero", -1 -> "um" ], 5;
+        b = AInit();
+        c = b;
+
+    }
+    func m: AInit a { }
+    
+    func run {
+        
+        assert shInt0 == 0 && shInt1 == 0 && shInt2 == -1;
+        assert shArInt0 == [ 0, 1, 2, 3 ] &&
+           shArInt1 size == 0 &&
+           shMap0 size == 2;
+        //assert shMap1 get: 0 == "zero";
+        cast zero = shMap1 get: 0 {
+            assert zero == "zero";
+        }
+        else {
+            assert false;
+        }
+        assert mypi > 3.13 && mypi < 3.15;
+           
+           
+        // assert map get: 5 == "five" && b isA: AInit;
+        cast five = map get: 5 { assert five == "five"; }
+        else { assert false; }
+        
+        // assert p == Nil && p2 == 1;        
+        cast ppp = p {
+            assert false;
+        }
+        else {
+            cast  ppp2 = p2 { 
+                assert ppp2 == 1;
+            }
+            else {
+                assert false;
+            }
+        }
+        
+            
+    }    
+    
+    var IMap<Int, String> map
+    var IMap<Int, String> map2 = [ 0 -> "0", 1 -> "1" ];
+    let Int d = Int();
+    var Int e = Int new;
+    var AInit a, b, c;
+    shared Int shInt0, shInt1, shInt2;
+    shared Array<Int> shArInt0, shArInt1;
+    shared IMap<Int, String> shMap0, shMap1;
+    shared Double mypi;
+    let Int|Nil p = Nil;
+    let Int|Nil p2 = 1;
+    // testing field assignment with new: with parameters
+    let CInitParam cip  = CInitParam new: 0;
+    let CInitParam cips = CInitParam new: 0, "";
+    
+end

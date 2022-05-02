@@ -1,0 +1,19 @@
+package people
+
+object Manager(String name, Int age, Int salary, String companyName,
+              String &outp, Int &sum)  
+       extends Employee(name, age, salary, companyName, outp, sum)
+       
+    /*
+    func init: String name, Int age, Int salary, String companyName,
+              String sectionName, String &outp, Int &sum  {
+        super init: name, age, salary, companyName, outp, sum;
+        self.sectionName = sectionName
+    }
+    */
+    
+    func getSectionName -> String = sectionName;
+    func setSectionName: String sn { sectionName = sn }
+    
+    var String sectionName = "";
+end

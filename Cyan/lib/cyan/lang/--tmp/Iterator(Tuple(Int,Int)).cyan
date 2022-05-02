@@ -1,0 +1,8 @@
+package cyan.lang
+
+
+public interface Iterator<Tuple<Int, Int>>
+    func hasNext -> Boolean 
+    func next -> Tuple<Int, Int> 
+end
+

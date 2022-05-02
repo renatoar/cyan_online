@@ -1,0 +1,7 @@
+package cyan.lang
+
+
+
+object Proto_Iterator__<Tuple<Int, Int>> implements Iterator<Tuple<Int, Int>>
+
+end

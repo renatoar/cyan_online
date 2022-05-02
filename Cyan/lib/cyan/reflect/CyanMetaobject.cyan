@@ -1,0 +1,124 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open 
+object CyanMetaobject
+
+
+    @javaPublic var meta.CyanMetaobject hidden;
+
+    private 
+    func init { @javacode{* _hidden = null; *} }
+
+    func init: meta.CyanMetaobject hidden {
+        self.hidden = hidden;
+        @javacode{*
+            _hidden.setMetaobjectInCyan(this);
+        *}
+
+    }
+
+    func getHidden -> meta.CyanMetaobject { return hidden } 
+
+
+    func getName  -> String {
+        return hidden getName
+    }
+
+    func getAnnotation  -> meta.WrAnnotation {
+        return hidden getAnnotation
+    }
+
+    func getCanonicalPath  -> String {
+        return hidden getCanonicalPath
+    }
+
+    func getFileName  -> String {
+        return hidden getFileName
+    }
+
+    func getPackageName  -> String {
+        return hidden getPackageName
+    }
+
+    @prototypeCallOnly
+    final
+    func removeQuotes: String arg0 -> String {
+        return meta.CyanMetaobject removeQuotes: arg0
+    }
+
+    func getErrorList  -> java.util.List {
+        return hidden getErrorList
+    }
+
+    func getPackageOfType  -> String {
+        return hidden getPackageOfType
+    }
+
+    func getColorList  -> java.util.List {
+        return hidden getColorList
+    }
+
+    func setFileName: String arg0 {
+        hidden setFileName: arg0
+    }
+
+    func setPackageName: String arg0 {
+        hidden setPackageName: arg0
+    }
+
+    func addError: meta.WrSymbol arg0, String arg1 {
+        hidden addError: arg0, arg1
+    }
+
+    func addError: String arg0 {
+        hidden addError: arg0
+    }
+
+    func isExpression  -> Boolean {
+        return hidden isExpression
+    }
+
+    func setAnnotation: meta.WrAnnotation arg0 {
+        hidden setAnnotation: arg0
+    }
+
+    func getReplacementPolicy  -> meta.ReplacementPolicyInGenericInstantiation {
+        return hidden getReplacementPolicy
+    }
+
+    func getCurrentPrototype  -> meta.WrPrototype {
+        return hidden getCurrentPrototype
+    }
+
+    func getCodeCompletionAlternatives: java.lang.Integer arg0 -> java.util.List {
+        return hidden getCodeCompletionAlternatives: arg0
+    }
+
+    func getPrototypeOfType  -> String {
+        return hidden getPrototypeOfType
+    }
+
+    func getErrorMessageList_cleanAll  -> java.util.List {
+        return hidden getErrorMessageList_cleanAll
+    }
+
+    @prototypeCallOnly
+    final
+    func unescapeString: String arg0 -> String {
+        return meta.CyanMetaobject unescapeString: arg0
+    }
+
+    @prototypeCallOnly
+    final
+    func escapeString: String arg0 -> String {
+        return meta.CyanMetaobject escapeString: arg0
+    }
+
+    func setCanonicalPath: String arg0 {
+        hidden setCanonicalPath: arg0
+    }
+end

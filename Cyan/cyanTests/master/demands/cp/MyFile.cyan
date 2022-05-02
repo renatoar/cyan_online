@@ -1,0 +1,10 @@
+package demands.cp
+
+open
+object MyFile implements Openable
+
+    override
+    func open {
+    }   
+    
+end

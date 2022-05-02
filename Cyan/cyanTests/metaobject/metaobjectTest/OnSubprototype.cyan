@@ -1,0 +1,40 @@
+package metaobjectTest
+
+
+@doc{*
+    Annotations of this metaobject should be attached to a prototype. The
+    Cyan code attached to the annotation is run in phase afterSemAn. Method 
+    afterSemAn_checkSubprototype of the class of metaobject onSubprototype,
+    overridden from ICheckSubprototype_afterSemAn, just interpret the Cyan 
+    statements attached to the annotation. 
+    
+    Then, in phase afterSemAn of the compilation, the Tyan statements 
+    attached to the annotation onSubprototype below are interpreted. 
+    Tyan is interpreted Cyan.
+    
+    To better understand this, see the documentation for action_afterResTypes_semAn.
+*}
+@onSubprototype{*
+    // demands that every subprototype has a method 'subprint'
+    // if not, issue a warning message
+    var Boolean found = false;
+    var methodList = subPrototype getMethodDecList: env;
+    for i in 0..< methodList size {
+        if (methodList get: i) getName == "subprint" {
+            return Nil;
+        }
+    }
+    Out println: 
+        "'" ++ subPrototype getName ++ 
+        "' is a subprototype of '" ++ 
+        metaobject getAttachedDeclaration getName ++
+        "' It should define a method 'subprint'. It does not";
+*}
+open
+object OnSubprototype
+
+    func run {
+    }
+        
+end
+

@@ -1,0 +1,16 @@
+/*
+    compile the interface of package cyan.io,
+    a file so that the package does not need to be
+    recompiled in every compilation.
+    
+    use the following compiler options:
+    
+    "C:\Dropbox\Cyan\cyanTests\empty\compileCyan_util.pyan" 
+    -java 
+    -cp "C:\Dropbox\Cyan\lib\sacilib.jar" 
+    -cp "C:\Dropbox\Cyan\lib\cyanruntime.jar"
+*/
+program 
+
+    @annot("compilePackage")
+    package cyan.util at "C:\Dropbox\Cyan\lib\cyan\util"

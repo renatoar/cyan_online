@@ -1,0 +1,32 @@
+package cyan.lang
+
+@doc{*
+    Cast can be used to cast some value to type T. It does not work 
+    if T is an union. 
+*}
+open
+object Cast<T>
+
+    func asReceiver: Dyn value -> T {
+        type value 
+            case T other {
+                return other
+            }
+        if value isA: Any {
+            throw: ExceptionCast("Cannot cast value of type '" ++
+               value prototypeName ++ "' "
+               ++ "to " ++ #T  )
+        }
+        else if value == Nil {
+            throw: ExceptionCast("Cannot cast value of type Nil to "
+               ++ #T )
+        }
+        else {
+            throw: ExceptionCast("Cannot cast value of a Java type " ++
+               "to " ++ #T )
+        }
+    }
+    
+
+end
+

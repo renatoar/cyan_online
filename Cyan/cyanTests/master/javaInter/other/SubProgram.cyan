@@ -1,0 +1,32 @@
+package javaInter.other
+
+import javaInter.main
+
+open
+object SubProgram extends Program
+
+    func init { 
+        super init: "a";
+    }
+
+    func init: Double d { 
+        super init: d asString;
+    }   
+    
+    func test {
+        var t = Program new;
+        // var t2 = Program new: 0;
+        var t3 = Program new: "a";
+        var t4 = Program(0.0);
+        
+    }
+    
+    package func packageFun -> Int = 0;
+    package func packageFun: Int n -> Int = n + 1;
+    
+    override
+    func aabc: Int s { }
+    override
+    func cbaa -> Int = 0;
+    
+end

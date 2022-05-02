@@ -1,0 +1,8 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IStayPrototypeInterface
+end

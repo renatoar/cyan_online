@@ -1,0 +1,12 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionNewPrototypes_parsing
+
+    func parsing_NewPrototypeList: ICompilerAction_parsing compiler
+        -> Array<Tuple<String, String>> 
+
+end

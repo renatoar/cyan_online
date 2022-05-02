@@ -1,0 +1,6 @@
+package cyan.reflect
+
+
+interface ICheck_afterResTypes_afterSemAn 
+
+end

@@ -1,0 +1,48 @@
+package conceptPackage
+
+
+open
+object PA extends other.SuperA implements I1, I2, PE, other.IOther
+    
+    
+    func ma1: Int ma2: String -> Boolean = true;
+    func runA = Nil;
+    func runA: Array<String> { }
+    
+    override
+    func repAB { }
+    override
+    func repAB: String -> Char = 'a';
+    func repAB: String repAB2: Int -> Char = 'b';
+    
+    func with: Char with: Int -> Char = '0';
+    
+    override
+    func i1_m1: Int -> String = "";
+    override
+    func i1_m2: Int i1_m3: String = Nil;
+    override
+    func i1_m4 -> String = "";
+
+    
+    override
+    func i2_m1: Int -> String = "";
+    override
+    func i2_m2: Int i2_m3: String = Nil;
+    override
+    func i2_m4 -> String = "";
+
+    override
+    func e_m1: Int -> String = "";
+    override
+    func e_m2: Int e_m3: String { }
+    override
+    func e_m4 -> String = "";
+
+    func + PA other -> PA = self;
+
+    func run {
+    }
+    
+    
+end

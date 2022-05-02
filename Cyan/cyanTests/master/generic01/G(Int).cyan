@@ -1,0 +1,11 @@
+package generic01
+
+object G<Int>
+
+    func init { _value = 0 }
+    
+    @property var Int _value;
+   
+   
+end
+

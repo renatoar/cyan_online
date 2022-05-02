@@ -1,0 +1,9 @@
+package main
+
+object ProtoR
+
+    func get -> Program = Program;
+    func at: Int n -> String = "";
+
+
+end

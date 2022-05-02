@@ -1,0 +1,19 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'codeAfter' adds the code attached to the 
+  annotation after a local variable declaration.
+*}
+object CodeAfter
+
+    func run {
+        @codeAfter{*
+            sum = 1;
+        *}
+        var Int sum = 0;
+        assert sum == 1;
+    }
+
+end
+

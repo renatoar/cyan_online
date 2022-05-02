@@ -1,0 +1,7 @@
+package cyan.lang
+
+object Throw
+    func init: CyException e {
+        throw: e;
+    }
+end

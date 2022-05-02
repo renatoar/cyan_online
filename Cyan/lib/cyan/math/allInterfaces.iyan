@@ -1,0 +1,87 @@
+package cyan.math
+
+
+object Cos extends Function<Double, Double>
+
+    func init 
+    func new -> cyan.math.Cos 
+    override func eval: (Double x)  -> Double 
+    override func prototype -> cyan.math.Cos 
+    override func clone -> cyan.math.Cos 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object Math 
+
+    func init 
+    func new -> cyan.math.Math 
+    func intAbs: (Int x)  -> Int 
+    func abs: (Double x)  -> Double 
+    func sin: (Double x)  -> Double 
+    func cos: (Double x)  -> Double 
+    func exp: (Double x)  -> Double 
+    func log: (Double x)  -> Double 
+    func log10: (Double x)  -> Double 
+    func floor: (Double x)  -> Double 
+    func ceil: (Double x)  -> Double 
+    func nextDouble -> Double 
+    func nextDouble: (Double bound)  -> Double 
+    func nextInt -> Int 
+    func nextInt: (Int bound)  -> Int 
+    func nextLong -> Long 
+    func nextLong: (Long bound)  -> Long 
+    func sqrt: (Double x)  -> Double 
+    override func prototype -> cyan.math.Math 
+    override func clone -> cyan.math.Math 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object Sin extends Function<Double, Double>
+
+    func init 
+    func new -> cyan.math.Sin 
+    override func eval: (Double x)  -> Double 
+    override func prototype -> cyan.math.Sin 
+    override func clone -> cyan.math.Sin 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object Sqr extends Function<Double, Double>
+
+    func init 
+    func new -> cyan.math.Sqr 
+    override func eval: (Double x)  -> Double 
+    override func prototype -> cyan.math.Sqr 
+    override func clone -> cyan.math.Sqr 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object Sqrt extends Function<Double, Double>
+
+    func init 
+    func new -> cyan.math.Sqrt 
+    override func eval: (Double x)  -> Double 
+    override func prototype -> cyan.math.Sqrt 
+    override func clone -> cyan.math.Sqrt 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+

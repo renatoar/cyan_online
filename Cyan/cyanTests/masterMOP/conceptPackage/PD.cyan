@@ -1,0 +1,7 @@
+package conceptPackage
+
+interface PD
+    func d_m1: Int -> String
+    func d_m2: Int d_m3: String
+    func d_m4 -> String
+end

@@ -1,0 +1,10 @@
+package main
+
+@init(name, age)
+object Person
+    
+    @annot( #f1 ) 
+    @property String name
+    @annot( #f2 ) 
+    @property Int age
+end

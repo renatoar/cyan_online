@@ -1,0 +1,10 @@
+A has [
+    func + A -> A
+],
+
+axiom plusTest: A a, A b {%
+    if a + b != b + a {
+        ^"A is not commutative"
+    }
+    ^Nil
+%}

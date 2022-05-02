@@ -1,0 +1,11 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionVariableDeclaration_semAn
+
+    func semAn_codeToAddAfter: WrEnv env -> String 
+
+end

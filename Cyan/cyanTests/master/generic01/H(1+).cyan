@@ -1,0 +1,6 @@
+package generic01
+
+object H<T+>
+    
+end
+

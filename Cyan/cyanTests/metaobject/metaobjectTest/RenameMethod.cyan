@@ -1,0 +1,81 @@
+package metaobjectTest
+
+
+@doc{*
+    Annotation 'renameMethod' should be attached to a prototype.
+    It takes at least two parameters: the first is a method name
+    and the others are the new selectors for the method. Example:
+        @renameMethod("at:1 with:2", "myAt:", "myWith:")
+    This annotation will rename method "at:1 with: 2" to "myAt:1 myWith:2".
+    Overloaded methods cannot be renamed.
+    
+    
+    
+    Annotation 'renameMethod' should be attached to a prototype.
+    It takes at least four parameters.
+    
+    The first one is the signature of the method to be renamed. This signature is
+    got from method getNameWithoutParamNumber of WrMethodSignature or WrMethodDec.
+    Something like 
+        """ 
+         func one: Int n 
+         two: Int nn, Double d
+         three: String a, String b, String  c -> Int"""
+         
+    The Cyan MOP demands that, if a method is renamed, other should be 
+    created with this same name. The code of the NEW method, with the OLD
+    method name, is in the second parameter. Something like
+    
+         """ 
+         func one: Int n 
+              two: Int nn, Double d 
+              three: String a, String b, String  c -> Int {
+              
+              var value = n + nn + d asInt;
+              Out println: a, b, c;
+              return value;
+         }
+         """    
+    
+    The third parameter is the OLD method name composed of method keywords
+    and number of parameters, something like
+        "one:1 two:2 three:3"
+        
+    The rest of the parameters are the new keywords for the method, for
+    example, 
+        "um:", "dois:", "tres:"
+    Overloaded methods cannot be renamed.    
+*}
+@renameMethod(
+    """ 
+    func one: Int n 
+         two: Int nn, Double d 
+         three: String a, String b, String  c -> Int""", 
+    """ 
+    func one: Int n 
+         two: Int nn, Double d 
+         three: String a, String b, String  c -> Int {
+         
+         var value = n + nn + d asInt;
+         return value;
+    }
+    """, 
+    "one:1 two:2 three:3",
+    "um:", "dois:", "tres:"   // new keywords
+    )
+object RenameMethod
+
+    func run {
+        
+        assert um: 5 dois: 5, 0.3 tres: "a", #b, #c == 0;
+        assert one: 5 two: 5, 0.3 three: "a", #b, #c == 10;
+    }
+    
+    func one: Int n 
+         two: Int nn, Double d 
+         three: String a, String b, String  c -> Int {
+         return 0;
+    }
+
+end
+

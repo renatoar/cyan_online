@@ -1,0 +1,129 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open 
+object CyanMetaobjectAtAnnot extends CyanMetaobject 
+
+
+    func init: String name, String parameterKind,
+			Array<String> decKindList, String visibility { 
+        @javacode{*
+            super( new meta.CyanMetaobjectAtAnnot(_name.s, 
+               meta.CyanMetaobjectAtAnnot.fromStringAnnotationArgumentsKind(_parameterKind.s),
+               meta.CyanMetaobjectAtAnnot.fromStringAttachedDeclarationKind(_decKindList), 
+               meta.CyanMetaobjectAtAnnot.fromStringVisibility(_visibility.s) ) );
+        *}
+    } 
+    
+    func init: String name, String parameterKind,
+			Array<String> decKindList { 
+        @javacode{*
+            super( new meta.CyanMetaobjectAtAnnot(_name.s, 
+               meta.CyanMetaobjectAtAnnot.fromStringAnnotationArgumentsKind(_parameterKind.s),
+               meta.CyanMetaobjectAtAnnot.fromStringAttachedDeclarationKind(_decKindList), 
+               meta.CyanMetaobjectAtAnnot.fromStringVisibility("PRIVATE") ) );
+        *}
+    } 
+      
+    func init: String name, String parameterKind { 
+        @javacode{*
+            super( new meta.CyanMetaobjectAtAnnot(_name.s, 
+               meta.CyanMetaobjectAtAnnot.fromStringAnnotationArgumentsKind(_parameterKind.s),
+               null, 
+               meta.CyanMetaobjectAtAnnot.fromStringVisibility("PRIVATE") ) );
+        *}
+    } 
+      
+    func init: String name { 
+        @javacode{*
+            super( new meta.CyanMetaobjectAtAnnot(_name.s, 
+               null,
+               null, 
+               meta.CyanMetaobjectAtAnnot.fromStringVisibility("PRIVATE") ) );
+        *}
+    } 
+    override
+    func getHidden -> meta.CyanMetaobjectAtAnnot { @javacode{* return (meta.CyanMetaobjectAtAnnot) super._getHidden(); *} } 
+
+
+    override
+    func getName  -> String {
+        return self getHidden getName
+    }
+
+    override
+    func getAnnotation  -> meta.WrAnnotationAt {
+        return self getHidden getAnnotation
+    }
+
+    func check  {
+        self getHidden check
+    }
+
+    @prototypeCallOnly
+    final
+    func extractSlotInterface: String arg0 -> String {
+        return meta.CyanMetaobjectAtAnnot extractSlotInterface: arg0
+    }
+
+    override
+    func getPackageOfType  -> String {
+        return self getHidden getPackageOfType
+    }
+
+    func getAttachedDeclaration  -> meta.IDeclaration {
+        return self getHidden getAttachedDeclaration
+    }
+
+    func shouldBeAttachedToSomething  -> Boolean {
+        return self getHidden shouldBeAttachedToSomething
+    }
+
+    func getParameterKinds  -> meta.AnnotationArgumentsKind {
+        return self getHidden getParameterKinds
+    }
+
+    override
+    func getPrototypeOfType  -> String {
+        return self getHidden getPrototypeOfType
+    }
+
+    func attachedListAsString  -> String {
+        return self getHidden attachedListAsString
+    }
+
+    func mayBeAttachedToSomething  -> Boolean {
+        return self getHidden mayBeAttachedToSomething
+    }
+
+    func attachedDecKindListSubsetOf: meta.AttachedDeclarationKind[] arg0 -> Boolean {
+        return self getHidden attachedDecKindListSubsetOf: arg0
+    }
+
+    func getAttachedDecKindList  -> meta.AttachedDeclarationKind[] {
+        return self getHidden getAttachedDecKindList
+    }
+
+    func mayBeAttachedTo: meta.AttachedDeclarationKind arg0 -> Boolean {
+        return self getHidden mayBeAttachedTo: arg0
+    }
+
+    func myClone  -> meta.CyanMetaobjectAtAnnot {
+        return self getHidden myClone
+    }
+
+    func ee: meta.CyanMetaobjectAtAnnot arg0 {
+        self getHidden ee: arg0
+    }
+
+    func shouldTakeText  -> Boolean {
+        return self getHidden shouldTakeText
+    }
+
+    func getVisibility  -> meta.Token {
+        return self getHidden getVisibility
+    }
+end

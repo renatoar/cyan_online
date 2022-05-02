@@ -5,7 +5,7 @@ FROM ubuntu
 RUN apt-get update
 
 #Install tzdata and set timezone.
-ENV TZ=America/Chicago
+ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get -y install tzdata
 
@@ -48,7 +48,7 @@ EXPOSE 80
 CMD /usr/sbin/apache2ctl -D FOREGROUND
 
 #Copy files to webserver 
-COPY Online-Compiler /var/www/html/
+COPY cyan_compiler /var/www/html/
 
 #Change Permission
 RUN chmod -R 777 /var/www/html/

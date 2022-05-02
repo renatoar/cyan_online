@@ -1,0 +1,32 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionMessageSend_semAn extends IStayPrototypeInterface
+
+    func semAn_analyzeReplaceKeywordMessage:
+            WrExprMessageSendWithKeywordsToExpr messageSendExpr, 
+            WrEnv env
+        -> Tuple<String, String, String>
+
+
+    func semAn_analyzeReplaceUnaryMessage:
+            WrExprMessageSendUnaryChainToExpr messageSendExpr, 
+            WrEnv env 
+        -> Tuple<String, String, String>
+
+    /* called when the compiler finds a message sends like
+            unary;
+       or
+            x = unary;
+       in which 'self.' was not used but it could be.
+    */
+    func semAn_analyzeReplaceUnaryMessageWithoutSelf:
+            WrExprIdentStar messageSendExpr, 
+            WrEnv env 
+        -> Tuple<String, String, String>
+
+
+end

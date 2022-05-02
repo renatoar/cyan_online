@@ -1,0 +1,19 @@
+package context
+
+object SumInject<T> extends InjectObject<T>
+
+    func init {
+        //sum = T cast: 0
+        sum = T
+    }
+    
+    override
+    func eval: T item {
+        sum = sum + item
+    }
+    
+    override func result -> T = sum;
+    
+    var T sum
+end
+

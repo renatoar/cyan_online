@@ -1,0 +1,22 @@
+package metaobjectTest
+
+@doc{*
+    callUnaryMethods generates code that calls all methods of
+    the current prototype whose name matches with the pattern
+    that is the annotation parameter. 
+*}
+object CallUnaryMethods
+
+    func run {
+    
+        @callUnaryMethods(".*Test")
+        assert count == 3;
+    }
+    
+    func oneTest { ++count }
+    func twoTest { ++count }
+    func threeTest { ++count }
+    
+    var Int count = 0;
+    
+end

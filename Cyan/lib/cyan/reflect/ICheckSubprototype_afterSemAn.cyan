@@ -1,0 +1,13 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface ICheckSubprototype_afterSemAn extends ICheck_afterResTypes_afterSemAn, IStayPrototypeInterface
+
+    func afterSemAn_checkSubprototype:
+            ICompiler_semAn compiler_semAn, 
+            WrPrototype subPrototype
+    
+end

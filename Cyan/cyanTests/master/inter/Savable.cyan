@@ -1,0 +1,5 @@
+package inter
+
+interface Savable
+    func save
+end

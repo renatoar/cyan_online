@@ -1,0 +1,22 @@
+package generic02.gb
+
+object G3<T>
+    fun init: G1<T> newValue {
+        _value = newValue;
+    }
+    fun nameGP -> String {
+        return T prototypeName
+    }
+    
+    fun name -> String = "generic02.gb." + prototypeName;
+    fun value -> G1<T> = _value;
+    fun nameT -> String = ( @paramToString(T) );
+    
+    fun check: String tname {
+        const tproto = T prototypeName;
+        assert tproto == tname;
+    }
+    
+    G1<T> _value
+end
+

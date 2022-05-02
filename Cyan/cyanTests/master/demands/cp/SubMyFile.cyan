@@ -1,0 +1,5 @@
+package demands.cp
+
+
+object SubMyFile extends MyFile
+end

@@ -1,0 +1,14 @@
+package main
+
+
+object SubOnOverride extends metaobjectTest.OnOverride
+
+    override
+    func draw {
+        super draw
+    }
+
+    func subMethod {
+    }
+    
+end

@@ -1,0 +1,10 @@
+package main
+
+
+open
+object SubRestrictOverrideTo extends metaobjectTest.RestrictOverrideTo
+
+    override
+    func myprint { }
+    
+end

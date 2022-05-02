@@ -1,0 +1,31 @@
+package cyan.lang
+
+
+open object ArrayIterator<Tuple<Int, Int>> 
+          implements Iterator<Tuple<Int, Int>>
+
+    func init: (Array<Tuple<Int, Int>> s)   {
+        self.s = s; 
+        index = 0
+    } 
+
+    override func hasNext -> Boolean  {
+        return index < (s size)
+    } 
+
+    override func next -> Tuple<Int, Int>  {
+                if index < (s size) {
+            ++index; 
+            return s[index - 1]
+        }
+        else {
+            throw: ExceptionIterator
+        }
+
+    } 
+
+    private let Array<Tuple<Int, Int>> s
+    private var Int index
+
+end
+

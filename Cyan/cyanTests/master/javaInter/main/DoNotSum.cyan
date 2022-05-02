@@ -1,0 +1,10 @@
+package javaInter.main
+
+object DoNotSum(Int sum)
+   func eval: (Int x) {
+      sum = sum + x
+   }
+   
+   func setSum: Int sum { self.sum = sum }
+   func getSum -> Int = sum;
+end

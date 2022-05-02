@@ -1,0 +1,2466 @@
+package main
+
+import context
+import inter
+import people
+import shape
+import initNewTests
+import abstractPackage
+import generic02.ga
+import generic02.protoA
+import myExceptions
+import abstractPackage
+import bank
+import mult
+import funct
+
+
+object Program implements ISumMult
+
+    let Float bbb = 99.8F;
+    let Float aaa = 10.66F;
+
+
+    let Int publicConst = 0;
+    private let Int privateConst = 1;
+    let Int protectedConst = 2;
+    
+    let Int zeroConst
+    private let Int oneConst
+    let Int twoConst
+    
+    var String name = "just a name";
+    shared var Int sharedInt
+    shared var Int n = 0;
+    shared let Int sharedConstInt = -1;
+    private shared let Int sharedConstIntPrivate = -2;
+
+    private func initOnce {
+        sharedInt = 0
+    }
+    
+    func init { 
+        zeroConst = 0;    
+        oneConst = 1;
+        twoConst = 2;
+    }
+
+    
+    
+    func run {
+    
+        var Function<Int, Int, Int, Int> fiiii;
+    
+        var Function<Int, Int, Int> fiii;
+
+        var Program ppp;
+
+        TestCyan() run;
+        UnionTest() run;
+        TestCyan11() run;
+        ffm.Test() run;
+        fileTest.FileTest() run;
+        CastTest() run;
+
+        demands.main.Program() test;
+        ReachabilityAssignmentTesting() run;
+        graph.GraphTest run;
+
+        /*
+           This metaobject call will expand to calls to all
+           methods of this prototype whose name ends with "Test" 
+           like "libraryTest"
+        */        
+        @callTestMethods ;
+        "End of Master" println;
+    }
+    
+    func libraryTest {
+    
+        let intArray = [ 0, 1, 2, 3, 4, 5, 6 ];
+        assert (intArray filter: LT<Int>(3)) size == 3 &&
+               (intArray filter: GE<Int>(3)) size == 4 &&
+               (intArray filter: LT<Int>(5) |> GE<Int>(3)) size == 2;
+    
+        let clientList = [ Client("Livia"), Client("Carol"), Client("Marcia"), Client("Carol") ];
+        let clientListCarol = clientList filter: EQ<Client, name, String>("Carol");
+        assert clientListCarol[0] name == "Carol" &&
+               clientListCarol[1] name == "Carol";
+        let peopleList = [ Worker("Livia", 9, "DogCare"), Worker("Carol", 6, "ArtCia"), 
+           Worker("Marcia", 31, "UFSCar"), Worker("Livia", 27, "CompanyA"), 
+           Worker("Carol", 24, "CompanyB") ];
+        let list = peopleList filter: GT<Worker, age, Int>(20) |> EQ<Worker, name, String>("Carol");
+        assert list size == 1 && list[0] company == "CompanyB";
+        let list2 = peopleList filter: LT<Worker, age, Int>(30) |> NEQ<Worker, name, String>("Jose");
+        assert list2 size == 4 && list2[3] company == "CompanyB";
+        
+        let pList = [ Worker("w1", 10, "A"), Worker("w2", 20, "B"), 
+            Worker("w3", 30, "A"), Worker("w4", 40, "D") ];
+        var Int ageSum =  0;
+        pList foreach: Sum<Worker, age, Int>(ageSum);
+        assert ageSum == 100;
+        var String allNames = "";
+        pList foreach: ConcatStr<Worker, name>(allNames);
+        assert allNames == "w1w2w3w4";
+        
+        ageSum = 0;
+        allNames = "";
+        pList foreach: Sum<Worker, age, Int>(ageSum) |> ConcatStr<Worker, name>(allNames);
+        assert ageSum == 100 && allNames == "w1w2w3w4";
+        
+
+    }
+    
+    
+    
+    func ifWhileForTest {
+        let myBool = Boolean new;
+        var Int i = 1;
+        var Int j = 1;
+        var ok;
+        if i == j && (i eq: j) {
+            ok = true
+        }
+        else {
+            ok = false
+        }
+        
+        type ok
+            case Boolean ok2 {
+                assert ok2;
+            }
+            else {
+                assert false;
+            }
+        
+        let Int k = 2;
+        var Boolean fine = true;
+        if 1 < 0 { fine = false }
+        else if i != j { fine = false }
+        else if i != 1 { fine = false }
+        else if k < i  { fine = false }
+        assert fine;
+        
+        i = 0;
+        var String s = "";
+        while i < 10 {
+            s = s ++ i;
+            ++i
+        }
+        assert s == "0123456789";
+        s = "";
+        for kkk in 0..< 10 {
+            s = s ++ kkk
+        }
+        assert s == "0123456789";
+        s = "";
+        for k2 in 0..9 {
+            s = s ++ k2
+        }
+        assert s == "0123456789";
+        s = "";
+        let zeroNine = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+        for m in zeroNine {
+            s = s ++ m
+        }
+        assert s == "0123456789";
+        s = "";
+        i = 0;
+        while i < zeroNine size { 
+            s = s ++ zeroNine[i];
+            ++i;
+        }        
+        assert s == "0123456789";
+
+        s = "";
+        for p in 0..< 10 {
+            s = s ++ zeroNine[p]
+        }
+        assert s == "0123456789";
+        s = "";
+        0..< 10 foreach: { (: Int ii :)
+            s = s ++ ii;            
+        };
+        assert s == "0123456789";
+
+        s = "";
+        0..9 foreach: { (: Int jj :)
+            s = s ++ jj;            
+        };
+        assert s == "0123456789";
+
+        s = "";
+        i = 0;
+        10 times: { 
+            s = s ++ i;            
+            ++i;
+        };
+        assert s == "0123456789";
+
+        s = "";
+        10 repeat: { (: Int kk :)
+            s = s ++ kk;            
+        };
+        assert s == "0123456789";
+
+
+        i = 0;
+        s = "";
+        while i < 10 {
+            if i%2 == 0 { s = s ++ i }
+            ++i
+        }
+        assert s == "02468";
+        s = "";
+        for k3 in 0..< 10 {
+            if (k3+1)%2 == 0 { s = s ++ k3 }
+        }
+        assert s == "13579";
+        s = "";
+        for k4 in 0..9 {
+            if k4 > 5 && k4%2 == 0 { s = s ++ k4 }
+        }
+        assert s == "68";
+        s = "";
+        for mm in zeroNine {
+            if mm < 5 { s = s ++ mm }
+            else if mm >= 5 && mm%2 == 0 {
+                s = s ++ mm 
+            }
+        }
+        assert s == "0123468";
+        i = 10;
+        s = "";
+        while i > 0 { 
+            --i;
+            if i < 5 { s = s ++ zeroNine[i]*zeroNine[i] }
+            if i > 5 && i > 8 { s = s ++ zeroNine[i] }
+        }        
+        assert s == "9169410";
+
+
+        var Int age = 1;
+        if age < 3 {
+            s = "baby"
+        }
+        else if age <= 12 {
+            s = "child"
+        }
+        else if age <= 19 {
+            s = "teenager"
+        }
+        else {
+            s = "adult"
+        }
+        assert s == "baby";
+
+        age = 12;
+        if age < 3 {
+            s = "baby"
+        }
+        else if age <= 12 {
+            s = "child"
+        }
+        else if age <= 19 {
+            s = "teenager"
+        }
+        else {
+            s = "adult"
+        }
+        assert s == "child";
+
+
+        age = 15;
+        if age < 3 {
+            s = "baby"
+        }
+        else if age <= 12 {
+            s = "child"
+        }
+        else if age <= 19 {
+            s = "teenager"
+        }
+        else {
+            s = "adult"
+        }
+        assert s == "teenager";
+
+        age = 21;
+        if age < 3 {
+            s = "baby"
+        }
+        else if age <= 12 {
+            s = "child"
+        }
+        else if age <= 19 {
+            s = "teenager"
+        }
+        else {
+            s = "adult"
+        }
+        assert s == "adult";
+        
+
+        age = 3;             
+        var oddOrEven = "" ++ ((age%2 == 0) t: "even" f: "odd");
+        assert oddOrEven == "odd";
+        age = 12;
+        oddOrEven = "" ++ ((age%2 != 0) f: "even" t: "odd");        
+        assert oddOrEven == "even";
+
+        //  with break
+        
+        s = "";
+        i = 0;
+        for kkk2 in 0..< 10 {
+            s = s ++ kkk2;
+            if i > 5 { break }
+            ++i;
+        }
+        assert s == "0123456";
+        s = "";
+        i = 0;
+        for k7 in 0..9 {
+            s = s ++ k7;
+            if i > 7 { break }
+            ++i
+        }
+        assert s == "012345678";
+        s = "";
+        i = 0;
+        let zeroNine3 = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+        for m5 in zeroNine3 {
+            s = s ++ m5;
+            if i > 3 { break }
+            ++i
+        }
+        assert s == "01234";
+        s = "";
+        i = 0;
+        while i < zeroNine3 size { 
+            s = s ++ zeroNine3[i];
+            if i >= 2 { break }
+            ++i;
+        }        
+        assert s == "012";
+        
+
+    }
+    
+    func whileTrueTest {
+        var i = 0;
+        var String s = "";
+        { ^ i < 5 } whileTrue: {
+            s = s ++ i;
+            ++i
+        };
+        assert s == "01234";
+        
+
+        i = 0;
+        s = "";
+        { ^ i >= 5 } whileFalse: {
+            s = s ++ i;
+            ++i
+        };
+        assert s == "01234";
+    }
+    
+    func initNewTest {
+        var x = InitTest0 new;
+        assert (x run0);
+        
+        
+        let t0 = InitTest1 new: 0, "b";
+        assert  (t0 all) == "0bc";
+
+        let t00 = InitTest1 new: "b";
+        assert (t00 all) == "0bc";
+
+        let t01 = InitTest1 new: 0;
+        assert (t01 all) == "0bc";
+
+        
+        let t1 = InitTest2 new: 0, "b", 1S, 2L;
+        assert (t1 all) == "0bc12f";
+
+        let t2 = InitTest3 new: 1;
+        assert (t2 all) == "0001";
+
+        let t3 = InitTest3 new;
+        assert (t3 all) == "0001";
+
+
+        let t11 = InitTest2 new;
+        assert (t11 all) == "0bc12f";
+
+        let t12 = InitTest2 new: 0;
+        assert (t12 all) == "0bc12f";
+
+        let t13 = InitTest2 new: 0, 2L;
+        assert (t13 all) == "0bc12f";
+
+        let t14 = InitTest2 new: 1S, 2L;
+        assert (t14 all) == "0bc12f";
+
+        let t15 = InitTest2 new: 0, "b", 1S, 2L, "f";
+        assert (t15 all) == "0bc12f";
+        
+        
+
+        let t40 = InitTest2 new: 0, "b", 1S, 2L, "g";
+        assert (t40 all) == "0bc12g";
+        let t41 = InitTest2 new;
+        assert (t41 all) == "0bc12f";
+        let t42 = InitTest2 new: 0;
+        assert (t42 all) == "0bc12f";
+
+        let t43 = InitTest2 new: 0, 2L;
+        assert (t43 all) == "0bc12f";
+        let t44 = InitTest2 new: 1S, 2L;
+        assert (t44 all) == "0bc12f";
+        let t45 = InitTest2 new: 0, "b", 1S, 2L;
+        assert (t45 all) == "0bc12f";
+        
+        let t50 = InitTest6 new;
+        assert (t50 all) == "0001";
+
+        let t51 = InitTest7 new;
+        assert (t51 all) == "00012";
+        
+        let t52 = InitTest8 new;
+        assert (t52 all) == "000123";
+        
+        
+    }
+    
+
+
+    
+    func incSharedInt {
+        ++sharedInt;
+    }
+    
+    func sharedTest {
+        sharedInt = 0;
+        var Program p = Program new;
+        p incSharedInt;
+        var Program t = Program();
+        t incSharedInt;
+    }
+    
+    func initConst: Int n -> Int = n;
+    
+    func constTest {
+        assert publicConst == 0 &&
+               privateConst == 1 &&
+               protectedConst == 2 &&
+               zeroConst == 0 &&
+               oneConst == 1 &&
+               twoConst == 2;
+    }
+    
+    
+    
+    func genericPrototypeTest {
+
+        // parameter as prototype name
+        var IdGenericPrototype<Empty> idgp = IdGenericPrototype<Empty> new;
+        idgp test;
+        
+        // parameter as package name
+        IdPackage<mult>() test;
+        
+        let IdImplementsIdInter<mult> iii = IdImplementsIdInter<mult> new;
+        assert 
+            iii mult: 0 == 0 &&
+            iii mult: "abc" mult: 0 == "abc0" &&
+            iii mult: "aaa" mult: 0 mult: "bbb" == "aaa0bbb" &&
+            iii mult == "mult";
+            // test if the compiler accepts "annot" as a metaobject call
+
+        var G1<Int> g1int = G1<Int> new;
+        assert g1int name == "generic02.ga.G1<Int>" &&
+               g1int value == "Int"  &&
+               g1int getInt == 0 &&
+               g1int prototypeName == "G1<Int>" &&
+               G1<Int> prototypeName == "G1<Int>";
+               
+        var G2<Int> g2int = G2<Int> new;
+        assert g2int name == "generic02.ga.G2<Int>" &&
+               g2int nameGP == "Int"  &&
+               g2int value prototypeName == "G3<Int>" &&
+               g2int nameT == "Int" &&
+               G2<Int> prototypeName == "G2<Int>";
+               
+        var G3<Int> g3int = G3<Int> new: g1int;
+        assert g3int name == "generic02.ga.G3<Int>" &&
+               g3int nameGP == "Int"  &&
+               g3int value == g1int &&
+               g3int nameT == "Int";
+
+
+        var generic02.gb.G1<Int> gbg1int = generic02.gb.G1<Int> new;
+        assert gbg1int name == "generic02.gb.G1<Int>" &&
+               gbg1int nameGP == "Int"  &&
+               gbg1int nameT == "Int" &&
+               gbg1int value prototypeName == "IG2<Int>";
+        gbg1int check: "Int", 0, "G1<Int>";
+               
+        var generic02.gb.G2<Int> gbg2int = generic02.gb.G2<Int> new: gbg1int;
+        assert gbg2int name == "generic02.gb.G2<Int>" &&
+               gbg2int nameGP == "Int"  &&
+               gbg2int value prototypeName == "G3<Int>" &&
+               gbg2int nameT == "Int";
+               
+        var generic02.gb.G3<Int> gbg3int = generic02.gb.G3<Int> new: gbg1int;
+        assert gbg3int name == "generic02.gb.G3<Int>" &&
+               gbg3int nameGP == "Int"  &&
+               gbg3int value == gbg1int &&
+               gbg3int nameT == "Int";
+
+        /*
+           // this test succeeds. But it creates a Java file that has a VERY long name.
+           // It can only be deleted by the command line. 
+           
+        let p = generic02.metaTest.P<generic02.protoA.X, 
+            generic02.protoB.X, generic02.protoA.Y, generic02.protoB.Y><G1<Int>, 
+               generic02.gb.G1<Int>, String><first, second>() prototypeName;
+        assert p == "P<generic02.protoA.X,generic02.protoB.X,generic02.protoA.Y,generic02.protoB.Y><generic02.ga.G1<Int>,generic02.gb.G1<Int>,String><first,second>";
+        */
+        
+        
+        assert (G1<generic02.protoB.X> prototypeName) == "G1<generic02.protoB.X>"  &&
+            G1<generic02.protoB.Y> prototypeName == "G1<generic02.protoB.Y>";
+        assert (generic02.gb.G1<generic02.protoB.X> prototypeName) == "G1<generic02.protoB.X>"  &&
+            generic02.gb.G1<generic02.protoB.Y> prototypeName == "G1<generic02.protoB.Y>";
+
+        assert (G1<generic02.protoA.X> prototypeName) == "G1<generic02.protoA.X>"  &&
+            G1<generic02.protoB.Y> prototypeName == "G1<generic02.protoB.Y>";
+        assert (generic02.gb.G1<generic02.protoB.X> prototypeName) == "G1<generic02.protoB.X>"  &&
+            generic02.gb.G1<generic02.protoA.Y> prototypeName == "G1<generic02.protoA.Y>";
+
+
+        let I1<Int> subg1 = SubG1<Int>();
+        assert subg1 succ: 0 == 1 && (subg1 noop: I2<Int>)[0] == 0;
+        let I2<Int> subsubg1 = SubSubG1<Int>();
+        assert subsubg1 pred: 1 == -1;
+        
+        var I1<Char> a0;
+        var I1<Int> a1;;
+        var I1<G1<Char>> a2 = SubG1<G1<Char>> new;
+        var I2<Int> a3;
+        var I2<G1<Char>> a4;
+        var I3<Int> a5;
+        var I3<G1<Char>> a6;
+
+
+        assert G2<X> prototypeName == "G2<generic02.protoA.X>";
+        assert G2<Y> prototypeName == "G2<generic02.protoA.Y>";
+        assert G2<generic02.protoB.X> prototypeName == "G2<generic02.protoB.X>";
+        assert G2<generic02.protoB.Y> prototypeName == "G2<generic02.protoB.Y>";
+        
+
+        assert generic02.gb.G1<X> prototypeName == "G1<generic02.protoA.X>";
+        assert generic02.gb.G1<Y> prototypeName == "G1<generic02.protoA.Y>"; 
+        assert generic02.gb.G1<generic02.protoB.X> prototypeName == "G1<generic02.protoB.X>";
+        assert generic02.gb.G1<generic02.protoB.Y> prototypeName == "G1<generic02.protoB.Y>";
+        
+        let G1<String> g1str = G1<String> new;
+        let G1<Int> g1int2 = G1<Int>();
+        assert g1str nameGP == "String" && 
+               g1str name == "generic02.ga.G1<String>" &&
+               g1str value == "String" &&
+               g1str getString == "String";
+               
+        assert g1int2 name == "generic02.ga.G1<Int>" &&
+               g1int2 value == "Int" &&
+               g1int2 getInt == 0;
+        var r00 = R< G1<String>, Int>< generic02.protoB.Y >();                
+        assert r00 gett strOne == "G1<String> G1<String>" &&
+               r00 gett prototypeName == "One<generic02.ga.G1<String>>" &&
+               r00 getu strOne == "Int Int" &&
+               r00 getu prototypeName == "One<Int>" &&
+               r00 getu getInt == 11 &&
+               r00 getv strOne == "Y Y" &&
+               r00 getv prototypeName == "One<generic02.protoB.Y>";
+               
+        assert One<Int> getInt == 11;
+        let ws = WithSymbols<first, second, third, String>;
+        assert ws first == 0 && ws second == 'a' && ws third == "z" &&
+            ws getw == "";
+  
+        let fixSym = WithSymbols<f1, f2, f3, Char> new;
+        assert fixSym getF1 == 0  && fixSym getF2 == 1 &&
+               fixSym getF3 == 2 && fixSym getChar == 'w';
+        let ws2 = WithSymbols<f1, f2, f3, String>;
+        assert ws2 f1 == 0 && ws2 f2 == 'a' && ws2 f3 == "z" &&
+            ws2 getw == "";
+        
+        let wsp = WithStrParam<first, second, third>();
+        assert wsp first == 'a' && wsp second == "z" &&
+           wsp getStr == "[third]";   
+           
+        let One<  One<  cyan.lang.Int > > one0 = One<  One<  cyan.lang.Int > > new;
+        let One<  One<cyan.lang.Int > > one1 = One<  One<cyan.lang.Int > >();
+        let One<  One<cyan.lang.Int>> one2 = One<  One<cyan.lang.Int>> clone;
+        let One<One<cyan.lang.Int>> one3 = One<One<cyan.lang.Int>>;
+        
+        let rr = R<cyan.lang.Int, shape.Circle><String> new;
+        assert rr str == "Int Circle String" &&
+               rr gett getInt == 11 && rr getu strOne == "Circle Circle" &&
+               rr getv strOne == "String String";
+        let InterSym<get0, set0> gs0 = ProtoInterSym<get0, set0>();
+        gs0 set0: 5;
+        assert gs0 get0 == 0;
+        let InterSym<getn, setn> aaa000 = ProtoInterSym<getn, setn> new;
+        aaa000 setnnn: 13;
+        assert aaa000 getnnn == 13;
+        let InterSym<getk2, setk2> bb00 = ProtoInterSym<getk, setk> new;
+        bb00 setk2: 17;
+        assert bb00 getk2 == 17;
+        let InterSym<get, set> cc00 = ProtoInterSym new;
+        cc00 set: 23;
+        assert cc00 get == 23;
+        
+        let r5 = R<Int, shape.Square><shape.Circle>();
+        assert r5 str == "Int-Square-Circle" && r5 getZero == 0;
+        
+    }
+    
+    
+   
+    func contextObjectTest {
+    
+        var sum = 0;
+        var v = [ 1, 2, 3 ];
+        v foreach: Sum<Int>(sum);
+        assert sum == 6;
+        var s = "";
+        var strArray = [ "a", "b", "c" ];
+        strArray foreach: Concat(s, "");
+        assert s == "abc";
+
+        strArray foreach: Concat(s, "");
+        assert s == "abcabc";
+        s = "";
+        strArray foreach: Concat(s, " ");
+        assert s == "a b c ";
+        
+        
+        sum = 0;
+        v foreach: SumPercent(sum);
+        assert sum == 0;
+        
+        var Int aa = 0;
+        var Int bb = 2;
+        var Int cc = 0;
+        var adder = Adder(aa, bb, cc);
+        let r = adder eval: 1, 2;
+        assert r == 7;
+        assert aa == 3;
+        assert bb == 2; 
+        assert cc == 2;
+        
+        aa = 0;
+        bb = 2;
+        cc = 0;
+        var subadder = SubAdder(aa, bb, cc);
+        let r2 = subadder eval: 1, 2;
+        assert r2 == 13;
+        assert aa == 4;
+        assert bb == 2; 
+        assert cc == 4;
+        
+        var Int aa2 = 0;
+        let raa = Ref<Int>(aa2);
+        assert raa value == 0 && aa2 == 0;
+        raa value: 1;
+        assert raa value == 1 && aa2 == 1;
+        aa2 = 2;
+        assert raa value == 2 && aa2 == 2;
+        
+        var String ss = "a";
+        let rss = Ref<String>(ss);
+        assert rss value == "a" && ss == "a";
+        rss value: "b";
+        assert rss value == "b" && ss == "b";
+        ss = "c";
+        assert rss value == "c" && ss == "c";
+        
+    }
+    
+    private func until:  (Function<Boolean> test) do:  (Function<Nil> b)  {
+        b eval;
+        (test eval) ifTrue: { until: test do: b }
+    }
+    
+    func returnIntArray -> Array<Int> = [ 0, 1, 2 ];
+    
+    
+    func returnPersonArray -> Array<Person> = [ 
+       Person("Livia", 9),
+       Person("Carolina", 6), 
+       Person("Lili", 11),
+       Person("Loli", 14)
+       ];
+    
+    func equalFloat: Float a, Float b -> Boolean {
+        return (a - b) < 0.01F && (a - b) > -0.01Float
+    }
+    
+    
+    func arrayTest { 
+    
+        assert (returnPersonArray[0] name) == "Livia" &&
+           (returnPersonArray[2] name) == "Lili" &&
+           (returnPersonArray[1] age) == 6 &&
+           (returnPersonArray size) == 4;
+           
+        returnIntArray[0] = 10;
+        assert returnIntArray[0] == 0;
+    
+        /*   // RawArray does not exist anymore
+        let RawArray<Int> ra = RawArray<Int> new: 5;
+        ra[0] = 0;
+        ra[1] = 1;
+        ra[2] = 2;
+        ra[3] = 3;
+        ra[4] = 4;
+        assert ra size == 5 && ra[0] == 0 && ra[4] == 4;
+        */
+    
+        var String outp = "";
+        var Int sum = 0;
+        let eArray = [ 
+            Employee("Livia", 9, 10_000, "UFMG", outp, sum),
+            Employee("Carolina", 6, 20_000, "UFSCar", outp, sum), 
+            Employee("Lili", 11, 30_000, "Embrapa", outp, sum),
+            Employee("Loli", 14, 40_000, "Petrobras", outp, sum)
+            ];
+       
+               
+        var String s = "";
+        for emp in eArray {
+            s = s ++ emp name
+        }     
+        assert s == "LiviaCarolinaLiliLoli";
+        eArray apply: "doSum";
+        assert outp == "LiviaCarolinaLiliLoli" && sum == 100_000;
+        outp = "";
+        sum = 0;
+        eArray .* "doSum";
+        assert outp == "LiviaCarolinaLiliLoli" && sum == 100_000;
+    
+        assert ((eArray slice: 0..0) concat: (eArray slice: 1..3)) == eArray;
+        
+        assert (eArray size == 4) && (eArray[0] name) == "Livia" &&
+           (eArray[1] age == 6);
+
+            
+        var Array<Int> intArray;
+        intArray = [ 0, 1, 2 ];
+        var Array<Float> floatArray = [ 0.0F, 1.0F, 2.0F ];
+        var Array<String> stringArray;
+        stringArray = Array<String> new: 10;
+        stringArray add: "0";
+        stringArray add: "1";
+        stringArray add: "2";
+        
+        assert stringArray size == 3 && floatArray size == 3 && intArray size == 3;
+        assert intArray[0] == 0 && intArray[1] == 1 && intArray[2] == 2;
+        assert floatArray[0] == 0.0F && floatArray[1] == 1.0F && floatArray[2] == 2.0F;
+        
+        s = "";
+        stringArray foreach: { (: String elem :) 
+            s = s ++ elem;
+        };
+        assert s == "012";
+
+        sum = 0;
+        intArray foreach: { (: Int elem :) sum = sum + elem };    
+        assert sum == 3;
+        var sumF = 0.0F;
+        floatArray foreach: { (: Float elem :) sumF = sumF + elem };
+        assert equalFloat: sumF, 3.0Float;
+        
+        var Array<Int> intArray2 = [ 0, 1, 2, 3 ];
+        var Int n = 3;
+        assert n in: intArray2;
+
+        var arrayArray = [ [ 0, 1, 2 ], [ 3, 4, 5 ] ];
+        
+        assert arrayArray[0][0] == 0 && arrayArray[1][2] == 5 &&
+               arrayArray[0][2] == 2;
+        
+
+        assert [ [ 0 ], [ 1 ], [ 2 ] ] [0][0] == 0 &&
+               ([ [ 0, 1, 2 ], [ 3, 4, 5 ] ])[1][2] == 5;
+        
+        
+        var Array<Array<Array<Int>>> aaa;
+        aaa = Array<Array<Array<Int>>> new: 5;
+        aaa add: ( Array<Array<Int>> new: 10 );
+        aaa add: ( Array<Array<Int>> new: 10 );
+        aaa[0] add: ( Array<Int> new: 20 );
+        aaa[0] add: ( Array<Int> new: 20 );
+        aaa[1] add: ( Array<Int> new: 50 );
+        aaa[1] add: ( Array<Int> new: 50 );
+
+        aaa[0][0] add: 30;
+        aaa[0][0] add: 31;
+        aaa[0][1] add: 40;
+        aaa[0][1] add: 41;
+        aaa[1][0] add: 35;
+        aaa[1][0] add: 36;
+        aaa[1][1] add: 45;
+        aaa[1][1] add: 46;
+
+        assert  "" ++ aaa[0][0][0] ++ aaa[0][0][1] ++ aaa[0][1][0] ++ 
+           aaa[0][1][1] ++ aaa[1][0][0] ++ aaa[1][0][1] ++ 
+           aaa[1][1][0] ++ aaa[1][1][1] == "3031404135364546";
+                
+        aaa clear;
+        assert aaa size == 0;
+        assert aaa isEmpty;
+        assert ! (arrayArray isEmpty) && (arrayArray size > 0);
+        arrayArray remove: 1;
+        assert arrayArray size == 1;
+        assert (intArray2 slice: 0..2) == [ 0, 1, 2 ];
+        let newArray = intArray2 slice: 1..3;
+        assert  newArray size == 3 && newArray[0] == 1 &&
+            newArray == [ 1, 2, 3 ];
+            
+        assert ([ 0 ] concat: newArray) == [ 0, 1, 2, 3 ];
+        
+        let strArray = [ "a", "b", "c", "d", "e" ];
+        
+        s = "";
+        strArray foreach: { (: String elem :) 
+            s = s ++ elem
+        };
+        assert s == "abcde";
+        
+        assert strArray clone == strArray;
+        assert [ 0 ] clone == [ 0 ];
+        
+        var Any any00 = InterI;
+        var Any any01 = Program;
+        var Any any02 = Array<Any>;
+        
+        let protoArray = [ any00, any01, any02 ];
+            
+        assert protoArray[0] prototypeName == "InterI" &&
+               protoArray[1] prototypeName == "Program" &&
+               protoArray[2] prototypeName == "Array<Any>";
+    }
+    
+    
+    
+    
+
+    func dynTest {
+        assert dynTest0 == 0 && dynTest0 eq: 0 && dynTest0 prototypeName == "Int";
+        
+        var Dyn d0 = "Hi";
+        assert d0 == "Hi" && d0 size == 2;
+        var Dyn d1 = 0;
+        d1 = "Hi";
+        assert d0 == d1;
+        d1 = 0;
+        
+        d0 = false;
+        d1 = d1 == 0;
+        if d0 { assert false; }
+        if d0 && d1 { assert false; }
+        if !d0 && d1 { } else { assert false; }
+        
+        var Dyn s = "";
+        d0 = 0;
+        while d0 < 5 {
+            s = s ++ d0;
+            ++d0
+        }
+        assert s == "01234";
+
+
+                
+        d0 = "01234";
+        s = "";
+        for elem in d0 {
+            s = s ++ elem
+        }
+        assert s == "01234";
+
+
+        d0 = [ 0, 1, 2, 3, 4 ];
+        s = "";
+        for elem2 in d0 {
+            s = s ++ elem2
+        }
+        assert s == "01234";
+
+
+        d0 = [ '0', '1', '2', '3', '4' ];
+        s = "";
+        for elem3 in d0 {
+            s = s ++ elem3
+        }
+        assert s == "01234";
+
+        d0 = 0..4;
+        s = "";
+        for elem4 in d0 {
+            s = s ++ elem4
+        }
+        assert s == "01234";
+        
+        
+        d0 = 0;
+        d1 = "second";
+        var t0 = [. d0, d1 .];
+        assert t0 f1 == 0 && t0 f2 == "second";
+        var Dyn da = [ d0, d1 ];
+        assert da[0] == 0 && da[1] == "second" &&
+           da[d0] == 0 && da[d0 + 1] == "second";
+
+
+        let Array<Dyn> dynArray5 = da;
+        assert dynArray5[0] == 0 && dynArray5[1] == "second" &&
+           dynArray5[d0] == 0 && dynArray5[d0 + 1] == "second";
+           
+        d0 = 0;
+        d1 = 1;
+        da[1] = d1;
+        assert da[d0] == 0 && da[d1] == 1;
+
+        var Dyn d2;
+        
+        var Int n = 0;
+        d2 = n;
+        n = d2;
+        var Array<Dyn> dynArray0 = Array<Dyn> new;
+        dynArray0 add: 'A';
+        dynArray0 add:  0;
+        dynArray0 add: Program;
+        dynArray0 add: "string";
+        
+        
+        
+        n = 0;
+        d1 = 1;
+        assert dynArray0[0] == 'A' &&
+               dynArray0[n + 1] == 0 &&
+               dynArray0[d1 + 1] eq: Program &&
+               dynArray0[3] == "string";
+               
+        dynArray0[0] = Program;
+        dynArray0[n + 1] = 'a';
+        dynArray0[d1 + 1] = "string";
+        dynArray0[3] = 1;
+
+        assert dynArray0[0] == Program &&
+               dynArray0[n + 1] == 'a' &&
+               dynArray0[d1 + 1] == "string" &&
+               dynArray0[3] == 1;
+
+        d0 = 0;
+        d1 = "string";
+        d2 = 'z';
+        var Array<Dyn> dynArray1 = [ d0, d1, d2 ];
+        assert dynArray1[0] == 0 && dynArray1[d0 + 1] == "string" &&
+           dynArray1[2] == 'z';
+           
+        assert dynArray1[ dynArray1[0] ] == 0 &&
+               dynArray1[ dynArray1[0] + 1 ] == "string";
+        
+        assert dynTest0 == 0 && 
+               (dynTest1: 0) == 0 &&
+               (dynTest2: 0) prototypeName == "Program";
+               
+        assert self dynTest3: 0, Program, "hi", 0, "Carol"
+             selector: "Livia", 'L' == 0;
+             
+             
+             
+        var Int rdt = self dynTest3: 0, Program, "hi", 0, "Carol"
+             selector: "Livia", 'L';
+        assert rdt == 0;
+        
+        var Any any99 =  "aValue";
+        var Dyn dynT = produceRealPrototype: [. key = "aKey", value = any99 .];
+        assert dynT key == "aKey" && dynT value == "aValue";
+        
+        assert self ?dynTest0 == 0 && (?dynTest1: 0) == 0 && 
+           (self ?dynTest2: 0) prototypeName == "Program";
+           
+        assert (s1: 0, 'a', Bank("BB") 
+                s2: Client("Livia"), "Carolina"
+                s3: ProtoAInterI) sum: 2 mult: 3 == 5;
+                
+        assert (?s1: 0, 'a', Bank("BB") 
+                ?s2: Client("Livia"), "Carolina"
+                ?s3: ProtoAInterI) sum: 2 mult: 3 == 5;
+        let ss1 = "s1";
+        let ss2 = "s2";
+        let ss3 = "s3";
+        assert (self `ss1: 0, 'a', Bank("BB") 
+                `ss2: Client("Livia"), "Carolina"
+                `ss3: ProtoAInterI) sum: 2 mult: 3 == 5;
+                
+        let sdynTest0 = "dynTest0"; 
+        let sdynTest1 = "dynTest1";
+        let sdynTest2 = "dynTest2";
+        assert self `sdynTest0 == 0 && self `sdynTest1: 0 == 0 && 
+           (self `sdynTest2: 0) prototypeName == "Program";
+        
+        var Int dt00 = self `sdynTest0;
+        var Int dt01 = self `sdynTest1: 7;
+        assert dt00 == 0 && dt01 == 7;
+        
+       
+        let stest3 = "test3";
+        let stest4 = "test4";
+        let stest5 = "test5"; 
+        assert self `stest3: 0, 'w' `stest4: "yy", 3L `stest5: 7Short, 'x' == "0wyy37x";
+        assert self ?test3: 0, 'w' ?test4: "yy", 3L ?test5: 7Short, 'x' == "0wyy37x";
+
+
+        var String s66 = "set:";
+        { (: Int n88 :)
+            { (: String str :) 
+                self `s66: str, n88;
+            } eval: "aaa";
+        } eval: 0;
+                
+    }    
+    
+    func set: String name, Int n {
+        assert name == "aaa" && n == 0;
+    }
+
+    
+    
+    func dynWithCurryTest {
+    
+        let funList = [ 
+            { (: Int a, Int b, Int c :) ^a + b + c },
+            { (: Int a, Int b, Int c :) ^a*b*c },
+            { (: Int a, Int b, Int c :) ^a - b - c }
+            ];
+        let funList2 = [ 
+            (funList[0] curry: 10), 
+            (funList[1] curry: 10), 
+            (funList[2] curry: 10)
+            ];
+        let funList3 = [ 
+            (funList2[0] curry: 2), 
+            (funList2[1] curry: 2), 
+            (funList2[2] curry: 2)
+            ];
+        let funList4 = [ 
+            (funList3[0] curry: 5), 
+            (funList3[1] curry: 5), 
+            funList3[2] curry: 5
+            ];
+            
+        var Int i = 0;
+        let result = [ 9, 24, -1 ];
+        for f in funList {
+            assert f eval: 4, 3, 2 == result[i];
+            ++i
+        }
+            
+        i = 0;
+        let result2 = [ 15, 60, 5 ];
+        for f in funList2 {
+            assert f eval: 3, 2 == result2[i];
+            ++i
+        }            
+            
+        i = 0;
+        let result3 = [ 14, 40, 6 ];
+        for f in funList3 {
+            assert f eval: 2 == result3[i];
+            ++i
+        }            
+
+        i = 0;
+        let result4 = [ 17, 100, 3 ];
+        for f in funList4 {
+            assert f eval == result4[i];
+            ++i
+        }            
+
+
+        let dfunList = Array<Dyn> new;
+        for f in funList { 
+            dfunList add: f
+        }
+        let dfunList2 = Array<Dyn> new;
+        for f in funList2 { 
+            dfunList2 add: f
+        }
+        
+        let dfunList3 = Array<Dyn> new;
+        for f in funList3 { 
+            dfunList3 add: f
+        }
+        let dfunList4 = Array<Dyn> new;
+        for f in funList4 { 
+            dfunList4 add: f
+        }
+        
+        i = 0;
+        let dresult = [ 9, 24, -1 ];
+        for f in dfunList {
+            assert f eval: 4, 3, 2 == dresult[i];
+            ++i
+        }
+            
+        i = 0;
+        let dresult2 = [ 15, 60, 5 ];
+        for f in dfunList2 {
+            assert f eval: 3, 2 == dresult2[i];
+            ++i
+        }            
+            
+        i = 0;
+        let dresult3 = [ 14, 40, 6 ];
+        for f in dfunList3 {
+            assert f eval: 2 == dresult3[i];
+            ++i
+        }            
+
+        i = 0;
+        let dresult4 = [ 17, 100, 3 ];
+        for f in dfunList4 {
+            assert f eval == dresult4[i];
+            ++i
+        }            
+
+
+    }
+
+    func printProtoData: Any prototype {
+        prototype prototypeName println;
+    }
+    
+    func s1: Int a, Char ch, Bank bank 
+        s2: Client client, String s
+        s3: InterI b -> InterJ {
+            assert a == 0 && ch == 'a' && (bank getName == "BB") &&
+                   client name == "Livia" && s == "Carolina" && (b sum: 2 mult: 3) == 6;
+            return ProtoCExtendsBInterJ new
+    }
+        
+    func dynTest0 -> Dyn {
+       return 0;
+    }
+    
+    func dynTest1: Int n -> Dyn {
+       return n;
+    }
+    
+    func dynTest2: Int n -> Dyn {
+       return Program new;
+    }
+    
+    func dynTest3: Int n, Program p, String s, Dyn t1, Dyn t2
+        selector: Dyn t3, Char ch -> Dyn {
+        assert n == 0 && p == Program && s == "hi" &&
+            t1 == 0 && t2 == "Carol" && t3 == "Livia" && ch == 'L';
+        var Int tt1 = t1;
+        var String tt2 = t2;
+        var String tt3 = t3;
+        
+        assert tt1 == 0 && tt2 == "Carol" && tt3 == "Livia";
+        
+        return n;
+    }
+
+
+    func produceRealPrototype: Tuple<key, String, value, Any> t -> Tuple<key, String, value, Any> { 
+        return t
+    } 
+    
+
+
+        // methods of interface inter.ISumMult
+
+    override
+    func sum: mult: Int n -> Int = n*n;
+    override
+    func sum: Int n mult: -> Int = n + n;
+    override
+    func sum: mult: -> Int = -1;
+    
+    override
+    func sum: Int i -> Int = i;
+    override
+    func sum: Int i, Int j -> Int = i + j;
+    override
+    func sum: Int i, Int j, Int k -> Int = i + j + k;
+    override
+    func sum: Int i mult: Int a -> Int = i*a;
+    override
+    func sum: Int i, Int j mult: Int a -> Int = (i + j)*a;
+    override
+    func sum: Int i, Int j, Int k mult: Int a -> Int = (i + j + k)*a;
+    
+    override
+    func sum: Int i mult: Int a, Int b -> Int = i*a*b;
+    
+    override
+    func sum: Int i, Int j mult: Int a mult: Int b -> Int = (i + j)*a*b;
+    
+    override
+    func sum: Int i, Int j, Int k 
+        mult: Int a
+        mult: Int b, Int c
+           -> Int = (i + j + k)*a*b*c;    
+    
+    
+    func multiMethods {
+
+        let a = MultiA new;
+        let b = MultiB new;
+        let c = MultiC new;
+        let MultiA aa = a;
+        let MultiA ab = b;
+        let MultiA ac = c;
+
+
+        assert (a sum: 0 mult:) == 0 &&
+               (a sum: "0" mult:) == 0;
+        assert (a sum: mult: 0) == 0 &&
+               (a sum: mult: #0) == 0 &&
+               a sum: mult: == 0;
+
+        assert aa sum: 0 mult: == 0 &&
+               (aa sum: "0" mult:) == 0;
+        assert (aa sum: mult: 0) == 0 &&
+               (aa sum: mult: #0) == 0 &&
+               aa sum: mult: == 0;
+
+               
+        assert (ab sum: 0 mult:) == 1 &&
+               (ab sum: #0 mult:) == 1;
+        assert (ab sum: mult: 0) == 1 &&
+               ab sum: mult: == 1;
+
+        assert (ac sum: 0 mult:) == 5 &&
+               ac sum: #0 mult: == 10;
+        assert ac sum: mult: 0 == 5 &&
+               (ac sum: mult: "0") == 6 &&
+               ac sum: mult: == 2;
+
+
+        assert (b sum: 0 mult:) == 1 &&
+               (b sum: #0 mult:) == 1;
+        assert (b sum: mult: 0) == 1 &&
+               b sum: mult: == 1;
+
+        assert (c sum: 0 mult:) == 5 &&
+               c sum: #0 mult: == 10;
+        assert c sum: mult: 0 == 5 &&
+               (c sum: mult: "0") == 6 &&
+               c sum: mult: == 2;
+
+
+               
+        assert 
+            (a sum: 0) == 0 &&
+            (a sum: 1Short) == 2 &&
+            (a sum: "0") == 0 &&
+            (a sum: 0B) == 0;
+        assert 
+            (ab sum: 0) == 1 &&
+            (ab sum: 1Short) == 3 &&
+            (ab sum: "0") == 1 &&
+            (ab sum: 0B) == 1;
+        assert 
+            (ac sum: 0) == 2 &&
+            (ac sum: 1Short) == 4 &&
+            (ac sum: "0") == 2 &&
+            (ac sum: 0B) == 2;
+            
+        assert
+            (a sum: 0, 1) == 1 &&
+            (a sum: 0, "1") == 1 &&
+            (a sum: "0", 1) == 1;
+            
+        assert
+            (ab sum: 0, 1) == 2 &&
+            (ab sum: 0, "1") == 2 &&
+            (ab sum: "0", 1) == 2;
+
+        assert
+            (ac sum: 0, 1) == 3 &&
+            (ac sum: 0, "1") == 3 &&
+            (ac sum: "0", 1) == 3;
+            
+        assert
+            (a sum: 0, 1, 2) == 3 &&
+            (a sum: 0, "1", 2) == 3 &&
+            (a sum: "0", 1, "2") == 3;
+
+        assert
+            (ab sum: 0, 1, 2) == 4 &&
+            (ab sum: 0, "1", 2) == 4 &&
+            (ab sum: "0", 1, "2") == 4;
+
+        assert
+            (ac sum: 0, 1, 2) == 5 &&
+            (ac sum: 0, "1", 2) == 5 &&
+            (ac sum: "0", 1, "2") == 5;
+
+
+        assert
+            (a sum: 1 mult: 2) == 2 &&
+            (a sum: 2B mult: 3) == 6 &&
+            (a sum: "3" mult: (MultiA new)) == 3;
+            
+        assert
+            (ab sum: 1 mult: 2) == 3 &&
+            (ab sum: 2B mult: 3) == 7 &&
+            (ab sum: "3" mult: (MultiA new)) == 4;
+        assert
+            (ac sum: 1 mult: 2) == 4 &&
+            (ac sum: 2B mult: 3) == 8 &&
+            (ac sum: "3" mult: (MultiA new)) == 5;
+            
+        assert (a sum: 0, 1, 2 mult: 3) == 9 &&
+               (ab sum: 0, 1, 2 mult: 3) == 10 &&            
+               (ac sum: 0, 1, 2 mult: 3) == 11;
+               
+        assert (a sum: 1 mult: 2, 3) == 6 &&
+               (a sum: "1" mult: "2", 3B) == 6;               
+            
+        assert (ab sum: 1 mult: 2, 3) == 7 &&
+               (ab sum: "1" mult: "2", 3B) == 7;               
+               
+        assert (ac sum: 1 mult: 2, 3) == 8 &&
+               (ac sum: "1" mult: "2", 3B) == 8;               
+               
+        assert (a sum: 0, 1, 2
+                 mult: 2  mult: 3, 4) == 72 &&
+               (a sum: 0, "2", (MultiA new)
+                 mult: "2"  mult: 3, "4") == 72;
+        assert (ab sum: 0, 1, 2
+                  mult: 2  mult: 3, 4) == 73 &&
+               (ab sum: 0, "1", (MultiB new)
+                  mult: "2"  mult: 3, "4") == 73;
+        assert (ac sum: 0, 1, 2
+                  mult: 2  mult: 3, 4) == 74 &&
+               (ac sum: 0, "2", (MultiA new) 
+                  mult: "2"  mult: 3, "4") == 74;
+                  
+        assert (a m: 0) == 0 &&
+               (a m: "0") == 0 &&
+               (a m: 0S) == 0 &&
+               (a m: 0Long) == 0 &&
+               (a m: 0B) == 0;
+        assert (ab m: 0) == 0 &&
+               (ab m: "0") == 5 &&
+               (ab m: 0S) == 10 &&
+               (ab m: 0Long) == 0 &&
+               (ab m: 0B) == 1;
+
+        assert (ac m: 0) == 25 &&
+               (ac m: "0") == 5 &&
+               (ac m: 0S) == 61 &&
+               (ac m: 0Long) == 51 &&
+               (ac m: 0B) == 2;
+
+        assert (a testParamReturn: b, c) == MultiA &&
+               (ab testParamReturn: b, c) == MultiB &&
+               (ac testParamReturn: b, c) == MultiC;
+    }
+    
+    
+    func keywordMethods {
+        assert (sum: 0) == 0;
+        assert (sum: 0, 1) == 1 &&
+               (sum: 0, 1, 2) == 2 &&
+               (sum: 0 mult: 1) == 0 &&
+               (sum: 0, 1 mult: 2) == 2 &&
+               (sum: 0, 1, 2 mult: 3) == 6 &&
+               (sum: 1 mult: 2, 3 == 6) &&
+               (sum: 1, 2 mult: 3 mult: 4) == 24 &&
+               (sum: 0, 1, 2 mult: 3 mult: 4, 5) == 180;
+        assert (sum: mult: 3) == 9 &&
+               (self sum: mult: 3) == 9 &&
+               (sum: 5 mult:) == 10 &&
+               (self sum: 5 mult:) == 10 &&
+               (sum: mult:) == -1 &&
+               (self sum: mult:) == -1;
+    }
+    
+    func nilAnyTest {
+        let nil = Nil;
+        var Nil varNil = Nil;
+        assert Nil prototypeName == "Nil" &&
+               Nil asString == "Nil" &&
+               (nil asString: 3) == "   Nil" &&
+               Nil == nil && varNil == nil && varNil === Nil &&
+               !(nil != Nil) && !(Nil != varNil);
+        var Any any = Any;
+        let cany = Any;
+        
+        assert any == cany;
+        assert any eq: cany;
+        assert !(cany != any);
+        assert !(cany != Any); 
+        var Any any98 = any;
+        assert (any98 == cany); 
+        assert (any prototypeParent == Any); 
+        assert (Any prototypeParent == Any);
+        assert !(any isInterface); 
+        assert (ISumMult isInterface);
+        assert (cany isA: Any); 
+        assert Any isA: Any; 
+        assert (any clone == any);
+    
+        assert MultiB prototypeParent == MultiA &&
+               MultiC prototypeParent == MultiB &&
+               !(MultiA isInterface) &&
+               MultiA prototypeName == "MultiA";
+    }
+
+    func abstractTest {
+        let AbstractA ac = AbstractC new;
+        let AbstractA ad = AbstractD new;
+        
+        assert ac sum: mult: == 0 && 
+               ac sum: 0 mult: == 0 &&
+               ac sum: mult: 0 == 0 && 
+               ac sum: 1 mult: 5 == 5 &&
+               ac sum: 1, 2 mult: 5 == 15;
+        assert ad sum: mult: == 1 && 
+               (ad sum: 0 mult:) == 1 &&
+               ad sum: mult: 0 == 1 && 
+               (ad sum: 1 mult: 5) == 6 &&
+               (ad sum: 1, 2 mult: 5) == 16;
+               
+        
+        var newStr = "new";
+        let prog = Program;
+        assert  (prog `newStr) prototypeName == "Program";
+        var A a = B;
+        assert a run == 0 && a run: 10 == 10 &&
+               a run: 20 with: "" == 20;
+        assert B m0: 100 == 100;
+        var B b = C new;
+        assert b run == 1 && b run: 10 == 11 &&
+               b run: 20 with: "" == 21;
+        assert b m0: 100 == 101;
+        var D d = E new;
+        assert d m0: 505 m1: 'a' == 505;
+        assert d run == 1 && d run: 10 == 11 &&
+               d run: 20 with: "" == 21;
+
+        var Boolean hadException = false;
+        {
+            AbstractA sum: mult:
+        }
+        catch: { (: CyException e :)
+            hadException = true;
+            assert e prototypeName == "ExceptionCannotCallAbstractMethod";
+        };
+        assert hadException == true;
+
+        hadException = false;
+        {
+            AbstractB sum: 1 mult: 5;
+        }
+        catch: { (: CyException e :)
+            hadException = true;
+            assert e prototypeName == "ExceptionCannotCallAbstractMethod";
+        };
+        assert hadException == true;
+
+
+    }
+    
+
+    func funcTest {
+
+        assert self test3: 0, 'w' test4: "yy", 3L test5: 7Short, 'x' == "0wyy37x";
+        funct.FuncTest() test;
+
+    
+        var Int i = 0;
+        var String s = "";
+        {
+           s = s ++ i;
+           ++i
+        } repeatUntil: { ^ i >= 5 };
+        assert s == "01234";
+               
+        s = "";
+        i = 0;
+        { ^ i < 5 } whileTrue: {
+            s = s ++ i;
+            ++i;
+        };        
+        assert s == "01234";
+        s = "";
+        i = 0;
+        { ^ i >= 5 } whileFalse: {
+            s = s ++ i;
+            ++i;
+        };        
+        assert s == "01234";
+        
+        var SubFunctionIntString<Int> subfuncInt = SubFunctionIntString<Int>();
+        assert subfuncInt eval: 0 == "0";
+        subfuncInt = SubSubFunctionIntString<Int>();
+        assert subfuncInt eval: 0 == "01";
+        var Function<Int, String> aFunc = SubFunctionIntString<Int>();
+        assert aFunc eval: 0 == "0";
+        aFunc = SubSubFunctionIntString<Int>();
+        assert aFunc eval: 0 == "01";
+        
+        s = "";
+        for elem in [ 0, 1, 2, 3, 4 ] {
+            s = s ++ (subfuncInt eval: elem);
+        }
+        assert s == "0111213141";  
+        var subfuncT = SubFunctionTNil<Int>();
+        [ 0, 1, 2, 3 ] foreach: subfuncT;
+        assert subfuncT getSum == 6;
+
+        var subsubfuncT = SubSubFunctionTNil<Int>();
+        [ 0, 1, 2 ] foreach: subsubfuncT;
+        assert subsubfuncT getSum2 == 6;
+        
+        var me0 = { (: eval: Int a, Char b eval: Long c, String d eval: Byte e :)
+            ^ "" ++ a ++ b ++ c ++ d ++ e
+        };
+        assert (me0 eval: 0, 'w' eval: 1L, "a" eval: 2Byte) == "0w1a2";
+        
+        var me1 = { (: eval: Int a, Char b eval: Long c, String d eval: Byte e :)
+            ^ { (: eval: Int a0, Char b0, Long c0, String d0, Byte e0 :) 
+                 ^"" ++ a ++ b ++ c ++ d ++ e ++ a0 ++ b0 ++ c0 ++ d0 ++ e0
+               }
+        };
+        assert ((me1 eval: 5, '6' eval: 7L, "8" eval: 9Byte) 
+                 eval: 0, '1', 2L, "3", 4Byte) == "5678901234";  
+
+        funcTest: 0, "A", 'A';
+        
+    
+        var f77 =  { ^ { (: eval: Program d00 
+                      eval: Int d04 :) 
+                 
+               } };
+        (f77 eval) eval: Program eval: 3;
+    
+        
+        var me3 = { (: eval: Int x00 eval: Char x01 eval: Long x02, String x03 eval: Byte x04 :)
+        
+            ^ { (: eval: Int d00 eval: Char d01, Long d02 eval: String d03, Byte d04 :) 
+                 ^"" ++ x00 ++ x01 ++ x02 ++ x03 ++ x04 ++ d00 ++ d01 ++ d02 ++ d03 ++ d04;
+               }
+               
+        };
+
+        assert (me3 eval: 0 eval: 'a' eval: 1L, "2" eval: 3Byte) 
+              eval: 5 eval: 'b', 6L eval: "7", 8Byte == 
+            "0a1235b678";  
+            
+    
+        var fff = { (: Int h00 :) 
+                ^ { ^h00 + 1 } 
+            };
+        assert (fff eval: 0) eval == 1;
+        
+        var me2 = { (: eval: Int x00, Char x01 eval: Long x02, String x03 eval: Byte x04 :)
+        
+            ^ { (: eval: Int d00, Char d01, Long d02, String d03, Byte d04 :) 
+                 ^"" ++ x00 ++ x01 ++ x02 ++ x03 ++ x04 ++ d00 ++ d01 ++ d02 ++ d03 ++ d04;
+               }
+               
+        };
+        
+        assert (me2 eval: 0, 'a' eval: 1L, "2" eval: 3Byte) eval: 5, 'b', 6L, "7", 8Byte == 
+            "0a1235b678";
+
+
+
+        var me4 = { (: Int x00, Char x01, Long x02, String x03, Byte x04 :)
+        
+            ^ { (: eval: Int d00 eval: Char d01, Long d02 eval: String d03, Byte d04 :) 
+                 ^"" ++ x00 ++ x01 ++ x02 ++ x03 ++ x04 ++ d00 ++ d01 ++ d02 ++ d03 ++ d04;
+               }
+               
+        };
+        
+        assert (me4 eval: 0, 'a', 1L, "2", 3Byte) 
+              eval: 5 eval: 'b', 6L eval: "7", 8Byte == 
+            "0a1235b678";
+        
+        var me5 = { (: eval: Int x00 eval: Char x01, Long x02, String x03 eval: Byte x04 :)
+        
+            ^ { (: Int d00, Char d01, Long d02, String d03, Byte d04 :) 
+                 ^"" ++ x00 ++ x01 ++ x02 ++ x03 ++ x04 ++ d00 ++ d01 ++ d02 ++ d03 ++ d04;
+               }
+               
+        };
+        
+        assert (me5 eval: 0 eval: 'a', 1L, "2" eval: 3Byte) 
+              eval: 5, 'b', 6L, "7", 8Byte == 
+            "0a1235b678";
+        
+        
+    }
+    
+    func funcTest: Int anInt, String aString, Char aChar {
+    
+        var f = { (: Int x :) ^x*x };
+        
+        assert (f eval: 5) == 25;
+        var y = 2;
+        var g = { (: Int x :) ^ x + y };
+        assert (g eval: 5) == 7;
+        
+        var i = 0;
+        var sum = 0;
+        
+        var yy = 1;
+        var c = { (: Int x :)  y = yy + 2; ^ x + y };
+        assert (c eval: 5) == 8;
+        assert y == 3; 
+        y = 4;
+        yy = 3;
+        assert (c eval: 5) == 10 && y == 5;
+        
+        i = 0;
+        n = 5;
+        var f1 = { ^i };
+        var f2 = { ^n };
+        var f3 = { ^i };
+        var f4 = { ^n };
+        i = 100;
+        n = 200;
+        
+        assert (f1 eval) == 100 && 
+               (f2 eval) == 200 &&
+               (f3 eval) == 100 &&
+               (f4 eval) == 200;
+        
+        var f5 = { ^anInt };
+        var f6 = { ^aString };
+        var f7 = { ^aChar };
+        
+        assert f5 eval == 0 && f6 eval == "A" && f7 eval == 'A';
+        
+        
+        
+        var a20 = 0;
+        var f11 = { (: Int p4 :)
+            var a21 = a20 + p4 + 1;
+            var f12 = {  (: Int p5 :)
+                var a22 = a21 + 1;
+                var f13 = { (: Int p6 :)
+                    ^p6 + a22 + a21 + a20;
+                };
+                ^ f13 eval: p5;
+            };
+            ^ f12 eval: p4;
+        };
+        assert (f11 eval: 1) == 6;
+        
+        var g1 = { (: Int p1, Char c1, String s1 :) 
+            var ap1 = p1;
+            var ac1 = c1;
+            var as1 = s1;
+            var g2 = {  (: Int p2, Char c2, String s2 :) 
+                var ap2 = ap1 + 1;
+                var ac2 = ac1;
+                var as2 = as1;
+                var g3 = { (: Int p3, Char c3, String s3 :)
+                    ^ (p3 prototypeName) ++ p3 ++ " " ++ 
+                      (c3 prototypeName) ++ c3 ++ " " ++ (s3 prototypeName) ++ s3;
+                };
+                ^ g3 eval: p2, c2, s2;
+            };
+            ^ g2 eval: p1, c1, s1;
+        };
+        assert (g1 eval: 0, 'A', "A") == "Int0 CharA StringA";
+        
+        var f100 = { (: Int n :) 
+            if  n > 0  {
+                if n > 5 {
+                    if n > 10 {
+                        ^ "10";
+                    }
+                }
+            };
+            ^ "0";
+        };
+        assert (f100 eval: 20) == "10" && (f100 eval: 3) == "0";;
+        
+        var f200 = { (: Int n :) 
+            if  n > 100  {
+                ^ "100"
+            } 
+            else if n > 50 {
+                ^ "50"
+            }
+            else if n > 25 {
+                ^ "25"
+            }
+            else {
+                ^ "0"
+            };
+        };
+        assert (f200 eval: 200) == "100" &&
+               (f200 eval: 80) == "50" &&
+               (f200 eval: 30) == "25" &&
+               (f200 eval: 12) == "0";
+        
+    }
+    
+    
+
+
+    func test3: Int i, Char ch test4: String s, Long d test5: Short f, Char ch2 -> String {
+        var Function<Int, Char><String, Long><Short, Char, String> fff;
+        
+        fff = { (: eval: Int a1, Char b1 eval: String c1, Long d1 eval: Short e1, Char f1 :) 
+           ^ "" ++ a1 ++ b1 ++ c1 ++ d1 ++ e1 ++ f1;
+        };
+        
+        return fff eval: i, ch eval: s, d eval: f, ch2
+    }    
+    
+    
+    func exceptionTest {
+    
+        TestException() run;
+    
+        var Int n = 0;
+        var String control = "";
+        {
+            throwExceptionTest0IntIfLT0: n;
+            throwExceptionTest1IntIfGT0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" };
+        assert control == "";
+
+        n = -1;        
+        {
+            throwExceptionTest0IntIfLT0: n;
+            throwExceptionTest1IntIfGT0: n;
+            throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" };
+        assert control == "LT0";
+        
+        n = 1;
+        {
+            throwExceptionTest0IntIfLT0: n;
+            throwExceptionTest1IntIfGT0: n;
+            throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" };
+        assert control == "GT0";
+
+        // *****************************
+        
+        n = 0;
+        {
+            throwExceptionTest0IntIfLT0: n;
+            throwExceptionTest1IntIfGT0: n;
+            throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" };
+        assert control == "EQ0";
+        
+        control = "";
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" };
+        assert control == "";
+
+        n = -1;        
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" };
+        assert control == "LT0";
+        
+        n = 1;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" };
+        assert control == "GT0";
+
+        // #########################################        
+        n = 0;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" };
+        assert control == "EQ0";                
+        
+        
+        //   .............
+        
+        n = -1;        
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" }
+        finally: { control = control ++ "finally" };
+        assert control == "LT0finally";
+        
+        n = 1;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" }
+        finally: { control = control ++ "finally" };
+        assert control == "GT0finally";
+        
+        n = 0;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" }
+        finally: { control = control ++ "finally" };
+        assert control == "EQ0finally";          
+
+        // **********************************
+        control = "";
+        n = 5;
+        {
+            {
+                call_throwExceptionTest0StringEQ5: n;
+                call_throwExceptionTest0IntIfLT0: n;
+                call_throwExceptionTest1IntIfGT0: n;
+                call_throwExceptionTest2IntIfEQ0: n;
+            }
+            catch: { (: ExceptionTest0Int e :) control = "LT0" }
+            catch: { (: ExceptionTest1Int e :) control = "GT0" }
+            catch: { (: ExceptionTest2Int e :) control = "EQ0" }
+            finally: { control = control ++ "finally" };
+        }
+        catch: { (: ExceptionTest0String e :) control = control ++ "000" };
+        
+        assert control == "finally000";         
+        
+        control = "";
+        n = 5;
+        {
+            call_throwExceptionTest0StringEQ5: n;
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" }
+        catch: { (: ExceptionTest0String e :) control = "EQ5" }
+        finally: { control = control ++ "finally" };
+        assert control == "EQ5finally";         
+                
+        // *************************************
+        
+
+        n = -1;        
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: CatchExceptionTest012Int(control);
+        assert control == "LT0";
+        
+        n = 1;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: CatchExceptionTest012Int(control);
+        assert control == "GT0";
+        
+        n = 0;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: CatchExceptionTest012Int(control);
+        assert control == "EQ0";                
+
+
+        // *************************************
+        
+
+        n = -1;        
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: CatchExceptionTest012Int(control)
+        finally: { control = control ++ "finally" };
+        assert control == "LT0finally";
+        
+        n = 1;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: CatchExceptionTest012Int(control)
+        finally: { control = control ++ "finally" };
+        assert control == "GT0finally";
+        
+        n = 0;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: CatchExceptionTest012Int(control)
+        finally: { control = control ++ "finally" };
+        assert control == "EQ0finally";                
+
+
+
+        // **********************************
+        control = "";
+        n = 5;
+        {
+            {
+                call_throwExceptionTest0StringEQ5: n;
+                call_throwExceptionTest0IntIfLT0: n;
+                call_throwExceptionTest1IntIfGT0: n;
+                call_throwExceptionTest2IntIfEQ0: n;
+            }
+            catch: { (: ExceptionTest1Int e :) control = "GT0" }
+            catch: { (: ExceptionTest0Int e :) control = "LT0" }
+            catch: { (: ExceptionTest2Int e :) control = "EQ0" }
+            finally: { control = control ++ "finally" };
+        } 
+        catch: { (: ExceptionTest0String e :) control = control ++ "EQ5" };
+        
+        assert control == "finallyEQ5";         
+        
+        control = "";
+        n = 5;
+        {
+            call_throwExceptionTest0StringEQ5: n;
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest0String e :) control = "EQ5" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        finally: { control = control ++ "finally" };
+        assert control == "EQ5finally";         
+                
+        // *************************************
+        
+
+        n = -1;        
+        {
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: CatchExceptionTest012Int(control);
+        assert control == "LT0";
+        
+        n = 1;
+        {
+            call_throwExceptionTest2IntIfEQ0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest0IntIfLT0: n;
+        }
+        catch: CatchExceptionTest012Int(control);
+        assert control == "GT0";
+        
+        n = 0;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+        }
+        catch: CatchExceptionTest012Int(control);
+        assert control == "EQ0";                
+
+
+                
+        //   ###################################
+        
+        let f0 = { (: ExceptionTest0Int e :) control = "LT0" };
+        let f1 = { (: ExceptionTest1Int e :) control = "GT0" };
+        let f2 = { (: ExceptionTest2Int e :) control = "EQ0" };
+        n = -1;        
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: f0
+        catch: f1
+        catch: f2
+        finally: { control = control ++ "finally" };
+        assert control == "LT0finally";
+        
+        n = 1;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: f0
+        catch: f1
+        catch: f2
+        finally: { control = control ++ "finally" };
+        assert control == "GT0finally";
+        
+        n = 0;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: f0
+        catch: f1
+        catch: f2
+        finally: { control = control ++ "finally" };
+        assert control == "EQ0finally";   
+        
+        TestException resetTraceString;
+        TestException test: -1;
+        assert TestException traceString == "CatchNeg(-1) endProcess endTest";
+        
+        TestException resetTraceString;
+        TestException test: 0;
+        assert TestException traceString == "CatchZeroBig-CatchZero(0) endTest";
+        
+        TestException resetTraceString;
+        TestException test: 1;
+        assert TestException traceString == " endProcess endTest";  // CatchZeroBig-CatchBig(1) endTest
+        
+        TestException resetTraceString;
+        TestException test: 2;
+        assert TestException traceString == "CatchEven(2) endTest";
+        
+        TestException resetTraceString;
+        TestException test: 2001;
+        assert TestException traceString == "CatchZeroBig-CatchBig(2001) endTest";
+        
+        TestException resetTraceString;
+        TestException test: 5;
+        assert TestException traceString == "CatchNum(5) endTest";
+        
+        var String s = "";
+        
+        for elem5 in 0..5 {
+            {
+                {
+                    if elem5 == 0 { throw: ExceptionZero() }
+                    if elem5%2 == 0 { throw: ExceptionEven(elem5) }
+                    if elem5 == 5 { throw: ExceptionFive(elem5) }
+                } hideException;
+                s = s ++ elem5
+            } catch: CatchAll;
+
+        }
+        assert s == "012345";
+        
+        s = "";
+        n = 0;
+        {
+            if n < 3 { throw: ExceptionNum(n) }
+            s = s ++ n ++ n
+        }
+        catch: { (: ExceptionNum e :) s = s ++ (e number) }
+        retry: {
+            s = s ++ "#" ++ n;
+            ++n
+        };
+        assert s == "0#01#12#233";
+
+        s = "";
+        n = 0;
+        {
+            if n < 3 { throw: ExceptionNum(n) }
+            s = s ++ "#";
+            if n == 3 { throw: ExceptionBig(n) }
+            s = s ++ "end"
+        }
+        catch: CatchAll
+        retry: {
+            s = s ++ n;
+            ++n
+        };
+        assert s == "012#3#end";
+        
+        
+        s = "";
+        n = 0;
+        {
+            s = s ++ "#";
+            throw: ExceptionNum(n);
+        }
+        catch: CatchAll
+        tryWhileTrue: {
+            s = s ++ n;
+            ++n;
+            ^ n < 3
+        };
+        assert s == "#0#1#2";
+
+
+        s = "";
+        n = 0;
+        {
+            s = s ++ "#";
+            if n <= 10 { throw: ExceptionNum(n) }
+        }
+        catch: CatchAll
+        tryWhileTrue: {
+            s = s ++ n;
+            ++n;
+            ^ n < 3
+        };
+        assert s == "#0#1#2";
+        
+        s = "";
+        n = 0;
+        {
+            s = s ++ "#";
+            throw: ExceptionNum(n);
+        }
+        catch: CatchIgnore<ExceptionNum>
+        tryWhileTrue: {
+            s = s ++ n;
+            ++n;
+            ^ n < 3
+        };
+        assert s == "#0#1#2";
+        
+
+        s = "";
+        n = 0;
+        {
+            s = s ++ n;
+            ++n;
+            throw: ExceptionNum(n);
+        }
+        catch: CatchIgnore<ExceptionNum>
+        tryWhileTrue: Times(3);
+        assert s == "012";
+               
+        // *****************************
+        
+        n = 0;
+        {
+            throwExceptionTest0IntIfLT0: n;
+            throwExceptionTest1IntIfGT0: n;
+            throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int | ExceptionTest2Int e :) control = "GT0EQ0" };
+        assert control == "GT0EQ0";
+        
+        n = -1;        
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int | ExceptionTest0Int e :) control = "EQ0LT0" };
+        assert control == "EQ0LT0";
+
+        n = -1;        
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int | ExceptionTest0Int e :) control = "EQ0LT0" };
+        assert control == "LT0";
+
+        
+        n = 1;
+        {
+            call_throwExceptionTest0IntIfLT0: n;
+            call_throwExceptionTest1IntIfGT0: n;
+            call_throwExceptionTest2IntIfEQ0: n;
+        }
+        catch: { (: ExceptionTest1Int | ExceptionTest0Int e :) control = "GT0LT0" }
+        catch: { (: ExceptionTest0Int e :) control = "LT0" }
+        catch: { (: ExceptionTest1Int e :) control = "GT0" }
+        catch: { (: ExceptionTest2Int e :) control = "EQ0" };
+        assert control == "GT0LT0";
+                   
+        //var ExceptionConverter<ExceptionTwo, ExceptionPowerOfTwo,
+        //                 ExceptionTest0Int, ExceptionZero> .# writeCode ec3333;
+        s = "";
+        n = 1;
+        {
+            {           
+                {
+                    if n == 1 { throw: ExceptionTest0Int(-1) }
+                    if n == 2 { throw: ExceptionTwo() }
+                }
+                catch: ExceptionConverter<ExceptionTwo, ExceptionPowerOfTwo,
+                         ExceptionTest0Int, ExceptionZero>;
+            }
+            catch: { (: ExceptionZero e :) 
+                s = "zero"
+            }
+            catch: { (: ExceptionTest0Int e :) 
+                s = "0Int"
+            }
+            catch: { (: ExceptionTwo e :) 
+                s = "2"
+            }
+            catch: { (: ExceptionPowerOfTwo e :) 
+                s = "power2"
+            }
+        }
+        catch: { (: CyException e :) 
+            s = "all"
+        };
+        assert s == "zero";
+
+        s = "";
+        n = 2;
+        {
+            {           
+                {
+                    if n == 1 { throw: ExceptionTest0Int(-1) }
+                    if n == 2 { throw: ExceptionTwo() }
+                }
+                catch: ExceptionConverter<ExceptionTwo, ExceptionPowerOfTwo,
+                         ExceptionTest0Int, ExceptionZero>;
+            }
+            catch: { (: ExceptionZero e :) 
+                s = "zero"
+            }
+            catch: { (: ExceptionTest0Int e :) 
+                s = "0Int"
+            }
+            catch: { (: ExceptionTwo e :) 
+                s = "2"
+            }
+            catch: { (: ExceptionPowerOfTwo e :) 
+                s = "power2"
+            }
+        }
+        catch: { (: CyException e :) 
+            s = "all"
+        };
+        assert s == "power2";
+
+
+        s = "";
+        for ii in 0..2 {
+
+            {
+                {           
+                    {
+                        if ii == 1 { throw: ExceptionTest0Int(-1) }
+                        if ii == 2 { throw: ExceptionTwo() }
+                    }
+                    catch: ExceptionEncapsulator<ExceptionTwo, ExceptionPowerOfTwo,
+                             ExceptionTest0Int, ExceptionZero, ExceptionContainer>;
+                }
+                catch: { (: ExceptionZero e :) 
+                    s = s ++ "zero"
+                }
+                catch: { (: ExceptionTest0Int e :) 
+                    s = s ++ "0Int"
+                }
+                catch: { (: ExceptionTwo e :) 
+                    s = s ++ "2"
+                }
+                catch: { (: ExceptionPowerOfTwo e :) 
+                    s = s ++ "power2"
+                }
+            }
+            catch: { (: ExceptionContainer e :) 
+                if ii == 1 { assert  (e getException) isA: ExceptionTest0Int; }
+                if ii == 2 { assert  (e getException) isA: ExceptionTwo; }
+                
+                s = s ++ ii
+            };
+
+        }
+        assert s == "12";
+                    
+                    
+        // *************************
+        TestException resetTraceString;
+        {
+            throw: ExceptionZeroWithCatch();
+        }
+        catch: ExceptionZeroWithCatch;
+        assert TestException traceString == "0-with-catch";   
+        
+        
+        
+        // *************************
+        s = "";        
+        {
+            {
+                s = "0";
+                throw: CyException
+            }
+            catch: { (: CyException e :) 
+               s = s ++ "1";
+               throw: e
+            }
+            finally: {
+               s = s ++ "2";
+            }
+        } hideException;
+        assert s == "012";
+        
+
+    }
+    
+    func throwExceptionTest0IntIfLT0: Int n {
+        if n < 0 { throw: ExceptionTest0Int(n) }
+    }
+
+    func throwExceptionTest1IntIfGT0: Int n {
+        if n > 0 { throw: ExceptionTest1Int(n) }
+    }
+    
+    func throwExceptionTest2IntIfEQ0: Int n {
+        if n == 0 { throw: ExceptionTest2Int(n) }
+    }
+    
+    func throwExceptionTest0StringEQ5: Int n {
+        if n == 5 { throw: ExceptionTest0String("" ++ n) }
+    }
+
+    func call_throwExceptionTest0IntIfLT0: Int n {
+        throwExceptionTest0IntIfLT0: n
+    }
+    
+    func call_throwExceptionTest1IntIfGT0: Int n {
+        throwExceptionTest1IntIfGT0: n
+    }
+    
+    func call_throwExceptionTest2IntIfEQ0: Int n {
+        throwExceptionTest2IntIfEQ0: n
+    }
+    
+    func call_throwExceptionTest0StringEQ5: Int n {
+        throwExceptionTest0StringEQ5: n
+    }
+
+    var Int et = 0;
+    
+    
+    /*  context function are not supported yet
+    func contextFunctionTest {
+    
+    
+        var Array<String> colorTable = [ "red", "green", "blue", "cyan" ];
+        var colorNameCB =  { (: IColor self -> String :)
+            ^ colorTable[ self color ]
+        };            
+        var Function<String> f = colorNameCB bindToFunction: Square;
+        pn;
+        Out println: ( "" ++ (f eval) ++ " = red");
+    
+        var outterSelf = self;
+        var cf1 = { (: Person self, Int i, Char ch -> String :) 
+            name: "Carolina2";
+            age: 4;
+            outterSelf pn;
+            Out println: (name ++ " = Carolina");
+            outterSelf pn;
+            Out println: ("" ++ age ++ " = 4");
+            name: "Lívia";
+            age: 7;
+            outterSelf pn;
+            Out println: (name ++ " = Lívia");
+            outterSelf pn;
+            Out println: ("" ++ age ++ " = 7");
+            ^ "" ++ ((ch asInt) + i) asChar;
+        };
+        var Function<Int, Char, String> f1 = cf1 bindToFunction: Person("none", 0);
+        var String s = f1 eval: 1, 'A';
+        pn;
+        Out println: ( s ++ " = B");
+        
+        var cf2 = { (: Person self, Int i -> String :)
+            var f11 = { (: Int k :) 
+                ^1 + k;   
+            };
+            self name: (self name ++ " ");
+            ^ "" ++ self name ++ " " ++ self name ++ i;
+        };
+        var Function<Int, String> f2 = cf2 bindToFunction: Person("Lívia", 8);
+        Out println: (f2 eval: 2);
+        var f3 = { (: Int i :)
+            var f4 = { (: Int j :)
+                var cf3 = { (: Person self, Int k -> String :) 
+                    ^" " ++ k ++ j ++ i;  
+                };
+            };
+        };
+    }
+    
+    */
+
+    func generic03Test {
+        generic03.TestMO<Int, int_2147483647, int_0, int2147483647>() run;
+    }    
+end
+

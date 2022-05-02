@@ -1,0 +1,9 @@
+package cyan.reflect
+
+import meta
+
+interface IParseMacro_parsing extends IParse_parsing
+
+    func parsing_parseMacro: ICompilerMacro_parsing compiler_parsing
+
+end

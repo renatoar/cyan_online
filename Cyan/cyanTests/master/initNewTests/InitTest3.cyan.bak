@@ -1,0 +1,21 @@
+package initNewTests
+
+object InitTest3 extends InitTest0
+
+    fun init: Int aa {
+        super init;
+        self.aa = aa
+    }
+    
+    fun init { 
+        super init;
+        aa = 1
+    }
+    
+    override
+    fun all -> String = (super all) + aa;
+    
+    const Int aa
+
+end
+

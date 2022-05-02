@@ -1,0 +1,5 @@
+package generic02.ga
+
+interface I2<T>
+    func pred: T elem -> Int
+end

@@ -1,0 +1,23 @@
+package metaobjectTest
+
+
+@doc{*
+    Macro 'assert' has the following syntax:
+         assert expr;
+    'assert' is a macro keyword and 'expr' a Cyan expression. A ';'
+    should end the macro call. 
+    At runtime, if 'expr' is false, an error message is issued. 
+    The program is NOT terminated.
+
+*}
+object Assert
+
+    func run {
+        assert "This message should be printed" == "";
+        assert "Do not print this" size > 10;
+        assert 0 == 0;
+        assert " "*3 == "   ";
+    }
+
+end
+

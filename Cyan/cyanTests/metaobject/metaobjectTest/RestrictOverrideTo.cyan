@@ -1,0 +1,17 @@
+package metaobjectTest
+
+@doc{*
+  Annotation 'restrictOverrideTo' should be attached to 
+  a method. Its parameter list is composed of prototype names,
+  with the package. The annotated method can only be 
+  overridden in those prototypes.
+*}
+open
+object RestrictOverrideTo
+
+    func run { }
+    
+    @restrictOverrideTo(main.SubRestrictOverrideTo, main.SubOtherRestrictOverrideTo)
+    func myprint { }
+    
+end

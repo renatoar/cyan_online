@@ -1,0 +1,29 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open 
+object CyanMetaobjectLiteralString extends CyanMetaobjectLiteralObject 
+
+
+    func init: Array<String> prefixNameList {
+        @javacode{*
+            super( new meta.CyanMetaobjectLiteralString( 
+               meta.CyanMetaobjectAtAnnot.fromCyanArrayStringToJavaArrayString(_prefixNameList)
+               ));
+        *}
+    }
+    override
+    func getHidden -> meta.CyanMetaobjectLiteralString { @javacode{* return (meta.CyanMetaobjectLiteralString) super._getHidden(); *} } 
+
+
+    func myClone  -> meta.CyanMetaobjectLiteralString {
+        return self getHidden myClone
+    }
+
+    func getPrefixNames  -> java.lang.String[] {
+        return self getHidden getPrefixNames
+    }
+end

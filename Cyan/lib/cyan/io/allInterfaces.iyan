@@ -1,0 +1,272 @@
+package cyan.io
+
+
+open object CatchExceptionIOMessage 
+
+    func init 
+    func new -> cyan.io.CatchExceptionIOMessage 
+    func eval: (cyan.io.ExceptionFileNotFound e)  
+    func eval: (cyan.io.ExceptionIO e)  
+    override func prototype -> cyan.io.CatchExceptionIOMessage 
+    override func clone -> cyan.io.CatchExceptionIOMessage 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object CatchExitExceptionIOMessage extends CatchExceptionIOMessage
+
+    func init 
+    func new -> cyan.io.CatchExitExceptionIOMessage 
+    override func eval: (cyan.io.ExceptionFileNotFound e)  
+    override func eval: (cyan.io.ExceptionIO e)  
+    override func prototype -> cyan.io.CatchExitExceptionIOMessage 
+    override func clone -> cyan.io.CatchExitExceptionIOMessage 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object ContainerForSerialize 
+
+    func init 
+    func new -> cyan.io.ContainerForSerialize 
+    func saveVariable: (Dyn varValue, String filename)  
+    override func prototype -> cyan.io.ContainerForSerialize 
+    override func clone -> cyan.io.ContainerForSerialize 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object CyFile 
+
+    func init: (String filename)  
+    func init: (cyan.io.CyFile parent, String filename)  
+    func new: (String p0)  -> cyan.io.CyFile 
+    func new: (cyan.io.CyFile p0, String p1)  -> cyan.io.CyFile 
+    @prototypeCallOnly 
+    func separator -> String 
+    @prototypeCallOnly 
+    func pathSeparatorChar -> Char 
+    @prototypeCallOnly 
+    func pathSeparator -> String 
+    func name -> String 
+    func getParent -> cyan.lang.String|cyan.lang.Nil 
+    func getParentFile -> cyan.io.CyFile|cyan.lang.Nil 
+    func getPath -> String 
+    func isAbsolute -> Boolean 
+    func getAbsolutePath -> String 
+    func getAbsoluteFile -> cyan.io.CyFile 
+    func getCanonicalPath -> String 
+    func getCanonicalFile -> cyan.io.CyFile 
+    func canRead -> Boolean 
+    func canWrite -> Boolean 
+    func exists -> Boolean 
+    func isDirectory -> Boolean 
+    func isFile -> Boolean 
+    func isHidden -> Boolean 
+    func lastModified -> Long 
+    func length -> Long 
+    func createNewFile -> Boolean 
+    func delete -> Boolean 
+    func deleteOnExit 
+    func list -> Array<String> 
+    func listFiles -> Array<cyan.io.CyFile> 
+    func mkdir -> Boolean 
+    func mkdirs -> Boolean 
+    func renameTo: (cyan.io.CyFile dest)  -> Boolean 
+    func setLastModified: (Long time)  -> Boolean 
+    func setReadOnly -> Boolean 
+    func setWritable: (Boolean writable, Boolean ownerOnly)  -> Boolean 
+    func setWritable: (Boolean writable)  -> Boolean 
+    func setReadable: (Boolean readable, Boolean ownerOnly)  -> Boolean 
+    func setReadable: (Boolean readable)  -> Boolean 
+    func setExecutable: (Boolean executable, Boolean ownerOnly)  -> Boolean 
+    func setExecutable: (Boolean executable)  -> Boolean 
+    func canExecute -> Boolean 
+    @prototypeCallOnly 
+    func listRoots -> Array<cyan.io.CyFile>|Nil 
+    func getTotalSpace -> Long 
+    func getFreeSpace -> Long 
+    func getUsableSpace -> Long 
+    @prototypeCallOnly 
+    func createTempFile: (String prefix, String suffix, cyan.io.CyFile directory)  -> cyan.io.CyFile 
+    @prototypeCallOnly 
+    func createTempFile: (String prefix, String suffix)  -> cyan.io.CyFile 
+    func compareTo: (cyan.io.CyFile other)  -> Int 
+    override func == Dyn other -> Boolean 
+    override func hashCode -> Int 
+    override func asString -> String 
+    override func prototype -> cyan.io.CyFile 
+    override func clone -> cyan.io.CyFile 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object ExceptionFileNotFound extends CyException
+
+    func init 
+    func init: (String filename)  
+    func new -> cyan.io.ExceptionFileNotFound 
+    func new: (String p0)  -> cyan.io.ExceptionFileNotFound 
+    func filename -> String 
+    func eval: (cyan.io.ExceptionFileNotFound e)  
+    override func prototype -> cyan.io.ExceptionFileNotFound 
+    override func clone -> cyan.io.ExceptionFileNotFound 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object ExceptionIO extends CyException
+
+    func init 
+    func init: (String filename)  
+    func new -> cyan.io.ExceptionIO 
+    func new: (String p0)  -> cyan.io.ExceptionIO 
+    func filename -> String 
+    func eval: (cyan.io.ExceptionIO e)  
+    override func prototype -> cyan.io.ExceptionIO 
+    override func clone -> cyan.io.ExceptionIO 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object InByteFile 
+
+    func init: (String filename)  
+    func new: (String p0)  -> cyan.io.InByteFile 
+    func read -> Int 
+    func close 
+    override func prototype -> cyan.io.InByteFile 
+    override func clone -> cyan.io.InByteFile 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object InTextFile 
+
+    func init: (String filename)  
+    func new: (String p0)  -> cyan.io.InTextFile 
+    func foreach: (Function<String,Nil> f)  
+    func readLine -> cyan.lang.String|cyan.lang.Nil 
+    func readFile -> cyan.lang.String|cyan.lang.Nil 
+    func readLines -> Array<String> 
+    @checkCatchParameter 
+    func readFile:  
+        catch: (Any catchObj)  -> cyan.lang.String|cyan.lang.Nil 
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        readFile:  
+        catch: (Any catchObj)  -> cyan.lang.String|cyan.lang.Nil 
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        readLines:  
+        catch: (Any catchObj)  -> Array<String> 
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        foreach: (Function<String,Nil> apply) 
+        catch: (Any catchObj)  
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        filter: (Function<String,Boolean> filter) 
+        foreach: (Function<String,Nil> apply) 
+        catch: (Any catchObj)  
+    func close 
+    override func prototype -> cyan.io.InTextFile 
+    override func clone -> cyan.io.InTextFile 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object OutByteFile 
+
+    func init: (String filename)  
+    func new: (String p0)  -> cyan.io.OutByteFile 
+    func writeByteArray: (Array<Byte> byteArray)  
+    func writeByte: (Byte aByte)  
+    func close 
+    override func prototype -> cyan.io.OutByteFile 
+    override func clone -> cyan.io.OutByteFile 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object OutTextFile 
+
+    func init 
+    func init: (String filename)  
+    func new -> cyan.io.OutTextFile 
+    func new: (String p0)  -> cyan.io.OutTextFile 
+    func write: (Array<Char> charArray)  
+    func write: (String s)  
+    func write: (Array<String> strList)  
+    func write: (Char ch)  
+    func write: (Array<Char> charArray) 
+        offset: (Int offset) 
+        size: (Int size)  
+    func write: (Array<String> strArray) 
+        offset: (Int offset) 
+        size: (Int size)  
+    func writeNewLine 
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        write: (String s) 
+        catch: (Any catchObj)  -> Boolean 
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        write: (Array<String> strList) 
+        catch: (Any catchObj)  -> Boolean 
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        write: (Array<String> strList) 
+        offset: (Int offset) 
+        size: (Int size) 
+        catch: (Any catchObj)  -> Boolean 
+    @prototypeCallOnly 
+    @checkCatchParameter 
+    func open: (String filename) 
+        maxNumLines: (Int maxNumLines) 
+        write: (String strLine) 
+        catch: (Any catchObj)  -> Boolean 
+    func newLine 
+    func close 
+    override func prototype -> cyan.io.OutTextFile 
+    override func clone -> cyan.io.OutTextFile 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+

@@ -1,0 +1,35 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'prototypeCallOnly' should be attached to a method. 
+  It assures that the method is only called with a prototype
+  as receiver. This is a replacement for 'static' methods
+  of Java/C++/C#. An annotated method cannot access 
+  non-shared fields and it should be final (either 
+  declared with 'final' or the prototype is final).
+  
+    
+*}
+open
+object PrototypeCallOnly
+    
+    func run {
+        var PrototypeCallOnly p = PrototypeCallOnly();
+        // error if uncommented
+        // p at: 10;
+        // p unary;
+        PrototypeCallOnly at: 10;
+        PrototypeCallOnly unary;
+        
+    }
+
+    @prototypeCallOnly        
+    final func at: Int n { value = n; }
+    
+    @prototypeCallOnly        
+    final func unary { value = 0; }   
+    
+    shared var Int value = 0; 
+end
+

@@ -1,0 +1,8 @@
+package cyan.lang
+
+
+public interface Iterator<graph.Edge>
+    func hasNext -> Boolean 
+    func next -> graph.Edge 
+end
+

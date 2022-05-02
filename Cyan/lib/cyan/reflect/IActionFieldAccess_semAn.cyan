@@ -1,0 +1,25 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionFieldAccess_semAn
+
+    func semAn_replaceGetField: WrExpr fieldToGet, WrEnv env
+        -> String
+
+    func semAn_replaceSetField: 
+            WrExpr fieldToSet, 
+            WrExpr rightHandSideAssignment, 
+            WrEnv env
+        -> String 
+        
+    func semAn_replacePlusPlusField: WrStatement plusPlusField, WrEnv env
+        -> String 
+
+    func semAn_replaceMinusMinusField: WrStatement minusMinusField, WrEnv env
+        -> String
+
+
+end

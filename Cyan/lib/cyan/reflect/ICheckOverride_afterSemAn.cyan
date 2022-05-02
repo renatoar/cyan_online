@@ -1,0 +1,13 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface ICheckOverride_afterSemAn extends ICheck_afterResTypes_afterSemAn, IStayPrototypeInterface
+
+    func afterSemAn_checkOverride: 
+            ICompiler_semAn compiler_semAn, 
+            WrMethodDec method
+    
+end

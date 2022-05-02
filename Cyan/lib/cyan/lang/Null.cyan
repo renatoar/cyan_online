@@ -1,0 +1,38 @@
+package cyan.lang
+
+object Null
+    func equalNull: Dyn obj -> Boolean { 
+        var Boolean r = false;
+        @javacode{*
+            if ( _obj == null) {
+                _r = CyBoolean.cyTrue;
+            }
+        *}
+        return r
+    }
+    
+    func getNull -> Dyn {
+        @javacode{*
+            return null;
+        *}
+    }
+    
+    func instanceof: Dyn obj, String packageName -> Boolean {
+        @javacode{*
+            try {
+                Class<?> aSuper = Class.forName(_packageName.s);
+                if ( _obj != null ) {
+                    return new CyBoolean( 
+                        aSuper.isAssignableFrom(_obj.getClass()) ) ;
+                }
+            }
+            catch (ClassNotFoundException e1) {
+            }
+            return CyBoolean.cyFalse;
+        *}
+    }
+    
+    // does nothing. To replace message passings 
+    // without any compiler errors
+    func nop { } 
+end

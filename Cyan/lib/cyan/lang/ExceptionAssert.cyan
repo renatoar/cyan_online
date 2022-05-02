@@ -1,0 +1,6 @@
+package cyan.lang
+
+
+object ExceptionAssert extends CyException
+end
+

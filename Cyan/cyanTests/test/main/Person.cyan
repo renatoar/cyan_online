@@ -1,0 +1,10 @@
+package main
+object Person
+    private var String name = "";
+    public func getName -> String {
+        return self.name;
+    }
+    public func setName: String name {
+        self.name = name;
+    }
+end

@@ -1,0 +1,33 @@
+package cyan.io
+
+
+
+object ContainerForSerialize
+
+    func saveVariable: Dyn varValue, String filename {
+        @javacode{*
+        try {        
+			 final java.nio.file.Path path = java.nio.file.Paths.get(_filename.s);   
+      	     final java.nio.file.Path parentDir = path.getParent();
+      	     if (!java.nio.file.Files.exists(parentDir)) {
+      		    java.nio.file.Files.createDirectories(parentDir);   
+             }
+        }
+   		catch (java.io.IOException e) {
+   			System.out.println("Error creating path to save value to file " + _filename.s);
+   		}
+   		try( java.io.FileOutputStream file = new java.io.FileOutputStream(_filename.s);
+   			 java.io.ObjectOutputStream out = new java.io.ObjectOutputStream(file)) {
+   	        // Method for serialization of object
+   
+   	         out.writeObject(_varValue);
+             //System.out.println(_varValue.getClass().getName());
+   		}
+   		catch (java.io.IOException e) {
+   			System.out.println("Error writing variable value to file " + _filename.s);
+   		}
+        *}
+        return Nil;
+    }
+end
+

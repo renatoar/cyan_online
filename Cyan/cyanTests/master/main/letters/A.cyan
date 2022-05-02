@@ -1,0 +1,19 @@
+package main.letters
+
+
+open
+object A
+    override
+    func println { 
+        "A" println;
+    }
+end
+/*
+          A 
+        /   \
+       B     C   
+             |
+             D
+
+
+*/

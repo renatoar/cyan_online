@@ -1,0 +1,6 @@
+package shape
+
+object Square extends Shape
+    override
+    func draw { }
+end

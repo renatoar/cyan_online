@@ -1,0 +1,15 @@
+package context
+
+open
+object Adder(@property Int &aa, @property Int bb, @property Int &cc) extends Function<Int, Int, Int>
+
+     override
+     func eval: Int x, Int y -> Int {
+          aa = x + y;
+          cc = x * y;
+          return aa + bb + cc;
+     }
+     
+     
+end
+

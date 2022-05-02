@@ -1,0 +1,34 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IAction_afterResTypes
+
+    /*
+    func  afterResTypes_codeToAdd:
+            meta.ICompiler_afterResTypes compiler, 
+            Array<Tuple<Dyn, Array<Dyn>>> infoList
+        -> Tuple<String, String> 
+    */
+    func afterResTypes_codeToAdd:
+            ICompiler_afterResTypes compiler, 
+            Array<
+               Tuple< WrAnnotation,
+                      Array<ISlotSignature>
+               >
+            > infoList
+            -> Tuple<String, String> 
+    
+        
+    func runUntilFixedPoint -> java.lang.Boolean
+    
+    func afterResTypes_beforeMethodCodeList:
+            meta.ICompiler_afterResTypes compiler
+            -> Array<Tuple<String, String, Boolean>> 
+            
+    func afterResTypes_renameMethod:
+            meta.ICompiler_afterResTypes compiler_afterResTypes
+            -> Array<Tuple<String, Array<String>>> 
+end

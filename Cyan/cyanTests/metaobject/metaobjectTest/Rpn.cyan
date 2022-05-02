@@ -1,0 +1,21 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'rpn' takes an expression in Reverse Polish Notation (RPN)
+  in the attached DSL and evaluates it at compile-time. The annotation 
+  is an expression of type Int. Only positive integer numbers are allowed 
+  in the RPN expression.
+  
+  This is a demonstration metaobject.
+  
+*}
+object Rpn
+
+    func run {
+        let value = @rpn{* 1 2 3 * + *};
+        assert value == 7;
+    }
+
+end
+

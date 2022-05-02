@@ -1,0 +1,11 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IAction_semAn
+
+    func semAn_codeToAdd: ICompiler_semAn compiler_semAn -> String
+    
+end

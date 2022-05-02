@@ -1,0 +1,38 @@
+package metaobjectTest
+
+/*
+   @addCodeFromMetaobject  is in prototype Array. The annotation 
+   addCodeToGenericPrototype gives the code to be added to the 
+   array of prototype AddCodeFromMetaobject.
+*/
+
+@addCodeToGenericPrototype("Array", " func sumAll -> Int"){*
+
+    func sumAll -> Int {
+        var Int s = 0;
+        for elem in self {
+            s = s + elem getValue;
+        }
+        return s
+    }
+*}
+@init(value)
+object AddCodeFromMetaobject
+        // methods getValue and setValue: will be added to prototype
+    @property Int value = 0;
+    func init { 
+    }
+
+    func run {
+        var array = [ 
+            AddCodeFromMetaobject(1), AddCodeFromMetaobject(2),
+            AddCodeFromMetaobject(3) ];
+            /* method sumAll will be added to Array<AddCodeFromMetaobject> by 
+               metaobject addCodeFromMetaobject. This method was passed by
+               annotation addCodeToGenericPrototype of this prototype 
+               (AddCodeFromMetaobject)
+            */
+        assert array sumAll == 6;
+    }
+    
+end

@@ -1,0 +1,5 @@
+package generic02.gb
+
+interface I2<T>
+    func pred: T elem -> T 
+end

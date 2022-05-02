@@ -1,0 +1,75 @@
+package metaobjectTest
+
+
+@doc{*
+    Annotations of this metaobject are attached to a declaration. 
+    The attached DSL code is made in Myan, which supports interpreted Cyan
+    within parameterless methods declared with 'func': 
+    
+        func afterResTypes_codeToAdd {    
+            // interpreted Cyan code
+        }
+    
+    According to the method name, the Cyan code is interpreted in phase
+    afterResTypes, semAn, or afterSemAn. Methods of interfaces
+        IAction_semAn
+        IActionNewPrototypes_semAn
+        IAction_afterResTypes
+        IActionNewPrototypes_afterResTypes
+        IParseWithCyanCompiler_parsing 
+        ICommunicateInPrototype_afterResTypes_semAn_afterSemAn    
+        ICheckDeclaration_afterSemAn
+        
+    can be implemented. To better understand this, see the documentation 
+    for action_afterResTypes_semAn.
+*}
+object OnDeclaration_afterResTypes_semAn_afterSemAn
+
+    func run {
+        assert get_age == 0;
+        age = 12;
+        assert get_age == 12;
+    
+        assert get_name == "";
+        
+    }
+    
+    /*
+         Method get_name is added to the prototype 
+    */
+    @onDeclaration_afterResTypes_semAn_afterSemAn{*
+    
+        func afterSemAn_checkDeclaration {
+            var annotation = metaobject getAnnotation;
+            var String name = annotation getDeclaration getName;
+            if name != "age" {
+                metaobject addError: "Field name should be 'age'"
+            }            
+        }
+        func afterResTypes_codeToAdd {
+            var annotation = metaobject getAnnotation;
+            var String name = annotation getDeclaration getName;
+            var String typeName = annotation getDeclaration getType getName;
+            return [. "func get_" ++ name ++ " -> " ++ typeName ++
+                    " = " ++ name ++ ";", "func get_" ++ name ++ " -> Int" .]
+        }
+    
+    *}
+    var Int age = 0;
+
+    // method get_name is added to the prototype
+    @onDeclaration_afterResTypes_semAn_afterSemAn{*
+        func afterResTypes_codeToAdd {
+            var annotation = metaobject getAnnotation;
+            var String name = annotation getDeclaration getName;
+            var String typeName = annotation getDeclaration getType getName;
+            return [. "func get_" ++ name ++ " -> " ++ typeName ++
+                    " = " ++ name ++ ";", 
+                    "func get_" ++ name ++ " -> " ++ typeName .]
+        }
+        
+    *}
+    var String name = "";    
+
+end
+

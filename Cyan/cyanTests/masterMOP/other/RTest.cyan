@@ -1,0 +1,7 @@
+package other
+
+object RTest
+       func run: Array<Any> args { }
+       func print: String s, Char ch { } 
+
+end

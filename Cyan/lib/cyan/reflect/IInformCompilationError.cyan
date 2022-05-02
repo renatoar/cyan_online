@@ -1,0 +1,9 @@
+package cyan.reflect
+
+interface IInformCompilationError
+
+    func getLineNumber -> Int
+	func getErrorMessage -> String
+	func activeInGenericPrototype -> Boolean
+
+end

@@ -52,54 +52,19 @@
   <div class="row ispace">
     <div class="col-sm-80" style="padding-left:20px; padding-left:20px;" >
       <div class="form-group">
-
         <form enctype="multipart/form-data" name="editor" id="code-form" method="POST" onsubmit="return false">
-          
-          <!-- prototype block 
-          <a data-target="#call" class="btn btn-primary" onclick="show_prototype('code_prototype');">Cyan Protótipo</a>
-          <textarea placeholder="Escreva o protótipo Cyan:" style="display:none" class="form-control" id="code_prototype" name="code_prototype" rows="10" cols="50"></textarea><br><br>
-          <script>
-            function show_prototype(elementId) {
-              var prototype = document.getElementById("code_prototype");
-              if (prototype.style.display === "none") {
-                //var myCodeMirror = CodeMirror.fromTextArea(code_prototype, {lineNumbers: true});
-                prototype.style.display = "block";
-              } else {
-                prototype.style.display = "none";
-              }
-            }
-          </script>
-
-          <a data-target="#call1" class="btn btn-primary" onclick="show_interface('code_interface');">Cyan Interface</a>
-          <textarea placeholder="Escreva a interface Cyan:" style="display:none" class="form-control" id="code_interface" name="code_interface" rows="10" cols="50"></textarea><br><br>
-          <script>
-            function show_interface(elementId) {
-              var interface = document.getElementById("code_interface");
-              if (interface.style.display === "none") {
-                //var myCodeMirror = CodeMirror.fromTextArea(code_interface, {lineNumbers: true});
-                interface.style.display = "block";
-              } else {
-                interface.style.display = "none";
-              }
-            }
-          </script>-->
 
           <!-- Code Editor -->
-          <label for="in">Code Editor:</label><br>
-          <textarea class="form-control" id="code" name="code" rows="20" cols="500">
-package main
-object Program
-  func run {
-    var name = "Hello World";
-    name println;
-  }
-end
-          </textarea>
+          <label for="in">Code Editor:</label>
+          <textarea class="form-control" id="code" name="code" rows="20" cols="500">package main&#10object Program&#10&#9func run {&#10&#9&#9var name = "Hello world";&#10&#9&#9name println&#10&#9}&#10end</textarea>
           <script>var myCodeMirror = CodeMirror.fromTextArea(code, {lineNumbers: true, indentWithTabs: false});</script>
 
           <!-- compile button -->
-          <button type="submit" value="Compile" class="btn btn-success" onclick="loadDoc()">
-          <span class="glyphicon glyphicon-play"></span>Compile</button><br>
+          <button type="submit" value="Compile" class="btn btn-success">
+          <span class="glyphicon glyphicon-play"></span>Compile</button>
+
+          <!-- <div id="new_editor"></div>
+          <br><button type="button" id="add_editor" class="btn btn-primary">Add Editor</button><br> -->
 
           <!-- Input area -->
           <br><label for="in">Input:</label>
@@ -108,7 +73,7 @@ end
         </form>
 
         <!-- Results of compilation area placeholder -->
-        <label>Result:</label><br>
+        <label>Result:</label>
         <div id="result" style="display:block;" class="codebox">Nothing compiled...</div>
         <div id="result-compiling" style="display: none;" class="codebox">Compiling...</div><br>
 
@@ -142,7 +107,7 @@ end
             ev.preventDefault();
           }, false);
         </script>
-       
+
         <!-- Info Block -->
         <div style="padding: 50px 50px 50px 50px;"></div>
         <div class="row">
@@ -150,7 +115,7 @@ end
             <p class="lead" style="text-align: center;"><b>Thanks for using the Cyan Online Compiler!</b></p>
             <p class="lead">Here are some Compiler known limitations:</p>
             <ul>
-              <li>Isn't possible to use input with multiple lines</li>
+              <li>Isn't possible to use input with multiple lines.</li>
             </ul>
           </div>
         </div>
@@ -170,5 +135,3 @@ end
 
 </body>
 </html>
-
-

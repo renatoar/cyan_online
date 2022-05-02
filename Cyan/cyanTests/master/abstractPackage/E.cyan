@@ -1,0 +1,8 @@
+package abstractPackage
+
+object E extends D
+
+    override
+    func m0: Int a m1: Char ch -> Int = a;
+        
+end

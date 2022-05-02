@@ -1,0 +1,27 @@
+package grammar
+
+object Camera
+    @grammarMethod{*
+        (sizeHoriz: Int sizeVert: Int
+                positionX: Int positionY: Int
+                (move: Int (up: | down: | left: | right:) )+ )    
+    *}
+    func camera: 
+       Tuple<Int, Int, Int, Int, 
+            Array<
+                Tuple<Int, 
+                    Union<f1, Any, f2, Any, f3, Any, f4, Any>>>> t {
+       // here comes the commands to actually change the camera position
+    }
+    
+    func test {
+        self   sizeHoriz: 1600 sizeVert: 900
+               positionX: 0    positionY: 0
+               move: 100 up:
+               move: 200 right:
+               move: 500 up:
+               move: 150 left:
+               move: 200 down:;
+    
+    }
+end

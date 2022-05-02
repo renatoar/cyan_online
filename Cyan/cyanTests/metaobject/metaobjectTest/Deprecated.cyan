@@ -1,0 +1,22 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'deprecated' should be attached to a method.
+  Whenever there is a possible message passing that can call 
+  the method, an error message is issued at compile-time
+*}
+object Deprecated
+
+    @deprecated("Method 'outdatedMethod:' was replaced by 'newMethod:'")
+    func outdatedMethod: String s { }
+    
+    func newMethod: String s { "Use this" println }
+    
+    func run {
+        // error if uncommented
+        // self outdatedMethod: "error if uncommented";
+    }
+
+end
+

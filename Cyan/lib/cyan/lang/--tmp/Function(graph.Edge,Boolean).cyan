@@ -1,0 +1,8 @@
+package cyan.lang
+
+@createFunction 
+abstract open object Function<graph.Edge, Boolean> 
+
+
+end
+

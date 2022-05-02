@@ -1,0 +1,8 @@
+package cyan.lang
+
+
+public interface Iterable<graph.Edge>
+    func iterator -> Iterator<graph.Edge> 
+    func foreach: Function<graph.Edge, Nil>  
+end
+

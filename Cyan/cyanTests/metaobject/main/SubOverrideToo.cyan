@@ -1,0 +1,12 @@
+package main
+
+
+object SubOverrideToo extends metaobjectTest.OverrideToo
+
+    override
+    func withdraw: Int amount { super withdraw: amount }
+
+    override
+    func add: Int amount { super add: amount }
+
+end

@@ -1,0 +1,238 @@
+package cyan.lang
+
+@javacode{*
+import java.util.*;
+*}
+ @createArrayMethods @addCodeFromMetaobject 
+object Array<Tuple<Int, Int>> 
+          implements Iterable<Tuple<Int, Int>>
+
+    override func == Dyn other -> Boolean  {
+        var Boolean ret = false; 
+        type other
+            case Array<Tuple<Int, Int>> another {
+                                if size != another size {
+                    return false
+                }                var Int i = 0; 
+                for elem in another {
+                                        if self[i] != elem {
+                        return false
+                    }                    ++i
+                }
+                return true
+            }
+        return false
+    } 
+
+    override func != Dyn other -> Boolean  {
+        return !(self == other)
+    } 
+
+    func add: (Tuple<Int, Int> elem)   {
+                @javacode<<<
+            array.add(_elem);
+                >>>
+ ; 
+        return Nil
+    } 
+
+    func replace: (Int i, Tuple<Int, Int> elem)   {
+                @javacode<<<
+            
+             try {
+                 array.add(_i.n, _elem);
+             } 
+             catch ( IndexOutOfBoundsException  e ) {
+                 throw new ExceptionContainer__( new _ExceptionIndexOutOfBounds(_i));
+             }            
+            
+                >>>
+ ; 
+        return Nil
+    } 
+
+    func addAll: (Iterable<Tuple<Int, Int>> list)   {
+        for elem in list {
+            self add: elem
+        }
+
+    } 
+
+    func clear  {
+                @javacode<<<
+            array.clear();
+                >>>
+ ; 
+        return Nil
+    } 
+
+    func isEmpty -> Boolean  {
+                @javacode<<<
+             return new CyBoolean(array.isEmpty());
+                 >>>
+ 
+    } 
+
+    func remove: (Int i)   {
+                @javacode<<<
+             try {
+                array.remove(_i.n);
+             } 
+             catch ( IndexOutOfBoundsException  e ) {
+                 throw new ExceptionContainer__( new _ExceptionIndexOutOfBounds(_i));
+             }
+                >>>
+ ; 
+        return Nil
+    } 
+
+    func  [] at: (Int index)  -> Tuple<Int, Int>  {
+                @javacode[*{
+             try {
+                return array.get(_index.n);
+             } 
+             catch ( IndexOutOfBoundsException  e ) {
+                 throw new ExceptionContainer__( new _ExceptionIndexOutOfBounds(_index));
+             }
+                }*]
+ 
+    } 
+
+    func  [] at: (Int index) 
+        put: (Tuple<Int, Int> elem)   {
+                @javacode[*{
+             try {
+                 array.set(_index.n, _elem);
+             } 
+             catch ( IndexOutOfBoundsException  e ) {
+                 throw new ExceptionContainer__( new _ExceptionIndexOutOfBounds(_index));
+             }            
+                }*]
+ ; 
+        return Nil
+    } 
+
+    func last -> Tuple<Int, Int>  {
+        return at: (size - 1)
+    } 
+
+    func head -> Tuple<Int, Int>  { return at: 0    } 
+
+    func tail -> Array<Tuple<Int, Int>>  {
+                if size == 0 || size == 1 {
+            return Array<Tuple<Int, Int>>()
+        }
+        else {
+            var newArray = Array<Tuple<Int, Int>>(size - 1); 
+            for n in 1 ..< size {
+                newArray add: (at: n)
+            }
+            return newArray
+        }
+
+    } 
+
+    func slice: (Interval<Int> interval)  -> Array<Tuple<Int, Int>>  {
+        var newArray22 = Array<Tuple<Int, Int>> new: (interval size); 
+        interval foreach: { 
+                (: Int i :) 
+                newArray22 add: (self at: i)
+             }; 
+        return newArray22
+    } 
+
+    func concat: (Array<Tuple<Int, Int>> other)  -> Array<Tuple<Int, Int>>  {
+        other foreach: { 
+                (: Tuple<Int, Int> elem :) 
+                self add: elem
+             }; 
+        return self
+    } 
+
+    func size -> Int  {
+                @javacode[*{
+            return new CyInt(array.size());
+                }*]
+ 
+    } 
+
+    override func foreach: (Function<Tuple<Int, Int>, Nil> b)   {
+        0 ..< size foreach: { 
+                (: Int i :) 
+                b eval: (self at: i)
+             }
+    } 
+
+    func filter: (Function<Tuple<Int, Int>, Boolean> f)  -> Array<Tuple<Int, Int>>  {
+        let other = Array<Tuple<Int, Int>> new; 
+        self foreach: { 
+                (: Tuple<Int, Int> elem :) 
+                                if f eval: elem {
+                    other add: elem
+                }
+             }; 
+        return other
+    } 
+
+    func filter: (Function<Tuple<Int, Int>, Boolean> f) 
+        foreach: (Function<Tuple<Int, Int>, Nil> b)   {
+        self foreach: { 
+                (: Tuple<Int, Int> elem :) 
+                                if f eval: elem {
+                    b eval: elem
+                }
+             }
+    } 
+
+    func map: (Function<Tuple<Int, Int>, Tuple<Int, Int>> f)  -> Array<Tuple<Int, Int>>  {
+        let mapped = Array<Tuple<Int, Int>>(); 
+        for elem in self {
+            mapped add: (f eval: elem)
+        }
+        return mapped
+    } 
+
+    func |> Function<Array<Tuple<Int, Int>>, Array<Tuple<Int, Int>>> f -> Array<Tuple<Int, Int>>  { return f eval: self    } 
+
+    override func iterator -> Iterator<Tuple<Int, Int>>  {
+        return ArrayIterator<Tuple<Int, Int>> new: self
+    } 
+
+    func contains: (Tuple<Int, Int> elem)  -> Boolean  {
+        for other in self {
+                        if other == elem {
+                return true
+            }
+        }
+        return false
+    } 
+
+    func notContains: (Tuple<Int, Int> elem)  -> Boolean  = !(contains: elem);
+
+    func containsArray: (Array<Tuple<Int, Int>> other)  -> Boolean  {
+        var count = 0; 
+        for otherElem in other {
+            for selfElem in self {
+                                if otherElem == selfElem {
+                    ++count; 
+                                        break;
+                }
+            }
+
+        }
+        return count == other size
+    } 
+
+    func indexOf: (Tuple<Int, Int> elem)  -> Int  {
+        var index = 0; 
+        for other in self {
+                        if other == elem {
+                return index
+            }            ++index
+        }
+        return -1
+    } 
+
+
+end
+

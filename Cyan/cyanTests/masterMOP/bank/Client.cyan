@@ -1,0 +1,35 @@
+package bank
+
+
+@addMethodTo("func setFavorite: String s;",
+    """
+    func setFavorite: String s { "Favorite bank" println }
+    """)
+open
+object Client
+    func init: String name {
+        self._name = name;
+        self._bankList = Array<Bank>()
+    }
+    func addBank: Bank bank {
+        _bankList add: bank;
+        bank search: "bb";
+    }
+    
+    @overrideTest{*
+        func test {
+            var (%SUBPROTOTYPE%) subproto = (%SUBPROTOTYPE%) new: "noname";
+            var localTotal = subproto getTotal;        
+            subproto add: 100;
+            subproto withdraw: 100;
+            assert localTotal == subproto getTotal;
+        }
+    *}
+    func withdraw: Int amount { total = total - amount }
+    func add: Int amount { total = total + amount }
+    
+    @property var Int total = 0;
+    
+    @property var Array<Bank> _bankList
+    @property var String _name
+end

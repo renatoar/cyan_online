@@ -1,0 +1,34 @@
+package metaobjectTest
+
+
+@doc{*
+    This is a literal number annotation, an identifier follows a literal
+    number. The syntax for this annotation is
+         n_base_N  or n_BASE_N  or n_Base_N
+    in which 'n' is a literal number in base 2 to 36 and N is the literal
+    number that is the base, in base 10. 'n' can have numbers, underscores, and letters
+    but, if it has letters, it should start with a number (otherwise the
+    compiler will consider it as an identifier). Both '_' in n_base_N are
+    optional. Of course, something like
+        0Abase_20
+    is illegal because the compiler would consider that the metaobject name
+    is 'Abase'. The metaobject uses method 
+        Integer.valueOf(n, N)
+    to parse the number 'n' in base N.
+    
+*}
+object Number_base
+
+    func run {
+        assert 101base2 == 5;
+        
+        assert 0FF_base_16 == 255;
+        
+        assert 0FF_FF_BASE16 == 65535;
+        
+        assert 11_base_8 == 9;
+        
+    }
+
+end
+

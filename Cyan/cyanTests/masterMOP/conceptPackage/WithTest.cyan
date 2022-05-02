@@ -1,0 +1,19 @@
+package conceptPackage
+
+import other
+
+open
+object WithTest
+    
+    func run {
+    }
+    
+    func with: String do: Function<WithTest, Nil> -> other.RTest {
+        return RTest
+    }
+    
+    func + other.RTest -> RTest {
+        return RTest
+    }
+
+end

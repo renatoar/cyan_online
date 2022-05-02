@@ -1,0 +1,8 @@
+package abstractPackage
+
+abstract object AbstractB extends AbstractA
+    override
+    func sum: mult: -> Int = 0;
+    override
+    func sum: Int a mult: -> Int = a;
+end

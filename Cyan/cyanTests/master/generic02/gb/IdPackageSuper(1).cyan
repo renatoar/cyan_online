@@ -1,0 +1,8 @@
+package generic02.gb
+
+object IdPackageSuper<M>
+    func M -> String = "" ++ ( @symbolToString(M) ) ++ ( @symbolToString(M) );
+    func M1 -> String = "ab";
+    func M: String s = s;
+end
+

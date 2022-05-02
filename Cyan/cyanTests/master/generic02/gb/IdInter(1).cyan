@@ -1,0 +1,18 @@
+package generic02.gb
+
+/*
+   test the rules 
+       InterMethSig2 ::= Id |
+                         { IdColon [ InterParameDecList ] } +
+                         
+*/
+@concept{*
+    T in [ mult ]
+*}
+interface IdInter<T>
+    func T: Int i -> Int
+    func T: String s T: Int i -> String
+    func T: String T: Int T: String -> String
+    func T -> String
+end
+

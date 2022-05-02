@@ -1,0 +1,5 @@
+package generic02.protoB
+
+object X
+    func packageName -> String = "generic02.protoB";
+end

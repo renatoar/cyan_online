@@ -1,0 +1,11 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface ICheckDeclaration_afterSemAn extends ICheck_afterResTypes_afterSemAn
+
+    func afterSemAn_checkDeclaration: ICompiler_semAn compiler 
+
+end

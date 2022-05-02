@@ -1,0 +1,17 @@
+package cyan.io
+
+object CatchExitExceptionIOMessage extends CatchExceptionIOMessage
+
+    override
+    func eval: ExceptionFileNotFound e {
+        ("File " ++ e filename ++ " cannot be opened") println;   
+        System exit: 1;     
+    }
+    override
+    func eval: ExceptionIO e {
+        ("I/O error when handling file " ++ e filename ) println;        
+        System exit: 1;     
+    }
+    
+end
+

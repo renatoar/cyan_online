@@ -1,0 +1,136 @@
+package mult
+
+object MultiC extends MultiB
+
+    override
+    func sum: mult: -> Int = 2;
+
+
+    override
+    func sum: Int i mult: -> Int = i + 5;
+    override
+    func sum: String i mult: -> Int { 
+        cast valuei = i asInt {
+            return (self sum: valuei mult: ) + 5 
+        }
+        else {
+            return 8888
+        }
+        //^ (self sum: (i asInt) mult: ) + 5 
+    }
+    
+    override
+    func sum:  mult: Int n -> Int = n + 5;
+    override
+    func sum:  mult: String n -> Int = (super sum: mult: n) + 5;
+
+    override
+    func sum: Int i -> Int = i + 2;
+    override
+    func sum: Short i -> Int = i asInt + 1 + 2;
+    override
+    func sum: String s -> Int {
+        cast value = s asInt {
+            return value + 2
+        }
+        return 8888
+        // ^s asInt + 2;
+    }
+    override
+    func sum: Byte b -> Int = b asInt + 2;
+
+    override
+    func sum: Int i, Int j -> Int = i + j + 2;
+    override
+    func sum: Int i, String j -> Int {
+        cast valuej = j asInt {
+            return (super sum: i, valuej) + 1;
+        }
+        return 8888
+        // ^(super sum: i, j asInt) + 1;
+    }
+    override
+    func sum: String i, Int j -> Int {
+        cast valuei = i asInt {
+            return sum: valuei, j
+        }
+        return 8888
+        // ^(sum: i asInt, j);
+    }
+
+    override
+    func sum: Int i, Int j, Int k -> Int = i + j + k + 2;
+    override
+    func sum: Int i, String j, Int k -> Int {
+        cast valuej = j asInt {
+            return i + valuej + k + 2
+        }
+        return 8888
+        // ^i + j asInt + k + 2;
+    }
+    override
+    func sum: String i, Int j, String k -> Int = (super sum: i, j, k) + 1;
+
+    override
+    func sum: Int i mult: Int a -> Int = i*a + 2;
+    override
+    func sum: Byte i mult: Int a -> Int = i asInt *a + 2;
+    override
+    func sum: String i mult: MultiA a -> Int {
+        cast valuei = i asInt {
+            return valuei*(a asInt) + 2
+        }
+        return 8888
+        // ^i asInt * a asInt + 2;
+    }
+
+    override
+    func sum: Int i, Int j mult: Int a -> Int = (i + j)*a + 2;
+
+    override
+    func sum: Int i, Int j, Int k mult: Int a -> Int = (i + j + k)*a + 2;
+    
+    override
+    func sum: Int i mult: Int a, Int b -> Int = i*a*b + 2;
+    override
+    func sum: String i mult: String a, Byte b -> Int {
+        cast valuei = i asInt, valuea = a asInt {
+            return valuei*valuea*(b asInt) + 2
+        }
+        return 8888
+        // ^i asInt *a asInt * b asInt + 2;
+    }
+
+
+    override
+    func sum: Int i, Int j, Int k 
+        mult: Int a
+        mult: Int b, Int c
+           -> Int = (i + j + k)*a*b*c + 2;    
+    override
+    func sum: Int i, String j, MultiA k 
+        mult: String a
+        mult: Int b, String c
+           -> Int {
+           
+        cast valuej = j asInt, valuea = a asInt, valuec = c asInt {
+            return (i + valuej + (k asInt)) * valuea * b * valuec + 2;    
+        }
+        return 8888
+        // ^(i + j asInt + k asInt)*a asInt *b* c asInt + 2;    
+    }
+
+    override
+    func m: Int n -> Int = 20 + (super m: n);
+    override
+    func m: Long n -> Int = 50 + (super m: n asByte);
+    override
+    func m: Byte n -> Int = 2;
+
+    override
+    func testParamReturn: MultiB first, MultiC second -> MultiC = MultiC;
+
+   
+    override
+    func asInt -> Int = 2;
+end

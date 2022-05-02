@@ -1,0 +1,10 @@
+package main
+
+object ProtoT
+
+    func search: Program -> Double = 0.0;
+    func at: Int -> String = "";
+    func get: Int -> Double = 0.0;
+
+    func < ProtoT -> Boolean = false;
+end

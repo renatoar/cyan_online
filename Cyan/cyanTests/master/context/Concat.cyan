@@ -1,0 +1,11 @@
+package context
+
+object Concat(String &sum, String between) extends Function<String, Nil>
+
+     override
+     func eval: String x {
+          sum = sum ++ x ++ between
+     }
+     
+end
+

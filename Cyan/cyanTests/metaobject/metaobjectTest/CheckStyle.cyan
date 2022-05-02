@@ -1,0 +1,21 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'checkStyle' should be attached to a method, method signature,
+  field, or prototype. It checks the style of the identifiers according
+  to some very basic rules.
+*}
+@checkStyle
+object CheckStyle
+
+    func run {
+    }
+    
+    func with: String s count: Int n {
+        var Int k;
+        var String name;
+    }
+
+end
+

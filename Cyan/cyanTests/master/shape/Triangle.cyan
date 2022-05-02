@@ -1,0 +1,6 @@
+package shape
+
+object Triangle extends Shape
+    override
+    func draw { }
+end

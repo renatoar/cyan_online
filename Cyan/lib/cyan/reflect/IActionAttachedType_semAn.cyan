@@ -1,0 +1,32 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionAttachedType_semAn
+
+    func semAn_checkLeftTypeChangeRightExpr:
+            ICompiler_semAn compiler_semAn,
+            WrType leftType, 
+            Object leftASTNode, 
+            String leftKind,
+            WrType rightType, 
+            WrExpr rightExpr
+        -> String
+    
+    func semAn_checkRightTypeChangeRightExpr:
+            ICompiler_semAn compiler_semAn,
+            WrType leftType, 
+            Object leftASTNode, 
+            String leftKind,
+            WrType rightType, 
+            WrExpr rightExpr
+        -> String
+        
+    func checkAnnotation
+    
+    func doNotCheckIn -> Array<Tuple<String, String>> 
+    
+    func allowDoNotCheckInList -> Boolean
+end

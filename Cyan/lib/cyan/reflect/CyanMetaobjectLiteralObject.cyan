@@ -1,0 +1,51 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open 
+object CyanMetaobjectLiteralObject extends CyanMetaobject 
+          implements IAction_semAn
+
+    func init: meta.CyanMetaobjectLiteralObject hidden { 
+        @javacode{*
+            super( _hidden );
+        *}
+    } 
+    override
+    func getHidden -> meta.CyanMetaobjectLiteralObject { @javacode{* return (meta.CyanMetaobjectLiteralObject) super._getHidden(); *} } 
+
+
+    override
+    func getName  -> String {
+        return self getHidden getName
+    }
+
+    override
+    func getPackageOfType  -> String {
+        return self getHidden getPackageOfType
+    }
+
+    override
+    func semAn_codeToAdd: meta.ICompiler_semAn arg0 -> String {
+        let StringBuffer s = self getHidden semAn_codeToAdd: arg0;
+        @javacode{*
+        return new CyString(_s.toString());
+        *}
+
+    }
+
+    override
+    func getPrototypeOfType  -> String {
+        return self getHidden getPrototypeOfType
+    }
+
+    func getColorTokenList: meta.WrAnnotationLiteralObject arg0 -> java.util.List {
+        return self getHidden getColorTokenList: arg0
+    }
+
+    func getUsefulString  -> String {
+        return self getHidden getUsefulString
+    }
+end

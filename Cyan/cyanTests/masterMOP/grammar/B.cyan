@@ -1,0 +1,16 @@
+package grammar
+
+object B implements InterB
+
+    override
+    func get -> Int = 1;
+    override
+    func set: Int n = Nil;
+    override
+    func color -> Int = 2;
+    
+    override
+    func asString -> String = "B(0)";
+
+
+end

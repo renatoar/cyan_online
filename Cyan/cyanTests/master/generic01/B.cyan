@@ -1,0 +1,17 @@
+package generic01
+
+open
+object B extends A
+
+    func init {
+        b = 0
+    }
+    
+    func name -> String = _name;
+    func name: String newName { self._name = newName }
+    
+    var String _name = "";
+    
+    Int b
+    
+end

@@ -1,0 +1,15 @@
+package initNewTests
+
+open
+object InitTest8 extends InitTest7
+
+    func init {
+       n = 3
+    }
+
+    override    
+    func all -> String = (super all) ++ n;
+
+    Int n
+end
+

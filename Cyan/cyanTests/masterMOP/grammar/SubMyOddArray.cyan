@@ -1,0 +1,14 @@
+package grammar
+
+object SubMyOddArray extends MyOddArray
+    @grammarMethod{*
+        ( (addThis: Int)+ (addOther: Int)* )
+    *}
+    override
+    func addAll: Tuple<Array<Int>, Array<Int>> t {  
+        let Array<Int> array = getAll;
+        for elem in t f1 {
+            array add: elem + 1
+        }
+    }
+end

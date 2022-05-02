@@ -1,0 +1,15 @@
+package generic01
+
+open
+object A 
+
+    
+    func init {
+        a = 10
+    }
+    
+    func getA -> Int = a;
+    
+    Int a
+    
+end

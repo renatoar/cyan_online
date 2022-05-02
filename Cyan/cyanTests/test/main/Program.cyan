@@ -1,0 +1,10 @@
+package main
+object Program
+    public func run {
+        var p = Person clone;
+        var String name;
+        name = In readLine;
+        p setName: name;
+        Out println: (p getName);
+    }
+end

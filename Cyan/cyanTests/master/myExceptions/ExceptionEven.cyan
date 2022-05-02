@@ -1,0 +1,7 @@
+package myExceptions
+
+object ExceptionEven extends ExceptionNum
+    func init: Int _number {
+        super init: _number
+    }
+end

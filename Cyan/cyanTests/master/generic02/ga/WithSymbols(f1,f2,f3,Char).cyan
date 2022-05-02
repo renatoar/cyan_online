@@ -1,0 +1,9 @@
+package generic02.ga
+
+object WithSymbols<f1, f2, f3, Char>
+    func getF1 -> Int = 0;
+    func getF2 -> Int = 1;
+    func getF3 -> Int = 2;
+    func getChar -> Char = 'w';
+    
+end

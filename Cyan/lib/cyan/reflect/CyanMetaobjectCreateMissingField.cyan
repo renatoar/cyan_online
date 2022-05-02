@@ -1,0 +1,107 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+/* This metaobject takes pairs of parameters, each one consisting
+   of an identifier and a value. The metaobject creates read-only
+   virtual fields for each pair. The field name is the identifier. 
+   Example:
+   
+   @createMissingField("zero", 0, "one", 1, "pi", 3.14, country, Brasil)
+   object Test
+       func run {
+           var zz = self.zero;
+           assert zz == 0;
+           var oonee = self.one;
+           assert oonee == 1;
+       }
+   end
+
+   
+*/
+
+open 
+object CyanMetaobjectCreateMissingField extends CyanMetaobjectAtAnnot
+         implements IActionFieldMissing_semAn
+
+
+    func init {
+        super init: "createMissingField", "ZeroOrMoreParameters",
+             [ "prototype" ];
+    } 
+    
+
+    override
+    func semAn_replaceGetMissingField:
+            WrExprSelfPeriodIdent fieldToGet, 
+            WrEnv env
+        -> Tuple<String, String, String> {
+        
+        let String fieldName = fieldToGet asString substring: 5;
+        var annot = self getAnnotation;
+        let Int size = annot getJavaParameterList size;
+        if size odd { 
+            addError: "This annotation should be used with a even number of parameters";
+            return [. "", "", "" .]
+        }
+        var i = 0;
+        while i < size {
+            let java.lang.String javaParam = ((annot getJavaParameterList) get: i) toString;
+            var String strparam = 
+                CyanMetaobject removeQuotes: javaParam;
+                
+            if strparam == fieldName {
+                var value = (annot getRealParameterList) get: i + 1;
+                var java.lang.String js = value asString;
+                var String s = js;
+                js = value getJavaType;
+                var String javaType = js;
+                var Nil|String cyanTypeNil = [
+                    "String" -> "String",
+                    "boolean" -> "Boolean",
+                    "Boolean" -> "Boolean",
+                    "Character" -> "Char",
+                    "char" -> "Char",
+                    "Byte" -> "Byte",
+                    "byte" -> "Byte",
+                    "Integer" -> "Int",
+                    "int" -> "Int",
+                    "Short" -> "Short",
+                    "short" -> "Short",
+                    "Long" -> "Long",
+                    "long" -> "Long",
+                    "Double" -> "Double",
+                    "double" -> "Double",
+                    "Float" -> "Float",
+                    "float" -> "Float"
+                     ] get: javaType;
+                type cyanTypeNil
+                    case String typeName {
+                        if typeName == "String" { 
+                            s = "\"" ++ (CyanMetaobject removeQuotes: s) ++ "\""; 
+                        }
+                        return [. "cyan.lang", typeName, s .]
+                    }
+                    case Nil nil {
+                        addError: "Unknown type: " ++ javaType;
+                        return [. "", "", "" .]
+                    }
+                    
+            }
+            i = i + 2
+        }
+        return [. "", "", "" .]
+    }
+
+    override
+    func semAn_replaceSetMissingField:
+            WrExprSelfPeriodIdent fieldToSet, 
+            WrExpr rightHandSideAssignment, 
+            WrEnv env
+        -> String {
+        
+        return ""
+    }
+
+end

@@ -1,0 +1,14 @@
+package initNewTests
+
+open
+object CInitParamSub extends CInitParam
+
+    func init: Int n {
+        super init: n
+    }
+    
+    func init: Int n, String s {
+        super init: n, s
+    }
+    
+end

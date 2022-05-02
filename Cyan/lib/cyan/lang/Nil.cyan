@@ -1,0 +1,60 @@
+package cyan.lang
+
+object Nil
+
+    func prototypeName -> String = "Nil";
+    
+    func asString -> String = "Nil";
+    
+    func asString: (Int ident) -> String {
+        var String s = "";
+        1..ident foreach: { (: Int ch :)
+            s = s ++ " "
+        };
+        return s ++ "Nil"
+    }
+
+    func print { Out print: "Nil" }
+
+    func println { print; Out println: "\n" }
+    
+    
+    func == (Dyn other)  -> Boolean { 
+        @javacode{*
+            return new CyBoolean(_other == this) ; 
+        *}
+    }
+
+    func === (Dyn other)  -> Boolean { 
+        @javacode{*
+            return new CyBoolean(_other == this) ; 
+        *}
+    }
+    
+    func != (Dyn other)  -> Boolean { 
+        @javacode{*
+            return new CyBoolean(_other != this) ; 
+        *}
+    }
+    
+    func !== (Dyn other)  -> Boolean { 
+        @javacode{*
+            return new CyBoolean(_other != this) ; 
+        *}
+    }
+    
+    func ++ (Dyn other) -> String { 
+        @javacode{*
+        if ( _other instanceof _Any ) {
+            return new CyString(this._asString().s + ((_Any ) _other)._asString().s); 
+        }
+        else if ( _other instanceof _Nil ) {
+            return new CyString(this._asString().s + ((_Nil ) _other)._asString().s); 
+        }
+        *} 
+        0 throw: ExceptionMethodNotFound("Method 'asString' was not found in argument of method ++");
+    }
+    
+    
+end
+

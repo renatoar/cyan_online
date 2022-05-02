@@ -1,0 +1,10 @@
+How to produce the jar files for the basic libraries:
+
+- in Eclipse, export both sacilib.jar and saci.jar
+- in lauch4j, create saci.exe
+- run create-cyan.lang.jar.bat
+- run create-cyan.io.jar.bat
+- run create-cyan.math.jar.bat
+- run create-cyan.reflect.jar.bat
+- run create-cyan.util.bat
+

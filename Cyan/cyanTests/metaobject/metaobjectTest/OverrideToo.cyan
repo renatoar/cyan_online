@@ -1,0 +1,24 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'overrideToo' should be attached to a method. It
+  demands that, if the method is overridden in a subprototype,
+  all methods that are parameters to the annotation should
+  be overridden too.
+*}
+open
+object OverrideToo
+    
+    func run {
+    }
+    
+    @overrideToo("add:1")
+    func withdraw: Int amount { total = total - amount }
+    
+    func add: Int amount { total = total + amount }
+    
+    @property var Int total = 0;
+    
+end
+

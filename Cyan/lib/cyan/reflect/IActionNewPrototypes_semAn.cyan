@@ -1,0 +1,12 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionNewPrototypes_semAn
+
+    func semAn_NewPrototypeList: ICompiler_semAn compiler_semAn
+        -> Array<Tuple<String, String>> 
+
+end

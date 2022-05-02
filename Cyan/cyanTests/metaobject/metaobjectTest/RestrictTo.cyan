@@ -1,0 +1,26 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'type' should be attached to a type. It checks whether
+  the value of the type obeys the expression that is attached to 
+  the annotation
+*}
+object RestrictTo
+
+    func run {
+        var Int@restrictTo{* self >= 0 *} age;
+        age = 0;
+        age = 10;
+        var ok = false;
+        { 
+            age = -1;
+        } catch: { (: CyException e :) 
+             ok = true
+        };
+        assert ok;
+    
+    }
+
+end
+

@@ -1,0 +1,12 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionPrototypeLater_parsing
+
+    func parsing_actionPrototypeLater: 
+            ICompilerPrototypeLater_parsing compiler 
+
+end

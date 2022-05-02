@@ -1,0 +1,9 @@
+package inter
+
+open
+object ProtoBExtendsA extends ProtoAInterI
+    override
+    func sum: Int a 
+        mult: Int b 
+            -> Int = a*b + 1;
+end

@@ -1,0 +1,27 @@
+package cyan.lang
+
+@doc{*
+    JavaCast can be used to cast a Java value to the Java class T
+*}
+open
+object JavaCast<T>
+
+    func asReceiver: java.lang.Object value -> T {
+        @javaCodeReplaceCyan{*
+            if ( _value instanceof T ) {
+                return (T ) _value;
+            }
+        *}
+        var String valueClassName = value getClass getName;
+        /*@javacode{*
+            _valueClassName = new CyString(_value.getClass().getName());
+        *}
+        */
+        throw: ExceptionCast("Cannot cast value of Java type " ++
+            valueClassName ++
+           "to " ++ #T  )
+    }
+    
+
+end
+

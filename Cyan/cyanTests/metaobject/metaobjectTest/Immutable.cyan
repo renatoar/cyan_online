@@ -1,0 +1,32 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'immutable' should be attached to a prototype. It checks
+  whether the prototype is immutable (no field can change its value
+  after the object creation). Then an immutable prototype should
+  only be inherit by immutable prototypes and all of its fields
+  should be declared with 'let' and their types should be 
+  immutable. All basic types (Int, String, ...), Any, and Nil
+  are immutable.
+*}
+@immutable
+object Immutable
+
+    func run {
+    }
+
+    let String name = "Immutable";
+    // error if uncommented, 'var' is not allowed
+    // var Int Max = 100;
+
+    // error if uncommented, 'Array<Int>' is not immutable
+    // let Array<Int> array;
+    
+    // ok
+    let ImArray<Int> iarray = ImArray<Int>( [ 0, 1, 2 ] );
+    
+    let Nil nil = Nil;
+
+end
+

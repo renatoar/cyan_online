@@ -1,0 +1,22 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'eval' is an expression that returns the value
+  returned by the attached DLS that is in interpreted Cyan
+*}
+object Eval
+
+    func run {
+        var Int sum = @eval("cyan.lang", "Int"){*
+            var Int count = 0;
+            for n in 1..10 {
+                count = count + n
+            }
+            return count;
+        *};
+        assert sum == 55;
+    }
+
+end
+

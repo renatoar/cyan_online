@@ -1,0 +1,11 @@
+package cyan.reflect
+
+import meta
+
+interface IListAfter_afterResTypes
+
+    func after_afterResTypes_action: ICompiler_afterResTypes compiler
+    
+    func  getCompilationUnit -> WrCompilationUnit
+
+end

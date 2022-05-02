@@ -1,0 +1,8 @@
+package myExceptions
+
+object ExceptionTest0String(String _value) extends CyException 
+
+    func value -> String = _value;
+    
+end
+

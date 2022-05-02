@@ -1,0 +1,25 @@
+package generic02.gb
+
+object SubG1<T>  extends G1<T> implements I1<T>
+
+    func init {
+        super init;
+    }
+    
+    func init: G2<T> _value {
+        super init: _value
+    }
+    
+    func nameGP -> String {
+        return T prototypeName
+    }
+    
+    func noop: I2<T> -> Array<T> {
+        let Array<T> a = Array<T> new;
+        a add: (T defaultValue);
+        return a
+    }
+    
+    func succ: T n -> Int = n succ;
+    
+end

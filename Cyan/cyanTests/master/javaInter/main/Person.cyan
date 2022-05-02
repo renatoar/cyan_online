@@ -1,0 +1,21 @@
+package javaInter.main
+
+open
+object Person 
+
+    @overrideTest{* 
+        func test {
+            (%SUBPROTOTYPE%) myprint: "a";
+            (%SUBPROTOTYPE%) myprint: "b";
+        }
+    *}
+    func myprint: String s {
+    }
+    
+    protected 
+    func myprot: Int n { }
+    
+    protected 
+    func myprot -> Int = 0;
+
+end

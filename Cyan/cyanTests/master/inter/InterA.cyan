@@ -1,0 +1,8 @@
+package inter
+
+interface InterA
+
+    func get -> Int
+    func set: Int
+
+end

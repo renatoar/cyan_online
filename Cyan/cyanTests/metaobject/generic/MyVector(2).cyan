@@ -1,0 +1,16 @@
+package generic
+
+
+object MyVector<T, V>
+
+    func init {
+        array = Array<T> new: @extract(V)
+    }
+    
+    var Array<T> array
+    
+    // nothing useful
+    func getArray -> Array<T> = array;
+    
+end
+

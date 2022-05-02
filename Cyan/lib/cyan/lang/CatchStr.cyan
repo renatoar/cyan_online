@@ -1,0 +1,7 @@
+package cyan.lang
+
+object CatchStr
+    func eval: (ExceptionStr e) { 
+        e message println
+    }
+end

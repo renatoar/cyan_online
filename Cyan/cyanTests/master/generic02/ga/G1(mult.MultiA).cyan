@@ -1,0 +1,9 @@
+package generic02.ga
+
+object G1<mult.MultiA>
+    func name -> String = "mult.MultiA";
+    func value -> String = "MultiA";
+    
+    func getMult -> Int = 5;
+    
+end

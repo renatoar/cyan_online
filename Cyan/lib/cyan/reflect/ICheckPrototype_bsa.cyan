@@ -1,0 +1,11 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface ICheckPrototype_bsa
+
+    func bsa_checkPrototype: ICompiler_semAn compiler
+    
+end

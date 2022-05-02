@@ -1,0 +1,31 @@
+package generic02.ga
+
+/*
+   test the rules 
+       ExprPrimary ::= QualifId { "<" TypeList ">" }+ [ ObjectCreation ] |
+                       "typeof" "(" QualifId [ "<" TypeList ">" ] ")"
+       SingleType ::= QualifId { "<" TypeList ">" } | BasicType |
+                      "typeof" "(" QualifId [ "<" TypeList ">" ] ")"
+*/
+
+object IdGenericPrototype<M>
+    @firstBelongsTo(M, "generic02.ga.Empty")
+    /*  this code is only valid because there is an Empty.cyan file and
+        a Empty(1).cyan file. If there is no Empty.cyan file, a declaration
+           var IdGenericPrototype<Empty> x;
+        would be illegal since there is no Empty prototype.
+    */
+
+    fun test {
+        const mProto = "generic02.ga." + M<Int> prototypeName;
+        const stringM = ( @paramToString(M) );
+        assert mProto == "" + stringM + "<Int>";
+        var M<Int> x = M<Int> new;
+        var M<Int> y = M<Int>();
+        const mInt = M<Int> prototypeName;
+        assert x prototypeName == mInt;
+        var typeof( M<Int> ) v = typeof(x) new;
+        assert v prototypeName == "" + mInt;
+    }
+end
+

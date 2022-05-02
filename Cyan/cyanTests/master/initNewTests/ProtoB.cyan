@@ -1,0 +1,7 @@
+package initNewTests
+
+open
+object ProtoB extends ProtoA
+
+end
+

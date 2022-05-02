@@ -1,0 +1,7 @@
+package main
+
+object Help
+
+    func show -> Int = 0;
+    
+end

@@ -1,0 +1,64 @@
+package conceptPackage
+
+import other
+
+@concept(test){*
+
+    C is typeof( Int + Int ),
+    typeof( A ma1: 0 ma2: "" ) is Boolean,
+    A implements E,
+    A subprototype SuperA,
+    conceptA(A),
+    conceptB(B),
+    E interface,
+    D interface,
+    A implements I1,
+    A implements I2,
+    A noninterface,
+    B subprototype A,
+    B implements I1,
+    B implements I3, 
+    B implements D,
+    B noninterface,
+    A superprototype B,
+    A has [
+        func ma1: Int ma2: String -> Boolean
+        func runA
+        func runA: Array<String>
+        func repAB
+        func repAB: String ->             Char // typeof(A repAB: "" repAB2: 0) 
+        func repAB: String repAB2: Int -> Char // typeof(A repAB: String)  
+        //func with: Char with: Int -> typeof(A repAB: String)  
+    ],
+    B has [
+        func mb1: Int mb2: String -> Boolean
+        func runB
+        func runB: Array<String>
+        func repAB
+        func repAB: String -> Char
+        func repAB: String repAB2: Int -> Char
+    ],
+    C in [ Int, Long, String ],
+    
+    cyan.lang.comparison(C),
+    
+    axiom otherPlusTest: A a, A b {%
+        if a + b != b + a {
+            ^"A is not commutative --- "
+        }
+        ^Nil
+    %}
+
+    
+*}
+object GTest<A, B, C, D, E>
+    func run {
+         let A a = A new;
+         a runA;
+         Out println: (a repAB: "aaa");
+         let G<String, Int> g = G<String, Int>();
+    }
+    func test -> Char = 'a';
+
+    //func withNewType: R -> R { return R }
+end

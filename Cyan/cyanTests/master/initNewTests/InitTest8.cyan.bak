@@ -1,0 +1,14 @@
+package initNewTests
+
+object InitTest8 extends InitTest7
+
+    fun init {
+       n = 3
+    }
+
+    override    
+    fun all -> String = (super all) + n;
+
+    const Int n
+end
+

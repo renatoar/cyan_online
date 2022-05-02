@@ -1,0 +1,8 @@
+package myExceptions
+
+object ExceptionBig extends ExceptionNum
+    func init: Int _number {
+        super init: _number
+    }
+    
+end

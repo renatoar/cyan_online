@@ -1,0 +1,1261 @@
+package main
+
+import context
+import inter
+import people
+import shape
+import initNewTests
+import abstractPackage
+import generic02.ga
+import generic02.protoA
+import myExceptions
+import abstractPackage
+import bank
+import mult
+import funct
+
+
+
+object TestCyan
+
+    let Float bbb = 99.8F;
+    let Float aaa = 10.66F;
+
+
+    let Int publicConst = 0;
+    private let Int privateConst = 1;
+    let Int protectedConst = 2;
+    
+    let Int zeroConst = 0;
+    private let Int oneConst = 1;
+    let Int twoConst = 2;
+    
+    var String name = "just a name";
+    shared var Int sharedInt
+    shared var Int n = 0;
+    shared let Int sharedConstInt = -1;
+    private shared let Int sharedConstIntPrivate = -2;
+
+    private func initOnce {
+        sharedInt = 0
+    }
+    
+    func init { 
+    }
+
+    func initConst: Int n -> Int = n;
+
+
+    func run {
+        
+        @callTestMethods ;
+        
+    }
+    
+    
+    func prototypeTest {
+        assert Any() prototype == Any() prototype;
+        assert 0 prototype == 1 prototype;
+        let n = 0;
+        assert n prototype == 1 prototype;
+        assert 0B prototype == 1B prototype;
+        assert 0L prototype == 1L prototype;
+        assert 0.0F prototype == 1.0F prototype;
+        assert 0.0 prototype == 1.0 prototype;
+        var ch = 'b';
+        assert 'a' prototype == ch prototype;
+        assert true prototype == false prototype;
+        assert "" prototype == String new prototype;
+        assert TestCyan() prototype == TestCyan() prototype;
+    }
+
+    func andOrTest {
+        assert true || false;
+        assert false || true;
+        assert true || true;
+        assert !(false || false);
+
+        assert !(true && false);
+        assert !(false && true);
+        assert true && true;
+        assert !(false && false);
+        assert !( (true || false) && false );
+        assert ( (true || false) && (true || true) );
+        assert !( (false || false) && (false || true) );
+
+    }
+        
+    func intervalTest {
+        assert 0..10 == 0..< 11;
+        assert 'b'..'z' == 'a' succ .. 'z';
+    }
+    
+    func scopeTest {
+    
+        var Int color;
+        var String s;
+        
+        s = "abc";
+        
+        if s size > 0 {
+            let ss2 = 2;
+            color = 0;
+            if s size > 0 {
+                var ss3 = 2;
+                color = -1;
+                assert ss2 == 2 && ss3 == 2;
+            }
+        }
+        var ss3 = 0;
+        assert ss3 == 0;
+        
+        
+        let f00 = { (: Int ii, String ssk :) var Int n00 = 0; };
+        let f01 = { (: Int ii, String ssk :) var Int n00 = 0; };
+        
+        let fff = {
+            let f000 = { (: Int ii, String ssk :) var Int n00 = 0; };
+            let f010 = { (: Int ii, String ssk :) var Int n00 = 0; };
+            var ii = "";
+            var Int ssk = 0;
+            assert ii == "";
+            assert ssk == 0;
+        };
+        
+        fff eval;
+        s = "";
+        while s size < 3 {
+            s = s ++ "a";
+            var ssi = s;
+        }
+        assert s == "aaa";
+        var ssi = 0;
+         
+    }
+    
+
+    func identifierTest {
+        var _one;
+        var _two = 2;
+        var Int ___three;
+        var Int ___four_ = 4;
+        ___three = 3;
+        _one = 1;
+        assert _one == 1;
+        assert _two == 2;
+        assert ___three == 3;
+        assert ___four_ == 4;
+        assert (_one prototypeName) == "Int";
+        assert (_two prototypeName) == "Int";
+        assert (___three prototypeName) == "Int";
+        assert (___four_ prototypeName) == "Int";
+    }
+    
+    func commentTest {
+    
+        var Int n = 0;
+        /* n = 1 */
+        n = n*0;
+        // n = 2;
+        n = n + /* 10 + */ 1 - 1;
+        /*
+            n = 3;
+           /*
+              n = 4;
+              /*
+                 n = 5;
+              */
+           */
+        */
+        assert n == 0;
+    }
+    
+    func basicTypesTest {
+        
+        
+        assert Byte defaultValue == 0Byte &&
+               Short defaultValue == 0Short &&
+               Int defaultValue == 0 &&
+               Long defaultValue == 0Long &&
+               Float defaultValue == 0Float &&
+               Double defaultValue == 0Double &&
+               Char defaultValue == '\0' &&
+               Boolean defaultValue == false &&
+               String defaultValue == "";
+    }    
+
+
+    func booleanTest {
+        var Boolean ok = false;
+        
+        if ! ok { 
+
+        }
+        else {
+            assert false;
+            0 println;
+            
+        }
+        
+        var Dyn tr = true;
+        assert tr != 'a' && tr != 0 && tr != 0B &&
+               tr != 0S && tr != 0L && tr != 0.0 &&
+               tr != 0.0F && tr != "true" &&
+               tr != TestCyan && tr != false;
+        
+        var Dyn fa = false;
+        assert fa != 'a' && fa != 0 && fa != 0B &&
+               fa != 0S && fa != 0L && fa != 0.0 &&
+               fa != 0.0F && fa != "false" &&
+               fa != TestCyan && fa != true;
+
+        var n = 0;
+        var String s = "1";
+        ( n%2 == 0 ) ifTrue:   { s = "0" };
+        assert s == "0";
+        
+        ( n%2 != 0 ) ifFalse:  { s = "0" };
+        assert s == "0";
+
+        n = 4;        
+        ( n%2 == 0 ) ifTrue:   { s = "0" } ifFalse: { s = "1" } ;
+        assert s == "0";
+        ( n%2 != 0 ) ifFalse:  { s = "1" } ifTrue:  { s = "0" } ;
+        assert s == "1";
+        
+        assert ((1 == 0) t: 0 f: 1) == 1 &&
+               ((0 == 0) t: 0 f: 1) == 0 &&
+               ((1 == 0) f: 0 t: 1) == 0 &&
+               ((0 == 0) f: 0 t: 1) == 1;
+        assert ! Boolean;
+        assert ! Boolean();
+
+    }
+
+
+    func charTest {
+    
+        let Dyn ap = 'a';
+        assert ap != 0 && ap != 0B && ap != 0S &&
+               ap != 0L && ap != 0 && ap != "a" &&
+               ap != TestCyan && ap != false &&
+               ap != true;
+    
+        var Char ch0, ch1, ch2;
+        ch0 = 'A';
+        ch1 = 'A';
+        ch2 = 'b';
+        assert ch0 eq: ch1 && ch0 neq: ch2 &&
+            ch0 eq: 'A' && ch2 neq: 'A' && 'A' neq: 'B';
+        ch2 = 'B';
+        assert ch0 < ch2 && ch0 <= ch1 && ch2 >= ch0 &&
+           ch2 > ch0 && ch0 == ch1 && ch0 == 'A' && 
+           'A' == 'A' && 'A' == ch1 && 'A' === ch0 &&
+           ch1 === ch1 && ch0 != ch2 && 'B' != ch0 &&
+           ch2 != 'A' && ((ch0 <=> ch2) == -1) &&
+           ((ch0 <=> 'A') == 0) &&
+           (('C' <=> ch2) == 1);
+           
+           
+        var String s = "";
+        'a'..'e' foreach: { (: Char b :) s = s ++ b };
+        assert s == "abcde";
+        s = "";
+        'A'..< 'E' foreach: { (: Char b :) s = s ++ b };
+        assert s == "ABCD";
+        
+        s = "";
+        var Int i = 0;
+        'a'..'c' times: {
+            s = s ++ i;
+            ++i;
+        };
+        assert s == "012";
+
+        s = "";
+        'a' to: 'c' do: { (: Char ch :)
+            s = s ++ ch
+        };
+        assert s == "abc";
+
+        var Char b0, b1, b2;
+        b0 = '0';       
+        assert b0 asInt == 48;
+        assert b0 asShort == 48Short;
+        assert b0 asLong == 48Long;
+        assert b0 asBoolean == true;
+        assert b0 asString == "0";
+        
+        var Int j;
+        s = "";
+        j = 0;
+        'A'..'E' times: { 
+            s = s ++ j;
+            ++j;
+        };
+        assert s == "01234";
+        s = "";
+        '0' to: '5' do: { (: Char item :)
+            s = s ++ item;
+        };
+        assert s == "012345";
+        let charArray = [ 'a', 'b', 'c', 'd', 'e', 'f' ];
+        assert 'c' in: charArray;
+        assert !('g' in: charArray);
+        assert 'd' between: 'a'..'z';
+        assert !('m' between: 'a'..'g');
+
+
+        let r = 'a' |> { (: Char other -> Char :) ^ other succ } |>
+              { (: Char other -> Char :) ^ other succ };
+        assert r == 'c' && r eq: 'c';
+
+        let f = { (: Char other -> Char :) ^ other pred };
+        let r2 = 'f' |> { (: Char other -> Char :) ^ other pred pred } |>
+              f |> f;
+        // a b c d e f
+        assert r2 == 'b' && r2 eq: 'b' && r2 === 'b' && (r2 neq: 'a') && ! (r2 eq: 'a');
+        
+        b0 = 'a';
+        assert 'b' eq: charArray[1] && 
+               ! ('a' neq: charArray[0]) &&
+               b0 neq: 'b' &&
+               b0 eq: 'a';
+
+               
+        assert b0 succ == 'b' &&
+               b0 succ pred == 'a';
+           
+        assert ('c' - 'a') == 2 && ('d' - b0) == 3;
+        
+        assert Char == '\0' && Char == 'a' defaultValue && Char() == '\0';
+           
+    }
+    
+    func byteTest {
+
+        let Dyn zb = 0B;
+        assert zb != 1 && zb != 1S && zb != 0.0001 && zb != 0.0001F &&
+               zb != 1L && zb != 'a' && zb != "0" &&
+               zb != true && zb != false && zb != TestCyan;
+
+
+        var Byte b000, b111, b222;
+        
+        b000 = 0B;
+        ++b000;
+        assert b000 == 1B;
+    
+        var Byte b0, b1, b2;
+        
+        b0 = 0Byte;
+        b1 = 1B;
+        b2 = b0 + b1;
+        assert b2 == 1B && b1 == 1 asByte;
+        ++b2;
+        assert b2 == 2B;
+        b0 = 5B;
+        b1 = b0 - b1;
+        assert b1 == 4Byte;
+        b0 = 3B; 
+        b1 = 4Byte;
+        b2 = b0*b1;
+        assert b2 == 12Byte;
+        assert b2/3B == 4B;
+        assert 12Byte % 5Byte == 2B;
+        if b0 >= b1 { "3B >= 4Byte" println; };
+        if b1 < b0 { "4Byte < 3B" println; };
+        if b0 > b1 { "3B > 4Byte" println; };
+        if !(b0 <= b1) { "!(3B <= 4Byte)" println; };
+        if b1 <= b0 { "4Byte <= 3B" println; };
+        if !(b0 < b1) { "!(3B < 4Byte)" println; };
+        if b1 < b0 { "3B >= 4Byte" println; };
+        if !(b0 < b1) { "!(3B < 4Byte)" println; };
+        b0 = 1Byte;
+        b1 = 2B;
+        if b0 == 0B { "1 == 0Byte" println; };
+        if b1 == b0 { "1 == 2B" println; };
+        if b0 === 0B { "1 === 0Byte" println; };
+        if b1 === b0 { "1 === 2B" println; };
+        
+        if b0 != 1B { "1 != 1Byte" println; };
+        if b1 != (b0+1B) { "2 != 2B" println; };
+        
+        if (b0 <=> b1) != -1 { "1B < 2B is false" println; }
+        if (b0 <=> 3B) != -1 { "1B < 3B is false" println; }
+        if (b0 <=> 1B) != 0  { "1 == 1B is false" println; };
+        if (5B <=> b0) != 1  { "5B > 1B is false" println; }
+        var String s = "";
+        1B..5B foreach: { (: Byte b :) s = s ++ b };
+        assert s == "12345";
+        s = "";
+        1B..<5B foreach: { (: Byte b :) s = s ++ b };
+        assert s == "1234";
+        if -b0 != -1B { "-1B != -1B" println; };
+        if b0 != +b0  { "1B != +1B" println; };
+        b0 = 1B;
+        b1 = 2B;
+        if  b0 & b1 != 0B  { "1&2 != 0B" println; }
+        if  b0 ||| b1 != 3B  { "1|||2 != 3B" println; }
+        b0 = 0B;
+        assert (b0 asInt) == 0;
+        assert (b0 asShort) == 0Short;
+        assert (b0 asLong) == 0Long;
+        assert (b0 asFloat) == 0F;
+        assert (b0 asDouble) == 0Double;
+        assert (b0 asChar) == '\0';
+        assert (b0 asBoolean) == false;
+        assert (b0 asString) == "0";
+        
+        var Int j;
+        s = "";
+        j = 0;
+        0B..5B times: { 
+            s = s ++ j;
+            ++j;
+        };
+        assert s == "012345";
+        s = "";
+        0B to: 5B do: { (: Byte item :)
+            s = s ++ item;
+        };
+        assert s == "012345";
+        
+        
+        s = "";
+        j = 0;
+        10B times: { 
+            s = s ++ j;            
+            ++j;
+        };
+        assert s == "0123456789";
+
+        s = "";
+        10Byte repeat: { (: Byte kk :)
+            s = s ++ kk;            
+        };
+        assert s == "0123456789";
+
+        
+        
+        
+        var injectByte = SumInject<Byte>();
+        0B to: 3B into: injectByte;
+        assert injectByte result == 6B;
+        assert (0B to: 5B 
+           inject: 0B
+           into: { (: Byte total, Byte item -> Byte :)
+               ^total + item
+           }) == 15B;
+        let byteArray = [ 0B, 1B, 2B, 3B, 4B, 5B ];
+        assert 0B in: byteArray;
+        assert !(11B in: byteArray);
+        assert 0B between: -3B..3B;
+        assert !(5B between: -3B..3B);
+
+        let r = 1B |> { (: Byte other -> Byte :) ^ 2B*other } |>
+              { (: Byte other -> Byte :) ^ other + 5B };
+        assert r == 7B && r eq: 7B;
+
+        let f = { (: Byte other -> Byte :) ^ other*other };
+        let r2 = 1B |> { (: Byte other -> Byte :) ^ 2B*other } |>
+              f |> f;
+        assert r2 == 16B && r2 eq: 16B;
+        
+        b0 = 0B;
+        assert 1B eq: byteArray[1] && 
+               ! (0B neq: byteArray[0]) &&
+               b0 neq: 1B &&
+               b0 eq: 0B;
+
+               
+        assert (b0 succ) == 1B &&
+               (b0 pred) == -1B;
+
+        
+        assert Byte == 0B && Byte() == 0Byte && Byte defaultValue == 0B;
+    }
+    
+    func intTest {
+    
+        let Dyn zi = 0; 
+        assert zi != 1S && zi != 0.0001 && zi != 0.0001F &&
+               zi != 1L && zi != 'a' && zi != "0" &&
+               zi != true && zi != false && zi != TestCyan;
+
+    
+        var Int b000, b111, b222;
+
+        b000 = 0;
+        ++b000;
+        assert b000 == 1;
+
+        var Int b0, b1, b2;
+
+        b0 = 0Int;
+        b1 = 1;
+        b2 = b0 + b1;
+        assert b2 == 1 && b1 == 1Byte asInt;
+        ++b2;
+        assert b2 == 2;
+        b0 = 5;
+        b1 = b0 - b1;
+        assert b1 == 4Int;
+        b0 = 3I; 
+        b1 = 4Int;
+        b2 = b0*b1;
+        assert b2 == 12Int;
+        assert b2/3 == 4;
+        assert 12Int % 5Int == 2;
+        if b0 >= b1 { "3 >= 4Int" println; };
+        if b1 < b0 { "4Int < 3" println; };
+        if b0 > b1 { "3 > 4Int" println; };
+        if !(b0 <= b1) { "!(3 <= 4Int)" println; };
+        if b1 <= b0 { "4Int <= 3B" println; };
+        if !(b0 < b1) { "!(3 < 4Int)" println; };
+        if b1 < b0 { "3 >= 4Int" println; };
+        if !(b0 < b1) { "!(3 < 4Int)" println; };
+        b0 = 1;
+        b1 = 2;
+        if b0 == 0 { "1 == 0" println; };
+        if b1 == b0 { "1 == 2" println; };
+        if b0 === 0 { "1 === 0" println; };
+        if b1 === b0 { "1 === 2" println; };
+
+        if b0 != 1 { "1 != 1" println; };
+        if b1 != (b0+1) { "2 != 2" println; };
+
+        if (b0 <=> b1) != -1 { "1 < 2 is false" println; }
+        if (b0 <=> 3) != -1 { "1 < 3 is false" println; }
+        if (b0 <=> 1) != 0  { "1 == 1 is false" println; };
+        if (5 <=> b0) != 1  { "5 > 1 is false" println; }
+        var String s = "";
+        1..5 foreach: { (: Int b :) s = s ++ b };
+        assert s == "12345";
+        s = "";
+        1..<5 foreach: { (: Int b :) s = s ++ b };
+        assert s == "1234";
+        if -b0 != -1 { "-1 != -1" println; };
+        if b0 != +b0  { "1 != +1" println; };
+        b0 = 1;
+        b1 = 2;
+        if  b0 & b1 != 0  { "1&2 != 0Int" println; }
+        if  b0 ||| b1 != 3  { "1|||2 != 3Int" println; }
+        b0 = 0;
+        assert (b0 asByte) == 0Byte;
+        assert (b0 asShort) == 0Short;
+        assert (b0 asLong) == 0Long;
+        assert (b0 asFloat) == 0F;
+        assert (b0 asDouble) == 0Double;
+        assert (b0 asChar) == '\0';
+        assert (b0 asBoolean) == false;
+        assert (b0 asString) == "0";
+
+        var Int j;
+        s = "";
+        j = 0;
+        0..5 times: {
+            s = s ++ j;
+            ++j;
+        };
+        assert s == "012345";
+        s = "";
+        0 to: 5 do: { (: Int item :)
+            s = s ++ item;
+        };
+        assert s == "012345";
+
+        
+        s = "";
+        j = 0;
+        10 times: { 
+            s = s ++ j;            
+            ++j;
+        };
+        assert s == "0123456789";
+
+        s = "";
+        10 repeat: { (: Int kk :)
+            s = s ++ kk;            
+        };
+        assert s == "0123456789";
+
+        
+        
+        var injectInt = SumInject<Int>();
+        0 to: 3 into: injectInt;
+        assert (injectInt result == 6);
+        assert (0 to: 5
+           inject: 0
+           into: { (: Int total, Int item -> Int :)
+               ^total + item
+           }) == 15;
+        let intArray = [ 0, 1, 2, 3, 4, 5 ];
+        assert 0 in: intArray;
+        assert !(11 in: intArray);
+        assert 0 between: -3..3;
+        assert !(5 between: -3..3);
+
+        let r = 1 |> { (: Int other -> Int :) ^ 2*other } |> 
+              { (: Int other -> Int :) ^ other + 5 };
+        assert r == 7 && r eq: 7;
+
+        let f = { (: Int other -> Int :) ^ other*other };
+        let r2 = 1 |> { (: Int other -> Int :) ^ 2*other } |> 
+              f |> f;
+        assert r2 == 16 && r2 eq: 16;
+
+        b0 = 0;
+        assert 1 eq: intArray[1] && 
+               ! (0 neq: intArray[0]) &&
+               b0 neq: 1 &&
+               b0 eq: 0;
+               
+        assert (b0 succ) == 1 &&
+               (b0 pred) == -1;
+
+
+        assert Int == 0 && Int() == 0 && Int defaultValue == 0;
+
+        assert self addInt: 1, 4 < 7 && addInt: 0, 1 == 1 &&
+            self addInt: 3, 4 >= 5 && addInt: 1, 2 > 0;
+    }
+    
+    func addInt: Int first, Int second -> Int = first + second;
+    
+    func shortTest {
+    
+        let Dyn zs = 0S;
+        assert zs != 1 && zs != 0.0001 && zs != 0.0001F &&
+               zs != 1L && zs != 'a' && zs != "0" &&
+               zs != true && zs != false && zs != TestCyan;
+    
+        var Short b000, b111, b222;
+
+        b000 = 0S;
+        ++b000;
+        assert b000 == 1S;
+
+        var Short b0, b1, b2;
+
+        b0 = 0Short;
+        b1 = 1S;
+        b2 = b0 + b1;
+        assert b2 == 1S && b1 == 1 asShort;
+        ++b2;
+        assert b2 == 2S;
+        b0 = 5S;
+        b1 = b0 - b1;
+        assert b1 == 4Short;
+        b0 = 3S; 
+        b1 = 4Short;
+        b2 = b0*b1;
+        assert b2 == 12Short;
+        assert b2/3S == 4S;
+        assert 12Short % 5Short == 2S;
+        if b0 >= b1 { "3 >= 4Short" println; };
+        if b1 < b0 { "4Short < 3" println; };
+        if b0 > b1 { "3 > 4Short" println; };
+        if !(b0 <= b1) { "!(3 <= 4Short)" println; };
+        if b1 <= b0 { "4Short <= 3B" println; };
+        if !(b0 < b1) { "!(3 < 4Short)" println; };
+        if b1 < b0 { "3 >= 4Short" println; };
+        if !(b0 < b1) { "!(3 < 4Short)" println; };
+        b0 = 1Short;
+        b1 = 2S;
+        if b0 == 0S { "1 == 0Short" println; };
+        if b1 == b0 { "1 == 2S" println; };
+        if b0 === 0S { "1 === 0Short" println; };
+        if b1 === b0 { "1 === 2S" println; };
+
+        if b0 != 1S { "1 != 1Short" println; };
+        if b1 != (b0+1S) { "2 != 2S" println; };
+
+        if (b0 <=> b1) != -1 { "1S < 2S is false" println; }
+        if (b0 <=> 3S) != -1 { "1S < 3B is false" println; }
+        if (b0 <=> 1S) != 0  { "1 == 1S is false" println; };
+        if (5S <=> b0) != 1  { "5S > 1S is false" println; }
+        var String s = "";
+        1S..5S foreach: { (: Short b :) s = s ++ b };
+        assert s == "12345";
+        s = "";
+        1S..<5S foreach: { (: Short b :) s = s ++ b };
+        assert s == "1234";
+        if -b0 != -1S { "-1S != -1S" println; };
+        if b0 != +b0  { "1S != +1S" println; };
+        b0 = 1S;
+        b1 = 2S;
+        if  b0 & b1 != 0S  { "1&2 != 0S" println; }
+        if  b0 ||| b1 != 3S  { "1|||2 != 3S" println; }
+        b0 = 0S;
+        assert (b0 asInt) == 0;
+        assert (b0 asByte) == 0Byte;
+        assert (b0 asLong) == 0Long;
+        assert (b0 asFloat) == 0F;
+        assert (b0 asDouble) == 0Double;
+        assert (b0 asChar) == '\0';
+        assert (b0 asBoolean) == false;
+        assert (b0 asString) == "0";
+
+        var Int j;
+        s = "";
+        j = 0;
+        0S..5S times: {
+            s = s ++ j;
+            ++j;
+        };
+        assert s == "012345";
+        s = "";
+        0S to: 5S do: { (: Short item :)
+            s = s ++ item;
+        };
+        assert s == "012345";
+        
+        
+        
+        s = "";
+        j = 0;
+        10S times: { 
+            s = s ++ j;            
+            ++j;
+        };
+        assert s == "0123456789";
+
+        s = "";
+        10Short repeat: { (: Short kk :)
+            s = s ++ kk;            
+        };
+        assert s == "0123456789";
+
+        
+        
+        var injectShort = SumInject<Short>();
+        0S to: 3S into: injectShort;
+        assert (injectShort result == 6S);
+        assert (0S to: 5S
+           inject: 0S
+           into: { (: Short total, Short item -> Short :)
+               ^total + item
+           }) == 15S;
+        let shortArray = [ 0S, 1S, 2S, 3S, 4S, 5S ];
+        assert 0S in: shortArray;
+        assert !(11S in: shortArray);
+        assert 0S between: -3S..3S;
+        assert !(5S between: -3S..3S);
+
+
+        let r = 1S |> { (: Short other -> Short :) ^ 2S*other } |> 
+              { (: Short other -> Short :) ^ other + 5S };
+        assert r == 7S && r eq: 7S;
+
+        let f = { (: Short other -> Short :) ^ other*other };
+        let r2 = 1Short |> { (: Short other -> Short :) ^ 2S*other } |> 
+              f |> f;
+        assert r2 == 16Short && r2 eq: 16S;
+
+        b0 = 0S;
+        assert 1S eq: shortArray[1] && 
+               ! (0B neq: shortArray[0]) &&
+               b0 neq: 1S &&
+               b0 eq: 0S;
+
+               
+        assert (b0 succ) == 1S &&
+               (b0 pred) == -1S;        
+
+        assert Short == 0S && Short() == 0Short && Short defaultValue == 0Short;
+
+    }
+    
+    func longTest {
+    
+        let Dyn zl = 0L;
+        assert zl != 1S && zl != 0.0001 && zl != 0.0001F &&
+               zl != 1L && zl != 'a' && zl != "0" &&
+               zl != true && zl != false && zl != TestCyan;
+
+        var Long b000, b111, b222;
+
+        b000 = 0L;
+        ++b000;
+        assert b000 == 1L;
+
+        var Long b0, b1, b2;
+
+        b0 = 0Long;
+        b1 = 1L;
+        b2 = b0 + b1;
+        assert b2 == 1L && b1 == 1 asLong;
+        ++b2;
+        assert b2 == 2L;
+        b0 = 5L;
+        b1 = b0 - b1;
+        assert b1 == 4Long;
+        b0 = 3L; 
+        b1 = 4Long;
+        b2 = b0*b1;
+        assert b2 == 12Long;
+        assert b2/3L == 4L;
+        assert 12Long % 5Long == 2L;
+        if b0 >= b1 { "3 >= 4Long" println; };
+        if b1 < b0 { "4Long < 3" println; };
+        if b0 > b1 { "3 > 4Long" println; };
+        if !(b0 <= b1) { "!(3 <= 4Long)" println; };
+        if b1 <= b0 { "4Long <= 3B" println; };
+        if !(b0 < b1) { "!(3 < 4Long)" println; };
+        if b1 < b0 { "3 >= 4Long" println; };
+        if !(b0 < b1) { "!(3 < 4Long)" println; };
+        b0 = 1Long;
+        b1 = 2L;
+        if b0 == 0L { "1 == 0Long" println; };
+        if b1 == b0 { "1 == 2L" println; };
+        if b0 === 0L { "1 === 0Long" println; };
+        if b1 === b0 { "1 === 2L" println; };
+
+        if b0 != 1L { "1 != 1Long" println; };
+        if b1 != (b0+1L) { "2 != 2L" println; };
+
+        if (b0 <=> b1) != -1 { "1L < 2L is false" println; }
+        if (b0 <=> 3L) != -1 { "1L < 3B is false" println; }
+        if (b0 <=> 1L) != 0  { "1 == 1L is false" println; };
+        if (5L <=> b0) != 1  { "5L > 1L is false" println; }
+        var String s = "";
+        1L..5L foreach: { (: Long b :) s = s ++ b };
+        assert s == "12345";
+        s = "";
+        1L..<5L foreach: { (: Long b :) s = s ++ b };
+        assert s == "1234";
+        if -b0 != -1L { "-1L != -1L" println; };
+        if b0 != +b0  { "1L != +1L" println; };
+        b0 = 1L;
+        b1 = 2L;
+        if  b0 & b1 != 0L  { "1&2 != 0L" println; }
+        if  b0 ||| b1 != 3L  { "1|||2 != 3L" println; }
+        b0 = 0L;
+        assert (b0 asInt) == 0;
+        assert (b0 asByte) == 0Byte;
+        assert (b0 asFloat) == 0F;
+        assert (b0 asDouble) == 0Double;
+        assert (b0 asChar) == '\0';
+        assert (b0 asBoolean) == false;
+        assert (b0 asString) == "0";
+
+        var Int j;
+        s = "";
+        j = 0;
+        0L..5L times: {
+            s = s ++ j;
+            ++j;
+        };
+        assert s == "012345";
+        s = "";
+        0L to: 5L do: { (: Long item :)
+            s = s ++ item;
+        };
+        assert s == "012345";
+        
+        
+        
+        s = "";
+        j = 0;
+        10L times: { 
+            s = s ++ j;            
+            ++j;
+        };
+        assert s == "0123456789";
+
+        s = "";
+        10Long repeat: { (: Long kk :)
+            s = s ++ kk;            
+        };
+        assert s == "0123456789";
+
+        
+        
+        
+        var injectLong = SumInject<Long>();
+        0L to: 3L into: injectLong;
+        assert (injectLong result == 6L);
+        assert (0L to: 5L
+           inject: 0L
+           into: { (: Long total, Long item -> Long :)
+               ^total + item
+           }) == 15L;
+        let longArray = [ 0L, 1L, 2L, 3L, 4L, 5L ];
+        assert 0L in: longArray;
+        assert !(11L in: longArray);
+        assert 0L between: -3L..3L;
+        assert !(5L between: -3L..3L);
+
+        let r = 1L |> { (: Long other -> Long :) ^ 2L*other } |> 
+              { (: Long other -> Long :) ^ other + 5L };
+        assert r == 7L && r eq: 7L;
+
+
+        let f = { (: Long other -> Long :) ^ other*other };
+        let r2 = 1L |> { (: Long other -> Long :) ^ 2L*other } |> 
+              f |> f;
+        assert r2 == 16L;
+
+        b0 = 0L;
+        assert 1L eq: longArray[1] && 
+               ! (0L neq: longArray[0]) &&
+               b0 neq: 1L &&
+               b0 eq: 0L;
+               
+        assert (b0 succ) == 1L &&
+               (b0 pred) == -1L;
+    
+        assert Long == 0L && Long() == 0Long && Long defaultValue == 0L;
+    
+   }
+    
+    func equalFloat: Float a, Float b -> Boolean {
+        return (a - b) < 0.01F && (a - b) > -0.01F
+    }
+    
+    func floatTest {
+    
+        let Dyn zf = 0.0001F;
+        let Dyn zff = 0.0F;
+        
+        assert zf != 0S && zf != 0 &&
+               zf != 0L && zff != 'a' && zff != "0" &&
+               zff != true && zff != false && zff != TestCyan;
+    
+    
+        var Float b000, b111, b222;
+
+        b000 = 0F;
+        b000 = b000 + 1F;
+        assert b000 == 1F;
+
+        var Float b0, b1, b2;
+
+        b0 = 0Float;
+        b1 = 1F;
+        b2 = b0 + b1;
+        assert (equalFloat: b2, 1F) && (equalFloat: b1, 1 asFloat);
+        b2 = b2 + 1F;
+        assert equalFloat: b2, 2F;
+        b0 = 5F;
+        b1 = b0 - b1;
+        assert equalFloat: b1, 4Float;
+        b0 = 3F;
+        b1 = 4Float;
+        b2 = b0*b1;
+        assert equalFloat: b2, 12Float;
+        assert equalFloat: b2/3F, 4F;
+        if b0 >= b1 { "3 >= 4Float" println; };
+        if b1 < b0 { "4Float < 3" println; };
+        if b0 > b1 { "3 > 4Float" println; };
+        if !(b0 <= b1) { "!(3 <= 4Float)" println; };
+        if b1 <= b0 { "4Float <= 3B" println; };
+        if !(b0 < b1) { "!(3 < 4Float)" println; };
+        if b1 < b0 { "3 >= 4Float" println; };
+        if !(b0 < b1) { "!(3 < 4Float)" println; };
+        b0 = 1Float;
+        b1 = 2F;
+        if equalFloat: b0, 0F { "1 == 0Float" println; };
+        if equalFloat: b1, b0 { "1 == 2F" println; };
+        if equalFloat: b0, 0F { "1 === 0Float" println; };
+        if equalFloat: b1, b0 { "1 === 2F" println; };
+
+        if b0 != 1F { "1 != 1Float" println; };
+        if b1 != (b0+1F) { "2 != 2F" println; };
+
+        if (b0 <=> b1) != -1 { "1F < 2F is false" println; }
+        if (b0 <=> 3F) != -1 { "1F < 3B is false" println; }
+        if (b0 <=> 1F) != 0  { "1 == 1F is false" println; };
+        if (5F <=> b0) != 1  { "5F > 1F is false" println; }
+        var String s = "";
+
+        if -b0 != -1F { "-1F != -1F" println; };
+        if b0 != +b0  { "1F != +1F" println; };
+        b0 = 1F;
+        b1 = 2F;
+        b0 = 0F;
+        assert (b0 asInt) == 0;
+        assert (b0 asByte) == 0Byte;
+        assert (b0 asShort) == 0Short;
+        assert (b0 asDouble) == 0Double;
+        assert (b0 asChar) == '\0';
+        assert (b0 asString) == "0.0";
+
+        let floatArray = [ 0F, 1F, 2F, 3F, 4F, 5F ];
+
+        assert (floatArray at: 0) equal: 0F &&
+               floatArray at: 1 < 2F &&
+               floatArray at: 4 >= 0.0F;
+               
+        assert (Float equal: 0.0F) && (Float() equal: 0.0Float) 
+           && Float defaultValue equal: 0.0F;
+           
+
+        var Float f;
+        f = 1.65F;
+        f = 1.65e1F;
+        f = 1.65e+5F;
+        f = 1.65e-5F;
+        f = -1.65F;
+        f = -1.65e1F;
+        f = -1.65e+5F;
+        f = -1.65e-5F;
+
+        f = 1.65Float;
+        f = 1.65e1Float;
+        f = 1.65e+5Float;
+        f = 1.65e-5Float;
+        f = -1.65Float;
+        f = -1.65e1Float;
+        f = -1.65e+5Float;
+        f = -1.65e-5Float;
+
+
+
+    }
+    
+    func equalDouble: Double a, Double b -> Boolean {
+        return (a - b) < 0.01D && (a - b) > -0.01D
+    }
+    
+    func doubleTest {
+
+        let Dyn zd = 0.0001D;
+        let Dyn zdd = 0.0D;
+
+        assert zd != 0S && zd != 0 &&
+               zd != 0L && zd != 'a' && zdd != "0" &&
+               zdd != true && zdd != false && zdd != TestCyan;
+  
+    
+        var Double b000, b111, b222;
+
+        b000 = 0D;
+        b000 = b000 + 1D;
+        assert b000 == 1D;
+
+        var Double b0, b1, b2;
+
+        b0 = 0Double;
+        b1 = 1D;
+        b2 = b0 + b1;
+        assert (equalDouble: b2, 1D) && (equalDouble: b1, 1 asDouble);
+        b2 = b2 + 1D;
+        assert equalDouble: b2, 2D;
+        b0 = 5D;
+        b1 = b0 - b1;
+        assert equalDouble: b1, 4Double;
+        b0 = 3D;
+        b1 = 4Double;
+        b2 = b0*b1;
+        assert equalDouble: b2, 12Double && b2 equal: 12Double;
+        assert equalDouble: b2/3D, 4D && b2/3D equal: 4D;
+        if b0 >= b1 { "3 >= 4Double" println; };
+        if b1 < b0 { "4Double < 3" println; };
+        if b0 > b1 { "3 > 4Double" println; };
+        if !(b0 <= b1) { "!(3 <= 4Double)" println; };
+        if b1 <= b0 { "4Double <= 3B" println; };
+        if !(b0 < b1) { "!(3 < 4Double)" println; };
+        if b1 < b0 { "3 >= 4Double" println; };
+        if !(b0 < b1) { "!(3 < 4Double)" println; };
+        b0 = 1Double;
+        b1 = 2D;
+        if equalDouble: b0, 0D { "1 == 0Double" println; };
+        if equalDouble: b1, b0 { "1 == 2D" println; };
+        if equalDouble: b0, 0D { "1 === 0Double" println; };
+        if equalDouble: b1, b0 { "1 === 2D" println; };
+
+        if b0 != 1D { "1 != 1Double" println; };
+        if b1 != (b0+1D) { "2 != 2D" println; };
+
+        if (b0 <=> b1) != -1 { "1D < 2D is false" println; }
+        if (b0 <=> 3D) != -1 { "1D < 3B is false" println; }
+        if (b0 <=> 1D) != 0  { "1 == 1D is false" println; };
+        if (5D <=> b0) != 1  { "5D > 1D is false" println; }
+        var String s = "";
+
+        if -b0 != -1D { "-1D != -1D" println; };
+        if b0 != +b0  { "1D != +1D" println; };
+        b0 = 1D;
+        b1 = 2D;
+        b0 = 0D;
+        assert (b0 asInt) == 0;
+        assert (b0 asByte) == 0Byte;
+        assert (b0 asShort) == 0Short;
+        assert (b0 asFloat) == 0Float;
+        assert (b0 asChar) == '\0';
+        assert (b0 asString) == "0.0";
+
+        let doubleArray = [ 0D, 1D, 2D, 3D, 4D, 5D ];
+
+        assert (doubleArray at: 0) equal: 0D &&
+               doubleArray at: 1 < 2D &&
+               doubleArray at: 4 >= 0D;
+
+        assert (Double equal: 0.0D) && (Double() equal: 0.0D) 
+           && (Double defaultValue) equal: 0.0D;
+
+
+
+           
+        var Double d;
+        
+        d = 1.65;
+        d = 1.65e1;
+        d = 1.65e+5;
+        d = 1.65e-5;
+        d = -1.65;
+        d = -1.65e1;
+        d = -1.65e+5;
+        d = -1.65e-5;
+
+        d = 1.65D;
+        d = 1.65e1Double;
+        d = 1.65e+5D;
+        d = 1.65e-5Double;
+        d = -1.65D;
+        d = -1.65e1Double;
+        d = -1.65e+5D;
+        d = -1.65e-5Double;
+        
+
+
+    }
+
+    func interTest {
+    
+        var ProtoAInterI pa = ProtoAInterI new;
+        var ProtoBExtendsA pb = ProtoBExtendsA new;
+        var ProtoCExtendsBInterJ pc = ProtoCExtendsBInterJ new;
+        var ProtoDExtendsC pd = ProtoDExtendsC new;
+        var ProtoEExtendsDInterK pe = ProtoEExtendsDInterK new;
+        var InterI ti;
+        var InterJ tj;
+        var InterK tk;
+        
+        
+        assert (pa sum: 1 mult: 5) == 5 &&
+               (pb sum: 1 mult: 5) == 6 &&
+               (pc sum: 1 mult: 5) == 4 &&
+               (pc sum: 1, 3 mult: 5) == 19 &&
+               (pd sum: 1 mult: 5) == 7 &&
+               (pd sum: 1, 3 mult: 5) == 22 &&
+               (pe sum: 1 mult: 2) == 5 &&
+               (pe sum: 1, 2 mult: 5) == 18 &&
+               (pe sum: 1, 0, 2 mult: 5) == 15;
+               
+        pa = pb; assert (pa sum: 1 mult: 5) == 6;
+        pa = pc; assert (pa sum: 1 mult: 5) == 4;
+        pa = pd; assert (pa sum: 1 mult: 5) == 7;
+        pa = pe; assert (pa sum: 1 mult: 2) == 5;
+        pb = pc; assert (pb sum: 1 mult: 5) == 4;
+        pb = pd; assert (pb sum: 1 mult: 5) == 7;
+        pb = pe; assert (pb sum: 1 mult: 2) == 5;
+        pc = pd; assert (pc sum: 1 mult: 5) == 7;
+        pc = pe; assert (pe sum: 1 mult: 2) == 5;
+        
+        pa = ProtoAInterI new;
+        pb = ProtoBExtendsA new;
+        pc = ProtoCExtendsBInterJ new;
+        pd = ProtoDExtendsC new;
+        pe = ProtoEExtendsDInterK new;
+                
+        ti = pa; assert (ti sum: 1 mult: 5) == 5;
+        ti = pb; assert (ti sum: 1 mult: 5) == 6;
+        ti = pc; assert (ti sum: 1 mult: 5) == 4;
+        ti = pd; assert (ti sum: 1 mult: 5) == 7;
+        ti = pe; assert (ti sum: 1 mult: 2) == 5;
+        
+        tj = pc; 
+        assert (tj sum: 1 mult: 5) == 4;
+        assert (tj sum: 1, 3 mult: 5) == 19;
+        tj = pd;
+        assert (tj sum: 1 mult: 5) == 7 &&
+               (tj sum: 1, 3 mult: 5) == 22;
+        tk = pe; 
+        assert tk sum: 1 mult: 2 == 5 &&
+               tk sum: 1, 2 mult: 5 == 18 &&
+               tk  sum: 1, 0, 2 mult: 5 == 15;
+
+
+        var Any any = 0;
+        
+    
+        /*
+           no assert. Just test if the compiler compile correctly
+        */
+        var ma = MyArray();
+        var InterA aa = AAAA();
+        var InterB bb = BBBB();
+        ma[aa] = bb;
+        ma[any] = any;
+        ma[bb] = aa;
+        any = aa;
+        any = bb;   
+        any = { (: Int n, Any any66, Any any99 :)
+               ^aa } eval: 0, aa, bb;
+
+        any = { (: Any any66, Any any99 :)
+               ^bb } eval: aa, bb;
+               
+        any = { (: Any any66, Any any99 :)
+               ^ { (: Any any666, Any any699 :)
+                    ^any666;
+                 } eval: aa, any99;   
+               } eval: aa, bb;
+
+        any = { (: Any any66, Any any99 :)
+               ^ { (: Any any666, Any any699 :)
+                    ^bb;
+                 } eval: aa, bb;   
+               } eval: aa, bb;
+             
+        any = ma[aa];
+        any = ma[bb];
+        
+        self retAny2;
+        self retAny: aa;
+        self retAny: bb;
+        { (: -> Any :) ^aa } eval;        
+    }
+
+    
+
+
+    func testInterA: InterA ia { }
+    func retAny: Any any -> Any {
+        type any
+            case InterB ib { return ib }
+            case InterA ia { return ia }
+            case Any aa { return aa }
+            
+    }
+
+    func retAny7: Any any -> Int {
+        var Int|Char|String ics = 0;
+        type ics
+            case Char ch { return 1 }
+            case Int n { return n }
+            case String s { return 2 }
+    }
+
+    
+    var InterA intA = AAAA();
+    shared var Iterable<Int> iter = Array<Int>();
+    /* 
+        //  These are illegal
+    var Any anyIntA = Iterable<Int>;
+    shared var Any anyIter = Iterable<Int>;
+    let Any lanyIntA = Iterable<Int>;
+    shared let Any lanyIter = Iterable<Int>;
+    */
+    var Int justInt = Int;
+    let Int ljustInt = Int;
+    shared var Int sjustInt = Int;
+    shared let Int sljustInt = Int;
+    
+    func retAny2 -> Any = intA;
+
+end
+

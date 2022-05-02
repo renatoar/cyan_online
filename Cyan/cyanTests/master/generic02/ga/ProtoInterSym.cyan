@@ -1,0 +1,15 @@
+package generic02.ga
+
+object ProtoInterSym  implements InterSym<get, set>
+
+    override
+    func get -> Int = n;
+    
+    override
+    func set: Int n {
+        self.n = n
+    }
+    
+    var Int n = 0;
+     
+end

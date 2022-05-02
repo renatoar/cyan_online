@@ -1,0 +1,6 @@
+package generic02.ga
+
+interface InterSym<G, S>
+    func G -> Int
+    func S: Int n
+end

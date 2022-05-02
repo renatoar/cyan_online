@@ -1,0 +1,11 @@
+package main
+
+
+object Program
+
+    func run {
+        "Change main.Program to call the run methods" println;
+        metaobjectTest.Program() run
+    }
+    
+end

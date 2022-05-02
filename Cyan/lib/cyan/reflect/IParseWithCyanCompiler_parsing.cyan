@@ -1,0 +1,9 @@
+package cyan.reflect
+
+import meta
+
+interface IParseWithCyanCompiler_parsing extends IParse_parsing 
+
+    func parsing_parse: ICompiler_parsing compiler_parsing
+
+end

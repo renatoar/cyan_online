@@ -1,0 +1,8 @@
+package main
+
+
+object SubOnSubprototype extends metaobjectTest.OnSubprototype
+
+    //func subprint { }
+
+end

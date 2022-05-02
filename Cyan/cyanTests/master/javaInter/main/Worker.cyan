@@ -1,0 +1,28 @@
+package javaInter.main
+
+open 
+object Worker extends Person
+
+    func init {
+        sbWorker = java.lang.StringBuffer new: "ssbb";
+    }
+    override
+    func myprint: String s {
+        self myprot: 0;
+        var java.lang.Object obj = 0;
+        obj = "ok";
+        obj = Worker();
+        // self myprot println
+    }
+
+    protected 
+    override
+    func myprot: Int n { }
+    
+    protected 
+    override
+    func myprot -> Int = 1;
+
+    var java.lang.StringBuffer sbWorker
+
+end

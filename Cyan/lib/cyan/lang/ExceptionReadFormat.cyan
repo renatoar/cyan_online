@@ -1,0 +1,6 @@
+package cyan.lang
+
+
+object ExceptionReadFormat extends CyException
+end
+

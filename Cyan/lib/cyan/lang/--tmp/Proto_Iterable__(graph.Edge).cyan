@@ -1,0 +1,7 @@
+package cyan.lang
+
+
+
+object Proto_Iterable__<graph.Edge> implements Iterable<graph.Edge>
+
+end

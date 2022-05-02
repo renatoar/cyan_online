@@ -1,0 +1,18 @@
+package grammar
+
+object StringHashTable
+    func init { map = HashMap<String, String>(); }
+    
+    @grammarMethod{*
+        (key: String value: String)+
+    *}
+    func multKeyValue: Array<Tuple<String, String>> list  {
+        for t in list {
+            map[ t f1 ] = t f2
+        }
+    }
+    
+    func getMap -> IMap<String, String> = map;
+    
+    let IMap<String, String> map
+end

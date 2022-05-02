@@ -1,0 +1,29 @@
+package grammar
+
+
+object MyArray
+    func init { elem = A() }
+        
+    func [] at: Any any -> InterA { 
+        type any
+            case InterA other {
+                return other
+            }
+            else {
+                return InterA
+            }
+    }
+    
+    func [] at: Any any 
+            put: Any elem { 
+        self.elem = elem
+    
+    }
+    
+    func get -> Any = A();
+
+    override
+    func asString -> String = elem asString;
+        
+    var Any elem
+end

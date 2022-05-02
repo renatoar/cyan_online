@@ -1,0 +1,19 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionMethodMissing_semAn extends IStayPrototypeInterface
+
+    func semAn_missingKeywordMethod:
+                WrExpr receiver, WrMessageWithKeywords message, WrEnv env
+        -> Tuple<String, String, String>
+
+    func semAn_missingUnaryMethod:
+                WrExpr receiver, 
+                WrSymbol unarySymbol, 
+                WrEnv env
+        -> Tuple<String, String, String>
+
+end

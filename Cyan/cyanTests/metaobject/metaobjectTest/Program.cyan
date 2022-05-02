@@ -1,0 +1,84 @@
+package metaobjectTest
+
+
+object Program
+
+    func run {
+        Action_afterResTypes_semAn() run;
+        Assert() run;
+        AddBeforeMethod() run;
+        AddCodeFromMetaobject() run;
+        AddFieldInfo() run;
+        AddMethodTo() run;
+        Annot() run;
+        CallTestMethods() run;
+        CallUnaryMethods() run;
+        ChangeFunctionForMethod() run;
+        CheckCatchParameter() run;
+        CheckStyle() run;
+        CodeAfter() run;
+        CompilationInfo() run;
+        Concept() run;
+        CountFieldAccess() run;
+        CountNew() run;
+        CreateFieldIfAccessed() run;
+        CreatePrototype() run;
+        Deprecated() run;
+        Doc() run;
+        Eval() run;
+        Extract() run;
+        Feature() run;
+        FSM_DSL_Method() run;
+        GetPackageValueFromKey() run;
+        GetProgramValueFromKey() run;
+        GrammarMethod() run;
+        Immutable() run;
+        Init() run;
+        InsertCode() run;
+        KeepValue() run;
+        Number_base() run;
+        Number_hex() run;
+        Number_bin() run;
+        String_r_R() run;
+        String_n_N() run;
+        Letter() run;
+        Log() run;
+        OnDeclaration_afterSemAn() run;
+        OnDeclaration_afterResTypes_semAn_afterSemAn() run;
+        OnFieldAccess() run;
+        OnFieldMissing() run;
+        OnMessageSend_afterSemAn() run;
+        OnMessageSend_semAn() run;
+        OnMethodMissing() run;
+        OnOverride_afterResTypes_semAn_afterSemAn() run;
+        OnOverride() run;
+        OnOverride_afterResTypes_semAn_afterSemAn() run;
+        OnSubprototype_afterResTypes_semAn_afterSemAn() run;
+        OnVariableDeclaration() run;
+        OverrideTest() run;
+        OverrideToo() run;
+        ParametersToString() run;
+        Property() run;
+        PrototypeCallOnly() run;
+        ReadOnly() run;
+        Range() run;
+        Regex() run;
+        RenameMethod() run;
+        ImplementRestrictImplementation() run;
+        ReplaceCallBy() run;
+        RestrictOverrideTo() run;
+        RestrictTo() run;
+        RunFile() run;
+        RunPastCode() run;
+        SetVariable() run;
+        ShouldCallSuperMethod() run;
+        Shout() run;
+        SymbolToString() run;
+        Tainted() run;
+        Type() run;
+        
+        "metaobjectTest ended" println
+    }
+    
+    
+end

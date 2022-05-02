@@ -1,0 +1,10 @@
+program at "C:"
+
+    package cyan.io at "C:\Cyan\lib\cyan\io"
+    package cyan.lang at "C:\Cyan\lib\cyan\lang"
+    package cyan.math at "C:\Cyan\lib\cyan\math"
+    package cyan.reflect at "C:\Cyan\lib\cyan\reflect"
+    package cyan.script at "C:\Cyan\lib\cyan\script"
+    package cyan.someDayCompleteThis at "C:\Cyan\lib\cyan\someDayCompleteThis"
+    package cyan.util at "C:\Cyan\lib\cyan\util"
+    package cyan.util.graph at "C:\Cyan\lib\cyan\util\graph"

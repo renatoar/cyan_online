@@ -1,0 +1,803 @@
+package main
+
+// import a Cyan package
+import cyan.math
+import cyan.reflect
+// import a Java package
+import java.lang
+
+   
+@doc{*
+   doc is an annotation for documentation. An
+   annotation starts with '@', as @doc, and is processed
+   at compile-time. You can do your own documentation
+   annotation taking text in any format you wish. 
+   Unfortunately, there is no software that produces 
+   HTML pages from documentation --- the Cyan design and
+   compiler is a one-person project. There is much to be done.
+   
+   The declaration of a prototype follows. A prototype is
+   similar to a class in class-based languages as C++/Java/C#.
+   'extends' is used for inheritance, only single inheritance
+   is supported. 'implements' is used for implementation of
+   interfaces. 'SuperProgram' is declared as
+   
+        package main
+
+        open
+        object SuperProgram
+        end
+
+    IProgram is declared as 
+        package main
+        interface IProgram
+            func theSuperOne: String s -> String
+        end
+
+    'open' is used before 'object' to mean it is not
+    a final class. The default is final, a prototype that
+    cannot be inherited. 
+*}    
+/*  
+   The following annotation, '@init(name, max)', produces
+           func init: String name, Int max {
+               self.name = name;
+               self.max = max
+           }
+*/
+@init(name, max)
+open
+object Program extends SuperProgram
+          implements IProgram
+          
+    // a field or instance variable. They are always
+    // private or protected, default private
+    var String name
+    // a read-only field is declared with 'let'
+    let Int max
+    
+    // with an expression, ends with ';'
+    let Int min = 0;
+    
+    // @property produces getDocStr and setDocStr:
+    @property var String docStr = "documentation";
+    
+    // shared variables are shared among all
+    // objects of a prototype. They are the 'static' of C++/Java
+    shared Double sqrt10
+    
+    // initOnce initializes shared variables only
+    private func initOnce {
+        sqrt10 = 3.16227766017
+    }
+
+    // there are no 'shared' methods, use
+    // @prototypeCallOnly instead.
+    // A 'final' method cannot be overridden
+    @prototypeCallOnly
+    final 
+    func getSqrt10 -> Double = sqrt10;
+    
+    /* T his is a multi-line comment
+    */
+    
+    // method that returns a String
+    // by default, methods are public
+    func getName -> String = name;
+    
+    // method with a parameter
+    func with: String text -> String {
+        /*  $ is used for string interpolation.
+        */
+        return "$name\r\n$docStr\r\nWith: $text\r\nMax = $max"
+    }
+    
+    // override is used here because this method
+    // is declared in the implemented interface
+    // 'IProgram'
+    override
+    func theSuperOne: String s -> String {
+        var p = "";
+        // ++ is string concatenation
+        p = p ++ "super " ++ s;
+        // ++ works even if both are non-strings
+        assert 0 ++ 1 == "01";
+        // 'assert' is a macro. If its expression is false,
+        // it prints a message (at runtime).
+        return p;
+    }
+    
+    // constructors are called 'init' or 'init:'
+    func init: String name, Int min, Int max {
+        self.name = name;
+        self.min = min;
+        self.max = max
+    }
+
+    // a parameterless constructor
+    func init {
+        self.name = "";
+        self.max = 10;
+    }
+    
+    // message passing basics
+    func messagePassingTest {
+        // these are unary message sends
+        
+        // this would be, in Java/C++/C# syntax, 0.println()
+        0 println;
+        "print this" println;  
+        // cascading of unary message passings.
+        0 prototypeName println;
+        
+        // create an Int array
+        var Array<Int> array = [ 0 ];
+        // message passing 'at: 0' with receiver 'array'
+        // it would be 'array.at(0)' in C++/Java/C#
+        var elem = array at: 0;
+        // message passing 'at: 0 put: 5' with receiver 'array'
+        // it would be 'array.at_put(0, 5)' in C++/Java/C#
+        array at: 0 put: 5;
+    }
+
+    // each of the following methods is used to explain 
+    // a set of language features
+    func basicTypesTest {
+    
+        // basic types as in Java
+        var Char ch = 'a';
+        var Boolean ok = false;
+        var Byte abyte = 10Byte;
+        abyte = 10B;
+        var Short ashort = 0Short;
+        ashort = 0S;
+        var Int anInt = 10;
+        anInt = 10Int;
+        anInt = 10I;
+        var Long along = 10Long;
+        along = 10L;
+        var Float afloat = 10.0Float;
+        afloat = 10.0F;
+        var Double adouble = 10.0Double;
+        adouble = 10.0D;
+        var String string = "string";
+        string = n"escape are not considered: \r \n";
+        // assert is a macro for testing an expression
+        assert n"\r\n" size == 4;
+        
+        var Int otherInt = 0;
+        
+        """ multiple line 
+              Strings are
+              allowed """ println;
+        // '|' before " or """ orders the compiler
+        // to remove spaces before '|'
+        |"""
+           |spaces before \| are removed
+           |first char in the string
+           """ println;
+           
+        // #cyan is a symbol, exactly the same as "cyan"
+        assert #cyan == "cyan";
+        
+        // no automatic casts between basic types
+        // error if uncommented
+        // abyte = anInt
+        // abyte = 10; // 10 has type Int
+        
+        // use methods for converting values
+        abyte = 10 asByte;
+        along = 10.0 asLong;
+        
+        // r"a*Cb*" is an object of RegExpr
+        assert "aaCbbb" ~= r"a*Cb*";
+    }
+    
+    // anonymous functions or just functions
+    func funcTest {
+    
+        var Int n = 0;
+        // anonymous function without parameter
+        // or return value
+        var f = { n = 1 };
+        assert n == 0;
+        // execute the statements of 'f'
+        // 'f eval' is a 'message passing'. 
+        // the message name is 'eval' and the receiver is 'f'.
+        // It would be 'f.eval()' in Java/C#/C++
+        f eval; 
+        
+        // f changed the value of a local variable
+        assert n == 1;
+        
+        // anonymous function with an Int parameter
+        // and no return value --- use Nil for that
+        var Function<Int, Nil> fi = { 
+            (: Int k :) 
+            n = k
+            };
+        // a message passing. It would be 'fi.eval(5)' in Java/C#/C++
+        fi eval: 5;
+        assert n == 5;
+        
+        // anonymous function with a parameter
+        // and a return value
+        var Function<Int, String> g = { (: Int k -> String :)
+            ^ "k = " ++ k;
+            };
+        assert g eval: 5 == "k = 5";
+        
+        // the return type is optional
+        var fis = { (: Int k :) ^"" ++ k };
+        assert fis eval: 5 == "5";
+    }
+    
+    /*  A method with multiple keywords. Each of  
+       at:, with:, or do: is a method keyword or
+       just keyword. 'at:with:do:' is a method selector
+    */
+    func at: Array<Int> array 
+         with: String s 
+         do: Function<Int, String, Nil> f 
+         -> Int {
+        var sum = 0;
+        // for each elem of the array, call
+        // the function
+        array foreach: { (: Int n :)
+            sum = sum + n
+            };
+        f eval: sum, s;
+        return sum
+    }
+    
+    // creation of objects in Cyan
+    func newTest {
+        // objects are created with 'new:' or 
+        // 'new' (if no parameters)
+        var Person livia = Person new: "Livia", 12;
+        
+        //  objects can be created with this syntax too
+        var carolina = Person("Carolina", 9);
+        assert livia getName == "Livia";
+        assert carolina getAge == 9;
+        
+        // prototypes are objects
+        Person setName: "Marcia";
+        assert Person getName == "Marcia";
+        
+        // prototypes are objects. Int is 0
+        assert Int*Int + Int == 0;
+        
+    }
+
+    // decision and repetition constructs
+    func ifForWhileRepeatTest {
+    
+        // a literal array
+        var array = [ 0, 1, 2, 3 ];
+        var sum = 0;
+        // for statement. { and } are demanded
+        for elem in array { 
+            sum = sum + elem 
+        }
+        assert sum == 6;
+        
+        sum = 0;
+        // sum all array elements
+        assert (array .+ "+") == 6;
+        // print all array elements
+        array apply: #print; 
+        
+        sum = 0;
+        // Sum<Int>(sum) is a context object.
+        // It is like a REUSABLE anonymous function
+        // that can access local variables like 'sum'
+        
+        array foreach: Sum<Int>(sum);
+        assert sum == 6;
+        
+        // 'if' statements always have '{' and '}'
+        if array size != 4 { 
+            "Error! " println;
+            // ends the program
+            System exit: 1;
+        }
+        // 'if' as in Smalltalk, a message passing
+        (array size != 4) ifTrue: { System exit: 1 };
+        
+        // an random number between 0 and 99
+        var age = Math nextInt: 100;
+        if age < 3 { "baby" println }
+        else if age >= 3 && age < 13 { 
+            "child" println
+        }
+        else if age >= 13 && age < 19 {
+              // this is another form of printing to 
+              // the standard output
+            Out println: "teenager" 
+        }
+        else {
+            "adult" println
+        }
+        
+        sum = 0;
+        //  0..< 11 is an interval from 0 to 10 
+        for elem in 0..< 11 { sum = sum + elem }
+        assert sum == 55;
+
+        sum = 0;
+        // 0..10 is an interval from 0 to 10
+        for elem in 0..10 { sum = sum + elem }
+        assert sum == 55;
+
+        sum = 0;
+        0..10 foreach: { (: Int elem :) sum = sum + elem };
+        assert sum == 55;
+        
+        
+        // 'while' statements always have '{' and '}'
+        sum = 0;
+        var i = 0;
+        while i < 11 { 
+            sum = sum + i; 
+            ++i 
+        }
+        assert sum == 55;
+        
+        i = 0;
+        sum = 0;
+        // 'while' as in Smalltalk, a message passing
+        { ^ i <= 10 } whileTrue: {
+            sum = sum + i;
+            ++i
+        };
+        assert sum == 55;
+        
+        i = 0;
+        sum = 0;
+        // repeat-until statement
+        repeat
+            sum = sum + i;
+            ++i;
+        until i > 10;
+        assert sum == 55;  
+    }
+    
+    /*
+       an abstract prototype Animal with an abstract method 'eat:' is
+       declared as
+       
+             abstract Animal
+                abstract func eat: Food food 
+             end
+    */
+
+    // methods that do not return a value
+    // return Nil
+    func nilTypeUnionTest -> Nil {
+
+        // Any is the superprototype of everyone but Nil
+        var Any any = 0;
+        any = "ok";
+        any = Program;
+
+        // types are non-nullable
+        var String s = "";
+        // compile-time error if uncommented
+        // s = Nil;
+        
+        var Nil|String p;
+        // ok 
+        p = "abcd";
+        // compile-time error if uncommented
+        // there is no method 'size' in Nil|String
+        // (p size) println;
+        
+        
+        // statement 'cast' checks if the argument is
+        // not Nil, casting it to the other type. 
+        // Then notNilp has type String
+        cast notNilp = p {
+            assert notNilp size == 4;
+        }
+        // ok, the type of p is Nil|String
+        p = Nil;
+        cast notNilp = p {
+            assert false;
+        }
+        else {
+            // notNilp is Nil, then this is executed
+            assert true;
+        }
+        
+        p = "a string";
+        // 'type' can be used instead of 'cast'
+        type p 
+            case String notNilp { assert true; }
+            case Nil nilp { assert false; }
+            
+        var Int|String|Char isc = 0;
+        isc = 'a';
+        isc = "A";
+        // isc has the last value, "A"
+        type isc 
+            case Int ii    { assert false; }
+            case String ss { assert true;  }
+            case Char cc   { assert false; } 
+        
+        // tagged unions. An object must be created
+        var Union<lenMeter, Double, lenYard, Double> length = 
+               Union<lenMeter, Double, lenYard, Double>();
+               
+        // use a method whose name is a union tag
+        // to initialize the object
+        length lenMeter: 10.0;
+        // what is inside the union is discovered with 'type'
+        type length
+               // use tags as parameter names
+            case Double lenMeter {
+                "Len was given in meters: $lenMeter" println
+            }
+            case Double lenYard {
+                "Len was given in yards: $lenYard" println
+            }
+        
+        // method 'asInt' of String returns Nil|Int
+        cast n = "100" asInt {
+            assert n == 100
+        }
+        // the return type is Nil and therefore
+        // no value needs to be returned. Or just use
+        //      return Nil;
+
+    }
+    
+    // use union types instead of method overloading
+    // Cyan supports overloading of methods but this
+    // features will probably be removed
+    func myprint: Int|String|Char|Double param {
+    }
+    
+    // literal tuples, arrays, and maps
+    func tupleArrayMapTest {
+    
+        // a literal array
+        var array = [ 0, 1, 2, 3 ];
+        assert array[0] == 0;
+        // use add: to add elements,
+        array add: 4;
+        assert array size == 5;
+        // arrays work like lists of other languages
+        // elements cannot be added using [ ]
+        // runtime error if uncommented
+        // array[5] = 5;
+        
+        // a literal Tuple with tags f1 and f2
+        var Tuple<String, Int> livia = [. "Livia", 12 .];
+        assert livia f1 == "Livia";
+        assert livia f2 == 12;
+
+        // a named literal Tuple
+        var Tuple<name, String, age, Int> carolina = 
+            [. name = "Carolina", age = 9 .];
+        assert carolina name == "Carolina";
+        assert carolina age == 9;
+
+        // maps. And a literal map with String keys and Int values
+        let IMap<String, Int> map = [ "I" -> 1, "V" -> 5,
+            "X" -> 10, "L" -> 50, "C" -> 100, "D" -> 500, 
+            "M" -> 1000 ];
+            
+        // scan the keys
+        for key in map keySet { "key = $key" println }
+        
+        var String aKey;
+        // get: returns, in this case, an object of Nil|Int
+        cast lvalue = map get: "L" {
+            "L has the value $lvalue" println
+        }
+
+        // array of named literal tuples
+        var musicList = [ [. genre = "Samba", song = "Pelo Telefone" .],
+                  [. genre = "MPB", song = "Aquarela" .]
+                   ];
+        assert musicList[0] song == "Pelo Telefone";
+        
+        // is 5 in the array ?
+        assert 5 in: [ 1, 3, 5 ];
+        assert [ 1, 3, 5 ] last == 5;
+                   
+    }
+    
+    // using Java inside Cyan
+    func javaTest {
+    
+          // cast Java Integer to Cyan Int
+        var Int k = Integer(5);
+        var Integer ki = k; // and vice-versa
+    
+          /* prototype Int of Cyan used as parameter
+             to generic classes Set and HashSet of Java
+          */
+        var java.util.Set<Int> iset = java.util.HashSet<Int>();
+
+        // 0 is a Cyan Int object. iset refers to a Java class.
+        iset add: 0;
+        iset add: 1;
+        iset add: 2;
+        var Boolean b;
+            // casts Java 'boolean' to Cyan 'Boolean'
+        b = iset contains: 0;
+        assert b;
+        b = iset contains: 1;
+          // Java 'boolean' is not yet cast to Cyan 'Boolean' in 
+          // a macro. Then, 'assert iset contains: 1;' is illegal
+        assert b;
+
+        // cast from java.lang.Boolean to cyan.lang.Boolean
+        b = iset contains: 2;
+        assert b;
+        b = iset contains: -1;
+        assert !b;
+        b = iset contains: 4;
+        assert ! b;    
+        var java.lang.Boolean javaBooleanVar = true;
+        // casts Java 'Boolean' to Cyan 'Boolean'
+        if javaBooleanVar {
+            "This is printed" println;
+        }
+
+        var java.lang.Integer integer = Integer(5);
+        assert 5 == integer;
+
+    }
+    
+    // type Dyn for gradual typing
+    func dynTest {
+        // Dyn is the dynamic type. It is virtual,
+        // there is no prototype for it. It is supertype
+        // of every other type
+        var Dyn dyn = 0;
+           // it can refer even to Java objects
+        dyn = Integer(0);
+        dyn = [ 0, 1, 2 ];
+        // message passing are checks at runtime only
+        assert dyn at: 0 == 0;
+        dyn = 0;
+        // runtime type error if uncommented
+        // Int does not have a method 'at: Int'
+        // assert dyn at: 0 == 0;
+        
+        var IProgram p = Program;
+        // using '?fact:', the compiler does not check if 
+        // the variable type has a method 'fact: Int'.
+        // Without '?', this would result in a compile-time
+        // error
+        assert p ?fact: 5 == 120;
+        
+        var Any any = [ 0, 1, 2 ];
+        // without '?', there would be a compile-time error
+        any ?at: 0 ?put: 10;
+        assert any ?at: 0 == 10;
+        
+        // reflection at runtime
+        var String s = "size";
+        // method 'size' is called at runtime
+        assert [ 0, 1 ] `s == 2;
+        var String s1 = "at";
+        var String s2 = "put";
+        var Array<Char> array = [ 'a', 'b', 'c' ];
+        // method 'at:' is called
+        assert array `s1: 0 == 'a';
+        // method 'at:put:' is called
+        array `s1: 1 `s2: 'B';
+        assert array `s1: 1 == 'B' && array[1] == 'B';
+        
+        // prints 25, 15, 4, 100
+        for op in [ "+", "-", "/", "*" ]  {
+            Out println: (20 `op: 5);
+        }
+        
+        // fields can be dynamically added to DTuple objects
+        var Dyn t = DTuple();
+        t name: "Newton";
+        t age: 85;
+        assert t name == "Newton";
+        assert t age == 85;
+    }
+    
+    // In the next method, the parameter types are 
+    // not given. They are considered to be 'Dyn'. 
+    // So, if you want to program as in a dynamically
+    // typed language, simply do not put types in 
+    // parameters and use 'Dyn' to declare local 
+    // variables and fields
+    func with: a, b action: c, d {
+        
+    }
+    
+    /* assume there is a generic prototype Box:
+    
+          package main
+
+          @concept{*
+              T has [ func + T -> T ];
+              ! T implements IProgram,
+              S symbol
+              // tests could be generated too
+          *}
+          object Box<T, S>
+              func init: T value { 
+                 self.value = value 
+              }
+              func sum: T other -> T = 
+                  value + other;
+                  
+              // parameter used as method keyword
+              func S -> String = #S;
+              
+              @property T value
+          end
+    
+     
+    */
+    // generic prototypes
+    func genericTest {
+        // ok, Int has method + and it does
+        // not implement IProgram
+        // this is checked by metaobject 'concept' of Box --- see above
+        let Box<Int, asInt> bi = Box<Int, asInt>(0);
+
+        // ok, Double has method + and it does
+        // not implement IProgram
+        let Box<Double, asDouble> bd = Box<Double, asDouble>(0.0);
+        assert bd asDouble == "asDouble";
+        
+        // error if uncommented: Program
+        // implements IProgram and it does not
+        // have a method "+ Program -> Program"
+        
+        // let Box<Program, doesNotWork> bp;
+        
+        // error if uncommented: the second parameter 
+        // is not a symbol, it is a type
+        // let Box<Int, Char> boxic;
+        
+        /*
+           the parameter of a generic prototype may
+           be an identifier, as the second parameter 
+           to Box<Int, asInt>.
+           
+           The parameter of a generic prototype may
+           be used as type, after # as in #T, as a
+           parameter to a metaobject annotation, and
+           as a method keyword
+        */
+
+    }
+    
+    // exceptions in Cyan are made using message passings
+    func exceptionTest {
+    
+        var Int n = -1;
+        // try-catch is in fact a message send
+        {
+            if n < 0 { 
+                // an exception is thrown by sending
+                // message 'throw:' to self
+                // Exceptions must inherit from cyan.lang.CyException
+                // ExceptionStr is in package cyan.lang
+                throw: ExceptionStr("n < 0");
+            }
+            if n == 0 { 
+                  // use the prototype as the
+                  // exception object
+                throw: ExceptionExit;
+            }
+        } 
+        catch: { (: ExceptionStr e :)
+            "Exception ExceptionStr was thrown" println
+        }
+        catch: { (: ExceptionExit e :)
+            "Exception ExceptionExit was thrown" println
+        }
+        ;  // end of the message send
+        // exceptions can be grouped into 'catch objects'
+        // thus reusing the exception treatment
+        // CatchStr and CatchAll are in cyan.lang, which is always
+        // inherited. CatchStr just prints the  message.
+        // CatchAll does nothing.
+        {
+            if n < 0 { 
+                throw: ExceptionStr("n < 0");
+            }
+            if n == 0 { throw: ExceptionExit; }
+        } 
+        catch: CatchStr
+        catch: CatchAll;
+     
+
+        // This example demonstrates the interactions
+        // between the exception handling system and
+        // generic prototypes.
+        // if an exception of ExceptionStr or ExceptionCast 
+        // is thrown, exit the program
+        {
+           "no exception will be thrown" println
+        } catch: CatchExit<ExceptionStr, ExceptionCast>();
+
+        // after the exception is thrown, the 'retry:'
+        // function is called to correct the problem.
+        {
+            if n < 0 { throw: ExceptionStr("n < 0"); }
+        } 
+        catch: CatchAll
+        retry: { n = 1 };
+                   
+    }
+
+    // There is a Cyan interpreter in cyan.reflect.CyanInterpreter
+    func interpreterTest {
+    
+        // Cyan interpreter for statements
+        // self is given using 'self:'
+        assert CyanInterpreter 
+                    eval: "return self + 2*self" 
+                    self: 3
+               == 9;
+               
+        var Dyn aa = 1;
+        var Dyn bb = 5;
+        // a list of variables is given using
+        // 'varList:'. The value type should be
+        // Dyn
+        assert CyanInterpreter 
+                    eval: "return self + aa + 2*bb" 
+                    self: 3
+                    varList: [ [. "aa", aa .],
+                               [. "bb", bb .] ]
+               == 14;
+               
+        var Any|Nil anyNil;
+        anyNil = CyanInterpreter eval: """
+            var sum = 0;
+            for n in 1..10 {
+                sum = sum + n;
+            }
+            return sum
+            """;
+        type anyNil
+            case Int value {
+                    assert value == 55;
+                    "1 + 2 + ... 10 = $value" println
+            }
+               
+    }
+
+    
+    func fact: Int n -> Int {
+        if n <= 0 { return 1 }
+        else {
+            return n*(fact: n-1)
+        }
+    }
+
+    // execution will start here because
+    // method 'run' of 'Program' is the default
+    // starting method
+    @onOverride{*   
+        /*  this message is printed at compile-time
+            whenever 'run' is overrided in a 
+            subprototype
+        */
+        "Method run is being overridden" println
+    *}
+    func run {
+        "starting " println;
+        // This annotation will create unary messages
+        // for all unary methods ending with 'Test'
+        // with 'self' as receiver. Like 'self exceptionTest;'
+        @callTestMethods;
+    }
+    
+end

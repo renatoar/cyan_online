@@ -1,0 +1,18 @@
+
+    var String funcName;
+    
+    func afterResTypes_beforeMethodCodeList {
+        return [ [. MetSig, "fp = \"c\";", false .], 
+         [. UMS, "unaryReturn = Ret;", false .] ];
+    }
+    
+    func afterResTypes_codeToAdd {
+        var java.lang.String ssi = "func succ: Int n -> Int";
+        var String s = ssi;
+        return  [. "func succ: Int n -> Int = n + 1;", s .];
+    }
+    
+    func semAn_codeToAdd {
+        var String s = compiler getEnv getCurrentPrototype getName;;
+        return "nowExist = 5; \n" ++ "currentProgramUnitName = \"" ++ s ++ "\";\n";
+    }

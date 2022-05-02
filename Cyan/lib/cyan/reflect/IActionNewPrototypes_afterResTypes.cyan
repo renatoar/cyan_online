@@ -1,0 +1,12 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IActionNewPrototypes_afterResTypes
+
+    func afterResTypes_NewPrototypeList: ICompiler_afterResTypes compiler_afterResTypes
+        -> Array<Tuple<String, String>> 
+
+end

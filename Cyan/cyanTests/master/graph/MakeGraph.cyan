@@ -1,0 +1,14 @@
+package graph
+
+object MakeGraph
+    @grammarMethod{*
+        (numVertices: Int (edge: Int, Int)* )    
+    *}
+    func  make: Tuple<Int, Array<Tuple<Int, Int>>> t -> Graph {
+        let edgeArray = Array<Edge>();
+        for elem in t f2 {
+            edgeArray add: Edge(elem f1, elem f2);
+        }
+        return Graph new: t f1, edgeArray;
+    }
+end

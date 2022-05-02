@@ -1,0 +1,42 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface ICheckMessageSend_afterSemAn extends ICheck_afterResTypes_afterSemAn, IStayPrototypeInterface
+
+    func afterSemAn_checkUnaryMessageSend:
+            WrExpr receiverExpr, 
+            WrPrototype receiverType,
+            String receiverKind, 
+            WrSymbol unarySymbol, 
+            WrEnv env
+    
+
+    func afterSemAn_checkUnaryMessageSendMostSpecific:
+            WrExpr receiverExpr, 
+            WrPrototype receiverType,
+            String receiverKind, 
+            WrSymbol unarySymbol,
+            WrPrototype mostSpecificReceiver, 
+            WrEnv env
+            
+    func afterSemAn_checkKeywordMessageSend:
+            WrExpr receiverExpr, 
+            WrPrototype receiverType,
+            String receiverKind, 
+            WrMessageWithKeywords message,
+            WrMethodSignature methodSignature, 
+            WrEnv env
+            
+    func afterSemAn_checkKeywordMessageSendMostSpecific:
+            WrExpr receiverExpr, 
+            WrPrototype receiverType,
+            String receiverKind, 
+            WrMessageWithKeywords message,
+            WrMethodSignature methodSignature,
+            WrPrototype mostSpecificReceiver, 
+            WrEnv env
+    
+end

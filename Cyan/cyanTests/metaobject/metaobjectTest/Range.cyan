@@ -1,0 +1,111 @@
+package metaobjectTest
+
+
+@doc{*
+    Ranges are attached to types. A variable of type Int@range(first, last)
+    can only contain values between first and last (inclusive). This is 
+    checked at compile-time when a literal is assigned to the variable 
+    and at run-time if an expression is assigned to the variable.
+*}
+object Range
+
+    func run {
+        
+        var Int@range(1, 12) hour;
+        hour = 7; // ok
+        // hour = 20; // compile-time error
+        var Boolean ok = false;
+        let outOfLimitsHour = 30;
+        {
+              // runtime error
+            hour = outOfLimitsHour; 
+        } catch: { (: ExceptionStr e :)  
+            ok = true
+        };
+        assert ok;
+        var Int@range(1, 24) hour24;
+        hour24 = hour; // ok
+        // hour = hour24; // compile-time error
+
+
+        // other examples
+
+        var Char@range('a', 'c') ch_a_c;
+
+        var Char ch;
+        ch = 'a';
+        ch_a_c = 'a';
+        ok = true;
+        {
+            ch_a_c = ch;
+        } catch: { (: ExceptionStr e :) ok = false };
+        assert ok;
+
+        ch = 'e';
+        ok = false;
+        {
+            ch_a_c = ch;
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert ok;
+
+        var Int@range(1, 12) month;
+        var Int@range(5, 10) n57;
+        n57 = 6;
+        month = n57;
+
+
+        var Int p = 13;
+        month = 4;
+        ok = false;
+        {
+            var v66 = [ month, p, 7 ];
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert !ok;
+
+        ok = false;
+        {
+            var m787 = [ month -> month, p -> 5, 4 -> 1 ];
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert !ok;
+
+        ok = false;
+        {
+            var m676 = [ month -> month, 5 -> p, 5 -> 9 ]
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert !ok;
+
+        ok = false;
+        {
+            var k67 = month;
+            k67 = p;
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert ok;
+
+        ok = false;
+        {
+            let Int@range(0, 1) k69 = p;
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert ok;
+
+
+        ok = false;
+        {
+            var Int@range(0, 1) n5656 = 0;
+            n5656 = n5656 + 1;
+            n5656 = n5656 + 1
+
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert ok;
+
+
+        ok = false;
+        {
+            var Int@range(0, 1) n5656 = 0;
+            n5656 = n5656 - 1;
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert ok;
+
+    }
+
+end
+

@@ -1,0 +1,38 @@
+package initNewTests
+
+object InitTest1
+
+    fun init { 
+        self.aa = 0;
+        self.bb = "b"
+    }
+    
+    fun init: Int aa, String bb {
+        self.aa = aa;
+        self.bb = bb;
+    }
+
+    fun init: String bb {
+        self.aa = 0;
+        self.bb = bb;
+    }
+
+
+    fun init: Int aa {
+        self.aa = aa;
+        self.bb = "b";
+    }
+    
+    fun all -> String = "" + aa + bb + cc;
+    
+    override
+    fun print {
+       Out println: "aa = " + aa + " bb = " + bb;
+    }
+    
+    const Int aa
+    String bb
+    Char cc = 'c'
+
+end
+

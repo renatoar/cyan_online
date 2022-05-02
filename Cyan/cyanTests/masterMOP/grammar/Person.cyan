@@ -1,0 +1,26 @@
+package grammar
+
+@init(name, age)
+object Person
+
+    
+    @grammarMethod{*
+        ( name: String
+                 (age: Int)? )
+    *}
+    func set: Tuple<String, Union<some, Int, none, Any>> t {
+        self.name = t f1;
+        type t f2
+            case Int some {
+                self.age = some
+            }
+            case Any none {
+            }
+    }
+    
+    override 
+    func asString -> String = "Person($name, $age)";
+    
+    @property var String name = "";
+    @property var Int age = 0;
+end

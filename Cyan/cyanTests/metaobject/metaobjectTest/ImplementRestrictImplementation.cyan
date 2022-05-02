@@ -1,0 +1,13 @@
+package metaobjectTest
+
+
+object ImplementRestrictImplementation implements RestrictImplementation
+
+    func run {
+    }
+
+    override
+    func myprint { }
+    
+end
+

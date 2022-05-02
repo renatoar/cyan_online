@@ -1,0 +1,15 @@
+package main
+
+@concept{*
+    Int has [ func < Int -> Boolean ]
+*}
+ @init(value) 
+object Box<Int> 
+
+    func < Box<Int> other -> Boolean  = value < other getValue;
+
+    @property 
+    private var Int value
+
+end
+

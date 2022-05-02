@@ -1,0 +1,17 @@
+package generic02.ga
+
+object R<T, U><V>
+    func init { 
+        t = One<T> new;
+        u = One<U> new;
+        v = One<V>();
+    }
+    func str -> String = T prototypeName ++ " " ++ U prototypeName ++ " " ++ V prototypeName;
+    func gett -> One<T> = t;
+    func getu -> One<U> = u;
+    func getv -> One<V> = v;
+    
+    One<T> t
+    One<U> u
+    One<V> v
+end

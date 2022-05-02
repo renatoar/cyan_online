@@ -1,0 +1,45 @@
+package generic03
+
+/*
+   to be called as TestMO<Int, int_2147483647, int_0, int2147483647>
+*/
+object TestMO<R, S, T, U>
+
+    func run {
+        
+        let rs = @symbolToString(R);
+        let ss = @symbolToString(S);
+        let ts = @symbolToString(T);
+        let us = @symbolToString(U);
+        
+        assert rs == "Int" && ss == "int_2147483647" &&
+               ts == "int_0" && us == "int2147483647";
+        let sv = @extract(S);
+        let tv = @extract(T);
+        let uv = @extract(U);
+        assert sv == 2147483647 && tv == 0 && uv == 2147483647;
+
+
+        let f = { (: Char ch :)        
+            let g = { (: Int n :)
+                let rs0 = @symbolToString(R);
+                let ss0 = @symbolToString(S);
+                let ts0 = @symbolToString(T);
+                let us0 = @symbolToString(U);
+                
+                assert rs0 == "Int" && ss0 == "int_2147483647" &&
+                       ts0 == "int_0" && us0 == "int2147483647";
+                let sv0 = @extract(S);
+                let tv0 = @extract(T);
+                let uv0 = @extract(U);
+                assert sv0 == 2147483647 && tv0 == 0 && uv0 == 2147483647;
+                };
+            g eval: 0;
+            assert ch == 'a';
+            };
+        f eval: 'a';
+        
+        
+    }
+
+end

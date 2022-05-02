@@ -1,0 +1,23 @@
+"Prototype fields: " print;
+var Int size = compiler getFieldList size;
+ 
+for i in 0..< size {
+    var String sn = (compiler getFieldList get: i) getName;
+    Out println: sn
+}
+"" println;
+
+"Prototype methods: " println;
+size = compiler getMethodDecList size;
+for i in 0..< size {
+    var String sn = (compiler getMethodDecList get: i) getName;
+    Out println: sn;
+}
+"" println;
+
+var String fullPath = compiler getEnv getCurrentCompilationUnit getFullFileNamePath;
+Out println: "Full file path = " ++ fullPath;
+
+var String currentMethodName = compiler getEnv getCurrentMethod getName;
+Out println: "Current method name = " ++ currentMethodName;
+

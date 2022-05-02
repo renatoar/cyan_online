@@ -1,0 +1,6 @@
+package cyan.lang
+
+
+object ExceptionCopyFailure(String _message) extends CyException
+end
+

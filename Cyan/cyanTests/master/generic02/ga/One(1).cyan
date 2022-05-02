@@ -1,0 +1,6 @@
+package generic02.ga
+
+object One<T>
+    func strOne -> String = T prototypeName ++ " " ++ T prototypeName;
+    
+end

@@ -1,0 +1,31 @@
+package grammar
+
+
+object IntSet
+    @grammarMethod{*
+        (add: (Int)+)
+    *}
+    func addMany: Array<Int> array {  
+        for elem in array {
+            set add: elem
+        }
+    }
+    
+    
+    @grammarMethod{*
+        (addEach: Int)+
+    *}
+    func addManySelectors: Array<Int> array {
+        for elem in array {
+            set add: elem
+        }
+    }
+    
+    func getSet -> Set<Int> = set;
+    
+    override
+    func asString -> String = set asArray asString;
+    
+    let Set<Int> set = Set<Int>();
+    
+end

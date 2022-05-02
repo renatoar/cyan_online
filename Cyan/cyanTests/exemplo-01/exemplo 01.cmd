@@ -1,0 +1,2 @@
+@echo off
+"C:\Program Files\Java\jdk1.8.0_291\bin\java" -cp "C:\Dropbox\Cyan\lib\cyan.lang.jar";"C:\Dropbox\Cyan\lib";"C:\Dropbox\Cyan\mix\cyanSite\exemplos codigo Renato\java-for-exemplo 01";"C:\Dropbox\Cyan\lib\cyanruntime.jar"  main.Project

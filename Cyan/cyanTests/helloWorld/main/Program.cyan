@@ -1,0 +1,9 @@
+package main
+object Program
+    public func run {
+        var String name;
+        "teste 1" println;
+        name = In readLine;    
+        name println;
+    }
+end

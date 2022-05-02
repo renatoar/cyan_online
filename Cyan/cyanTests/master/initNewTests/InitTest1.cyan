@@ -1,0 +1,39 @@
+package initNewTests
+
+open
+object InitTest1
+
+    func init { 
+        self.aa = 0;
+        self.bb = "b"
+    }
+    
+    func init: Int aa, String bb {
+        self.aa = aa;
+        self.bb = bb;
+    }
+
+    func init: String bb {
+        self.aa = 0;
+        self.bb = bb;
+    }
+
+
+    func init: Int aa {
+        self.aa = aa;
+        self.bb = "b";
+    }
+    
+    func all -> String = "" ++ aa ++ bb ++ cc;
+    
+    override
+    func print {
+       Out println: "aa = " ++ aa ++ " bb = " ++ bb;
+    }
+    
+    let Int aa
+    String bb
+    Char cc = 'c';
+
+end
+

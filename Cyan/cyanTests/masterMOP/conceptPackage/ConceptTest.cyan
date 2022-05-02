@@ -1,0 +1,13 @@
+package conceptPackage
+
+
+object ConceptTest
+     
+    func run {
+        var CatchWarning<CyException> cw;
+        let gtest = GTest<PA, PB, Int, PD, PE>(); 
+        
+        // Tuple<other.PackageProto, Program> prototypeName println;
+        // main_ut.gtest_test.GTest_Test() run;
+    }
+end

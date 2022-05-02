@@ -1,0 +1,13 @@
+package inter
+
+open
+object ProtoCExtendsBInterJ extends ProtoBExtendsA implements InterJ
+    override
+    func sum: Int a 
+        mult: Int b 
+            -> Int = a*b - 1;
+    override
+    func sum: Int a, Int b 
+        mult: Int c -> Int
+            = (a+b)*c -  1;
+end

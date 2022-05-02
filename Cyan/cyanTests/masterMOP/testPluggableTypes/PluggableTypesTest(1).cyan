@@ -1,0 +1,215 @@
+package testPluggableTypes
+
+
+object PluggableTypesTest<T>(Int@range(50, 500) iv_1_12)
+
+    func init { 
+        iv_1_12 = 500
+    }
+    
+    func init: Int@range(1, 12) n1_12, 
+               Char@range('a', 'e') ch_a_e,
+               String@regex("a*[AB]b*") s {
+        iv_1_12 = 500
+    }
+
+    func run {
+    
+        
+        var Char@range('a', 'c') ch_a_c;
+        var String@regex("a*b[A-Z]") ab;
+        var String s;
+        ab = "bB";
+        ab = "aaaaabC";
+        
+        var Boolean ok = true;
+        s = "bB";
+        {
+            ab = s;
+        } catch: { (: ExceptionStr e :) ok = false };
+        assert ok;
+
+        ok = true;
+        s = """aaaaabC""";
+        {
+            ab = s;
+        } catch: { (: ExceptionStr e :) ok = false; };
+        
+        
+        ok = false;
+        s = "abAZ";
+        {
+            ab = s;
+        } catch: { (: ExceptionStr e :) ok = true; };
+        assert ok;
+        
+        ok = false;
+        s = "aaaa";
+        {
+            ab = s;
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert ok;
+        
+        var Char ch;
+        ch = 'a';
+        ch_a_c = 'a';
+        ok = true;
+        {
+            ch_a_c = ch;
+        } catch: { (: ExceptionStr e :) ok = false };
+        assert ok;
+
+        ch = 'e';        
+        ok = false;
+        {
+            ch_a_c = ch;
+        } catch: { (: ExceptionStr e :) ok = true };
+        assert ok;
+
+        var Int@range(1, 12) month;
+        var Int@range(5, 10) n57;
+        n57 = 6;
+        month = n57;
+        
+        ok = false;
+        {
+            retIllegalRange println;
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+        ok = false;
+        {
+            retIllegalRange2 println;
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+        var Int p = 5;
+        ok = false;
+        {
+            rangeParam: p, 'a' rangeParam: 2, 'c';
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+
+        p = 1;
+        ok = false;
+        {
+            rangeParam: 10, 'a' rangeParam: p, 'c';
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+        var ch_p = 'e';
+        ok = false;
+        {
+            rangeParam: 8, ch_p rangeParam: 2, 'c';
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+        ch_p = 'A';
+        ok = false;
+        {
+            rangeParam: 9, 'a' rangeParam: 6, ch_p;
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+        ch_p = 'f';
+        var ppp = PluggableTypesTest<T>(3, 'a', "aAbbb");
+        ok = false;
+        {
+            ppp = PluggableTypesTest<T>(3, ch_p, "aAbbb");
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+        ok = false;
+        p = 45;
+        {
+            ppp = PluggableTypesTest<T>(p, 'e', "aAbbb");
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+        s = "Zc";
+        ok = false;
+        {
+            ppp = PluggableTypesTest<T>(p, 'e', s);
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+
+        ok = false;
+        {
+            var pchar = PluggableTypesTest<Char>(300) ;
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert !ok;
+
+        ok = false;
+        {   var outsideRange = 999;
+            var pchar = PluggableTypesTest<Char>(outsideRange);
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+
+        p = 13;
+        month = 4;
+        ok = false;
+        {
+            var v66 = [ month, p, 7 ];
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert !ok;
+        
+        ok = false;
+        {
+            var m787 = [ month -> month, p -> 5, 4 -> 1 ];
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert !ok;
+        
+        ok = false;
+        {
+            var m676 = [ month -> month, 5 -> p, 5 -> 9 ]
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert !ok;
+        
+        ok = false;
+        {
+            var k67 = month;
+            k67 = p;
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+        
+        ok = false;
+        {
+            let Int@range(0, 1) k69 = p;
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+
+        ok = false;
+        {
+            var Int@range(0, 1) n5656 = 0;
+            n5656 = n5656 + 1;
+            n5656 = n5656 + 1
+            
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+
+        ok = false;
+        {
+            var Int@range(0, 1) n5656 = 0;
+            n5656 = n5656 - 1;
+        } catch: { (: ExceptionStr e :) ok = true };        
+        assert ok;
+
+    }
+    
+    func retIllegalRange -> Int@range(0, 5) {
+        var Int n = 7;
+        return n;
+    }
+
+    func retIllegalRange2 -> Int@range(0, 5) = value7;
+
+    func rangeParam: Int@range(7, 10) n7_10, Char@range('a', 'c') ch_a_c
+         rangeParam: Int@range(2, 7) n2_7, Char@range('a', 'z') ch_a_z {
+    }
+
+    let Int value7 = 7;
+end
+

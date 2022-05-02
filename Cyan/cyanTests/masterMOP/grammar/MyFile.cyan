@@ -1,0 +1,19 @@
+package grammar
+
+object MyFile
+    @grammarMethod{*
+        ( open: String (read: | write: ) )
+    *}
+    func openReadWrite: Tuple<String, Union<f1, Any, f2, Any>> t -> Int {
+        let String name = t f1;
+
+        type t f2
+            case Any f1 {
+                return 0;
+            }
+            case Any f2 {
+                return 1;
+            }
+    }
+
+end

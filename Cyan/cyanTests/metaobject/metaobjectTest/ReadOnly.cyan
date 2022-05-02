@@ -1,0 +1,47 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'readOnly' should be attached to a method. 
+  It assures that there is no assignment to either
+  shared or non-shared fields inside the method.
+  Note that does not guarantee that the method does
+  not change the receiver fields (self fields). These
+  can be changed by methods called by the attached method:
+        @readOnly
+        func unary {
+            // otherMethod can change a field
+            self otherMethod;
+            // can change a field
+            // because it can keep a reference to
+            // the current self
+            aField set: 0;
+            // self is passed as parameter and
+            // a method that change a field can 
+            // be called
+            aField add: self;
+        }
+  
+    
+*}
+open
+object ReadOnly
+    
+    func run {
+        at: 10;
+    }
+
+    @readOnly
+    func at: Int n { 
+        // error if uncommented
+        //value = n; 
+        
+        // error if uncommented
+        //sharedValue = n;
+    }
+    
+    
+    var Int value = 0; 
+    shared var Int sharedValue = 0; 
+end
+

@@ -1,0 +1,7 @@
+package inter
+
+interface InterI
+    func sum: Int a 
+        mult: Int b 
+            -> Int
+end

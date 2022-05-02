@@ -1,0 +1,499 @@
+package cyan.reflect
+
+
+object CyanInterpreter 
+
+    func init 
+    func new -> cyan.reflect.CyanInterpreter 
+    func eval: (String cyanCode) 
+        self: (Any selfObject) 
+        varList: (Array<Tuple<String,Dyn>> varList)  -> cyan.lang.Any|cyan.lang.Nil 
+    func eval: (String cyanCode) 
+        self: (Any selfObject) 
+        nameValue: (String name, Dyn value)  -> cyan.lang.Any|cyan.lang.Nil 
+    func eval: (String cyanCode) 
+        self: (Any selfObject)  -> cyan.lang.Any|cyan.lang.Nil 
+    func eval: (String cyanCode)  -> cyan.lang.Any|cyan.lang.Nil 
+    func javaEval: (String cyanCode)  -> java.lang.Object 
+    func javaEval: (String cyanCode) 
+        self: (Any selfObject)  -> java.lang.Object 
+    func javaEval: (String cyanCode) 
+        self: (Any selfObject) 
+        varList: (Array<Tuple<String,Dyn>> varList)  -> java.lang.Object 
+    private func fromJava: (java.lang.Object value)  -> Dyn 
+    override func prototype -> cyan.reflect.CyanInterpreter 
+    override func clone -> cyan.reflect.CyanInterpreter 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobject 
+
+    func init 
+    func init: (meta.CyanMetaobject hidden)  
+    func new -> cyan.reflect.CyanMetaobject 
+    func new: (meta.CyanMetaobject p0)  -> cyan.reflect.CyanMetaobject 
+    func getHidden -> meta.CyanMetaobject 
+    func getName -> String 
+    func getAnnotation -> meta.WrAnnotation 
+    func getCanonicalPath -> String 
+    func getFileName -> String 
+    func getPackageName -> String 
+    @prototypeCallOnly 
+    final func removeQuotes: (String arg0)  -> String 
+    func getErrorList -> java.util.List 
+    func getPackageOfType -> String 
+    func getColorList -> java.util.List 
+    func setFileName: (String arg0)  
+    func setPackageName: (String arg0)  
+    func addError: (meta.WrSymbol arg0, String arg1)  
+    func addError: (String arg0)  
+    func isExpression -> Boolean 
+    func setAnnotation: (meta.WrAnnotation arg0)  
+    func getReplacementPolicy -> meta.ReplacementPolicyInGenericInstantiation 
+    func getCurrentPrototype -> meta.WrPrototype 
+    func getCodeCompletionAlternatives: (java.lang.Integer arg0)  -> java.util.List 
+    func getPrototypeOfType -> String 
+    func getErrorMessageList_cleanAll -> java.util.List 
+    @prototypeCallOnly 
+    final func unescapeString: (String arg0)  -> String 
+    @prototypeCallOnly 
+    final func escapeString: (String arg0)  -> String 
+    func setCanonicalPath: (String arg0)  
+    override func prototype -> cyan.reflect.CyanMetaobject 
+    override func clone -> cyan.reflect.CyanMetaobject 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+abstract open object CyanMetaobjectActionFunction extends CyanMetaobject
+          implements IActionFunction
+
+    func init: (String name)  
+    override func getHidden -> meta.CyanMetaobjectActionFunction 
+    override abstract func eval: (Dyn value)  -> Dyn 
+    override func getPackageOfType -> String 
+    override func getPrototypeOfType -> String 
+    override func prototype -> cyan.reflect.CyanMetaobjectActionFunction 
+    override func clone -> cyan.reflect.CyanMetaobjectActionFunction 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectAtAnnot extends CyanMetaobject
+
+    func init: (String name, String parameterKind, Array<String> decKindList, String visibility)  
+    func init: (String name, String parameterKind, Array<String> decKindList)  
+    func init: (String name, String parameterKind)  
+    func init: (String name)  
+    func new: (String p0, String p1, Array<String> p2, String p3)  -> cyan.reflect.CyanMetaobjectAtAnnot 
+    func new: (String p0, String p1, Array<String> p2)  -> cyan.reflect.CyanMetaobjectAtAnnot 
+    func new: (String p0, String p1)  -> cyan.reflect.CyanMetaobjectAtAnnot 
+    func new: (String p0)  -> cyan.reflect.CyanMetaobjectAtAnnot 
+    override func getHidden -> meta.CyanMetaobjectAtAnnot 
+    override func getName -> String 
+    override func getAnnotation -> meta.WrAnnotationAt 
+    func check 
+    @prototypeCallOnly 
+    final func extractSlotInterface: (String arg0)  -> String 
+    override func getPackageOfType -> String 
+    func getAttachedDeclaration -> meta.IDeclaration 
+    func shouldBeAttachedToSomething -> Boolean 
+    func getParameterKinds -> meta.AnnotationArgumentsKind 
+    override func getPrototypeOfType -> String 
+    func attachedListAsString -> String 
+    func mayBeAttachedToSomething -> Boolean 
+    func attachedDecKindListSubsetOf: (meta.AttachedDeclarationKind[] arg0)  -> Boolean 
+    func getAttachedDecKindList -> meta.AttachedDeclarationKind[] 
+    func mayBeAttachedTo: (meta.AttachedDeclarationKind arg0)  -> Boolean 
+    func myClone -> meta.CyanMetaobjectAtAnnot 
+    func ee: (meta.CyanMetaobjectAtAnnot arg0)  
+    func shouldTakeText -> Boolean 
+    func getVisibility -> meta.Token 
+    override func prototype -> cyan.reflect.CyanMetaobjectAtAnnot 
+    override func clone -> cyan.reflect.CyanMetaobjectAtAnnot 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object CyanMetaobjectCreateInit extends CyanMetaobjectAtAnnot
+          implements IAction_afterResTypes
+
+    func init 
+    func new -> cyan.reflect.CyanMetaobjectCreateInit 
+    override func afterResTypes_codeToAdd: (meta.ICompiler_afterResTypes compiler, Array<Tuple<meta.WrAnnotation,Array<meta.ISlotSignature>>> infoList)  -> Tuple<String,String> 
+    override func runUntilFixedPoint -> Boolean 
+    override func afterResTypes_beforeMethodCodeList: (meta.ICompiler_afterResTypes compiler)  -> Array<Tuple<String,String,Boolean>> 
+    override func afterResTypes_renameMethod: (meta.ICompiler_afterResTypes compiler_afterResTypes)  -> Array<Tuple<String,Array<String>>> 
+    override func prototype -> cyan.reflect.CyanMetaobjectCreateInit 
+    override func clone -> cyan.reflect.CyanMetaobjectCreateInit 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectCreateMissingField extends CyanMetaobjectAtAnnot
+          implements IActionFieldMissing_semAn
+
+    func init 
+    func new -> cyan.reflect.CyanMetaobjectCreateMissingField 
+    override func semAn_replaceGetMissingField: (meta.WrExprSelfPeriodIdent fieldToGet, meta.WrEnv env)  -> Tuple<String,String,String> 
+    override func semAn_replaceSetMissingField: (meta.WrExprSelfPeriodIdent fieldToSet, meta.WrExpr rightHandSideAssignment, meta.WrEnv env)  -> String 
+    override func prototype -> cyan.reflect.CyanMetaobjectCreateMissingField 
+    override func clone -> cyan.reflect.CyanMetaobjectCreateMissingField 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectErrorActionFunction extends CyanMetaobjectActionFunction
+
+    func init 
+    func new -> cyan.reflect.CyanMetaobjectErrorActionFunction 
+    override func getName -> String 
+    override func eval: (Dyn input)  -> Dyn 
+    override func prototype -> cyan.reflect.CyanMetaobjectErrorActionFunction 
+    override func clone -> cyan.reflect.CyanMetaobjectErrorActionFunction 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectLiteralObject extends CyanMetaobject
+          implements IAction_semAn
+
+    func init: (meta.CyanMetaobjectLiteralObject hidden)  
+    func new: (meta.CyanMetaobjectLiteralObject p0)  -> cyan.reflect.CyanMetaobjectLiteralObject 
+    override func getHidden -> meta.CyanMetaobjectLiteralObject 
+    override func getName -> String 
+    override func getPackageOfType -> String 
+    override func semAn_codeToAdd: (meta.ICompiler_semAn arg0)  -> String 
+    override func getPrototypeOfType -> String 
+    func getColorTokenList: (meta.WrAnnotationLiteralObject arg0)  -> java.util.List 
+    func getUsefulString -> String 
+    override func prototype -> cyan.reflect.CyanMetaobjectLiteralObject 
+    override func clone -> cyan.reflect.CyanMetaobjectLiteralObject 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectLiteralObjectSeq extends CyanMetaobjectLiteralObject
+
+    func init: (String leftCharSequence)  
+    func new: (String p0)  -> cyan.reflect.CyanMetaobjectLiteralObjectSeq 
+    override func getHidden -> meta.CyanMetaobjectLiteralObjectSeq 
+    func myClone -> meta.CyanMetaobjectLiteralObjectSeq 
+    func leftCharSequence -> String 
+    override func prototype -> cyan.reflect.CyanMetaobjectLiteralObjectSeq 
+    override func clone -> cyan.reflect.CyanMetaobjectLiteralObjectSeq 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectLiteralString extends CyanMetaobjectLiteralObject
+
+    func init: (Array<String> prefixNameList)  
+    func new: (Array<String> p0)  -> cyan.reflect.CyanMetaobjectLiteralString 
+    override func getHidden -> meta.CyanMetaobjectLiteralString 
+    func myClone -> meta.CyanMetaobjectLiteralString 
+    func getPrefixNames -> java.lang.String[] 
+    override func prototype -> cyan.reflect.CyanMetaobjectLiteralString 
+    override func clone -> cyan.reflect.CyanMetaobjectLiteralString 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectMacro extends CyanMetaobject
+          implements IParseMacro_parsing, IAction_semAn
+
+    func init: (Array<String> startKeywords, Array<String> macroKeywords)  
+    func new: (Array<String> p0, Array<String> p1)  -> cyan.reflect.CyanMetaobjectMacro 
+    override func getHidden -> meta.CyanMetaobjectMacro 
+    override func getName -> String 
+    override func getAnnotation -> meta.WrAnnotationMacroCall 
+    override func getPackageOfType -> String 
+    override func semAn_codeToAdd: (meta.ICompiler_semAn arg0)  -> String 
+    override func getPrototypeOfType -> String 
+    func myClone -> meta.CyanMetaobjectMacro 
+    func getMacroKeywords -> java.lang.String[] 
+    func getStartKeywords -> java.lang.String[] 
+    func getColorTokenList: (meta.WrAnnotationMacroCall arg0)  -> java.util.List 
+    override func parsing_parseMacro: (meta.ICompilerMacro_parsing arg0)  
+    override func prototype -> cyan.reflect.CyanMetaobjectMacro 
+    override func clone -> cyan.reflect.CyanMetaobjectMacro 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object CyanMetaobjectNumber extends CyanMetaobjectLiteralObject
+
+    func init: (Array<String> suffixNameList)  
+    func new: (Array<String> p0)  -> cyan.reflect.CyanMetaobjectNumber 
+    override func getHidden -> meta.CyanMetaobjectNumber 
+    func getStartOffset -> java.lang.Integer 
+    func getEndOffset -> java.lang.Integer 
+    func getSuffixNameList -> java.lang.String[] 
+    func myClone -> meta.CyanMetaobjectNumber 
+    override func prototype -> cyan.reflect.CyanMetaobjectNumber 
+    override func clone -> cyan.reflect.CyanMetaobjectNumber 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+object CyanMetaobjectProtoInfo extends CyanMetaobjectAtAnnot
+          implements IAction_afterResTypes
+
+    func init 
+    func new -> cyan.reflect.CyanMetaobjectProtoInfo 
+    override func afterResTypes_codeToAdd: (meta.ICompiler_afterResTypes compiler, Array<Tuple<meta.WrAnnotation,Array<meta.ISlotSignature>>> infoList)  -> Tuple<String,String> 
+    override func runUntilFixedPoint -> Boolean 
+    override func afterResTypes_beforeMethodCodeList: (meta.ICompiler_afterResTypes compiler)  -> Array<Tuple<String,String,Boolean>> 
+    override func afterResTypes_renameMethod: (meta.ICompiler_afterResTypes compiler_afterResTypes)  -> Array<Tuple<String,Array<String>>> 
+    override func prototype -> cyan.reflect.CyanMetaobjectProtoInfo 
+    override func clone -> cyan.reflect.CyanMetaobjectProtoInfo 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+public interface IActionAttachedType_semAn
+    func semAn_checkLeftTypeChangeRightExpr: (meta.ICompiler_semAn compiler_semAn, meta.WrType leftType, java.lang.Object leftASTNode, String leftKind, meta.WrType rightType, meta.WrExpr rightExpr)  -> String 
+    func semAn_checkRightTypeChangeRightExpr: (meta.ICompiler_semAn compiler_semAn, meta.WrType leftType, java.lang.Object leftASTNode, String leftKind, meta.WrType rightType, meta.WrExpr rightExpr)  -> String 
+    func checkAnnotation 
+    func doNotCheckIn -> Array<Tuple<String,String>> 
+    func allowDoNotCheckInList -> Boolean 
+end
+
+
+
+public interface IActionFieldAccess_semAn
+    func semAn_replaceGetField: (meta.WrExpr fieldToGet, meta.WrEnv env)  -> String 
+    func semAn_replaceSetField: (meta.WrExpr fieldToSet, meta.WrExpr rightHandSideAssignment, meta.WrEnv env)  -> String 
+    func semAn_replacePlusPlusField: (meta.WrStatement plusPlusField, meta.WrEnv env)  -> String 
+    func semAn_replaceMinusMinusField: (meta.WrStatement minusMinusField, meta.WrEnv env)  -> String 
+end
+
+
+
+public interface IActionFieldMissing_semAn
+    func semAn_replaceGetMissingField: (meta.WrExprSelfPeriodIdent fieldToGet, meta.WrEnv env)  -> Tuple<String,String,String> 
+    func semAn_replaceSetMissingField: (meta.WrExprSelfPeriodIdent fieldToSet, meta.WrExpr rightHandSideAssignment, meta.WrEnv env)  -> String 
+end
+
+
+
+public interface IActionFunction
+    func eval: (Dyn input)  -> Dyn 
+    func getPackageOfType -> String 
+    func getPrototypeOfType -> String 
+end
+
+
+
+public interface IActionMessageSend_semAn          extends IStayPrototypeInterface
+    func semAn_analyzeReplaceKeywordMessage: (meta.WrExprMessageSendWithKeywordsToExpr messageSendExpr, meta.WrEnv env)  -> Tuple<String,String,String> 
+    func semAn_analyzeReplaceUnaryMessage: (meta.WrExprMessageSendUnaryChainToExpr messageSendExpr, meta.WrEnv env)  -> Tuple<String,String,String> 
+    func semAn_analyzeReplaceUnaryMessageWithoutSelf: (meta.WrExprIdentStar messageSendExpr, meta.WrEnv env)  -> Tuple<String,String,String> 
+end
+
+
+
+public interface IActionMethodMissing_semAn          extends IStayPrototypeInterface
+    func semAn_missingKeywordMethod: (meta.WrExpr receiver, meta.WrMessageWithKeywords message, meta.WrEnv env)  -> Tuple<String,String,String> 
+    func semAn_missingUnaryMethod: (meta.WrExpr receiver, meta.WrSymbol unarySymbol, meta.WrEnv env)  -> Tuple<String,String,String> 
+end
+
+
+
+public interface IActionNewPrototypes_afterResTypes
+    func afterResTypes_NewPrototypeList: (meta.ICompiler_afterResTypes compiler_afterResTypes)  -> Array<Tuple<String,String>> 
+end
+
+
+
+public interface IActionNewPrototypes_parsing
+    func parsing_NewPrototypeList: (meta.ICompilerAction_parsing compiler)  -> Array<Tuple<String,String>> 
+end
+
+
+
+public interface IActionNewPrototypes_semAn
+    func semAn_NewPrototypeList: (meta.ICompiler_semAn compiler_semAn)  -> Array<Tuple<String,String>> 
+end
+
+
+
+public interface IActionPrototypeLater_parsing
+    func parsing_actionPrototypeLater: (meta.ICompilerPrototypeLater_parsing compiler)  
+end
+
+
+
+public interface IActionVariableDeclaration_semAn
+    func semAn_codeToAddAfter: (meta.WrEnv env)  -> String 
+end
+
+
+
+public interface IAction_afterResTypes
+    func afterResTypes_codeToAdd: (meta.ICompiler_afterResTypes compiler, Array<Tuple<meta.WrAnnotation,Array<meta.ISlotSignature>>> infoList)  -> Tuple<String,String> 
+    func runUntilFixedPoint -> Boolean 
+    func afterResTypes_beforeMethodCodeList: (meta.ICompiler_afterResTypes compiler)  -> Array<Tuple<String,String,Boolean>> 
+    func afterResTypes_renameMethod: (meta.ICompiler_afterResTypes compiler_afterResTypes)  -> Array<Tuple<String,Array<String>>> 
+end
+
+
+
+public interface IAction_dpp
+    func dpp_action: (meta.ICompiler_dpp project)  
+end
+
+
+
+public interface IAction_semAn
+    func semAn_codeToAdd: (meta.ICompiler_semAn compiler_semAn)  -> String 
+end
+
+
+
+public interface ICheckDeclaration_afterSemAn          extends ICheck_afterResTypes_afterSemAn
+    func afterSemAn_checkDeclaration: (meta.ICompiler_semAn compiler)  
+end
+
+
+
+public interface ICheckMessageSend_afterSemAn          extends ICheck_afterResTypes_afterSemAn, IStayPrototypeInterface
+    func afterSemAn_checkUnaryMessageSend: (meta.WrExpr receiverExpr, meta.WrPrototype receiverType, String receiverKind, meta.WrSymbol unarySymbol, meta.WrEnv env)  
+    func afterSemAn_checkUnaryMessageSendMostSpecific: (meta.WrExpr receiverExpr, meta.WrPrototype receiverType, String receiverKind, meta.WrSymbol unarySymbol, meta.WrPrototype mostSpecificReceiver, meta.WrEnv env)  
+    func afterSemAn_checkKeywordMessageSend: (meta.WrExpr receiverExpr, meta.WrPrototype receiverType, String receiverKind, meta.WrMessageWithKeywords message, meta.WrMethodSignature methodSignature, meta.WrEnv env)  
+    func afterSemAn_checkKeywordMessageSendMostSpecific: (meta.WrExpr receiverExpr, meta.WrPrototype receiverType, String receiverKind, meta.WrMessageWithKeywords message, meta.WrMethodSignature methodSignature, meta.WrPrototype mostSpecificReceiver, meta.WrEnv env)  
+end
+
+
+
+public interface ICheckOverride_afterSemAn          extends ICheck_afterResTypes_afterSemAn, IStayPrototypeInterface
+    func afterSemAn_checkOverride: (meta.ICompiler_semAn compiler_semAn, meta.WrMethodDec method)  
+end
+
+
+
+public interface ICheckPrototype_bsa
+    func bsa_checkPrototype: (meta.ICompiler_semAn compiler)  
+end
+
+
+
+public interface ICheckSubprototype_afterSemAn          extends ICheck_afterResTypes_afterSemAn, IStayPrototypeInterface
+    func afterSemAn_checkSubprototype: (meta.ICompiler_semAn compiler_semAn, meta.WrPrototype subPrototype)  
+end
+
+
+
+public interface ICheck_afterResTypes_afterSemAn
+end
+
+
+
+public interface ICodeg
+    func getFileInfoExtension -> String 
+    func getUserInput: (meta.ICompiler_ded compiler_ded, Array<Byte> previousCodegFileText)  -> Array<Byte> 
+    func demandsLabel -> Boolean 
+    func newCodegAnnotation -> String 
+    func getNewFirstParameter -> String 
+    func getStartOffset -> Int 
+    func getEndOffset -> Int 
+end
+
+
+
+public interface ICommunicateInPrototype_afterResTypes_semAn_afterSemAn
+    func afterResTypes_semAn_afterSemAn_shareInfoPrototype: (meta.WrEnv env)  -> Dyn 
+    func afterResTypes_semAn_afterSemAn_receiveInfoPrototype: (Set<Tuple<String,Int,Int,Dyn>> annotationInfoSet, meta.WrEnv env)  
+end
+
+
+
+public interface ICommunicateInPrototype_ded
+    func ded_shareInfoPrototype -> Dyn 
+    func ded_receiveInfoPrototype: (Set<Tuple<String,Int,Int,Dyn>> annotationInfoSet)  
+end
+
+
+
+public interface ICompilerInfo_parsing
+    func action_parsing: (meta.ICompilerAction_parsing compiler_parsing)  
+end
+
+
+
+public interface IInformCompilationError
+    func getLineNumber -> Int 
+    func getErrorMessage -> String 
+    func activeInGenericPrototype -> Boolean 
+end
+
+
+
+public interface IListAfter_afterResTypes
+    func after_afterResTypes_action: (meta.ICompiler_afterResTypes compiler)  
+    func getCompilationUnit -> meta.WrCompilationUnit 
+end
+
+
+
+public interface IParseMacro_parsing          extends IParse_parsing
+    func parsing_parseMacro: (meta.ICompilerMacro_parsing compiler_parsing)  
+end
+
+
+
+public interface IParseWithCyanCompiler_parsing          extends IParse_parsing
+    func parsing_parse: (meta.ICompiler_parsing compiler_parsing)  
+end
+
+
+
+public interface IParse_parsing
+end
+
+
+
+public interface IStayPrototypeInterface
+end
+
+

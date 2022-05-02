@@ -1,0 +1,116 @@
+package graph
+
+@init#afterResTypes(numVertices, edgeArray)
+object Graph
+    func init { }
+    
+    @annot( #f1 ) @property#afterResTypes 
+    var Int numVertices = 0;
+    @annot( #f2 ) @property#afterResTypes 
+    var Array<Edge> edgeArray = Array<Edge>();
+    
+    @grammarMethod{*
+        (add: (edge: Int, Int)* )    
+    *}
+    func  addEdges: Tuple<Any, Array<Tuple<Int, Int>>> t  {
+        for elem in t f2 {
+            let v1 = elem f1;
+            let v2 = elem f2;
+            if v1 > numVertices { numVertices = v1 }
+            if v2 > numVertices { numVertices = v2 }
+            edgeArray add: Edge(v1, v1);
+        }
+    }
+    
+    func add: Edge edge {
+        let v1 = edge from;
+        let v2 = edge to;
+        if v1 > numVertices { numVertices = v1 }
+        if v2 > numVertices { numVertices = v2 }
+        edgeArray add: edge;
+    }
+    
+    func out: Int vertex -> Array<Edge> {
+        let Array<Edge> r = Array<Edge>();
+        for e in edgeArray {
+            if e getFrom == vertex {
+                r add: e
+            }
+        }
+        return r
+    }
+    
+    func in: Int vertex -> Array<Edge> {
+        let Array<Edge> r = Array<Edge>();
+        for e in edgeArray {
+            if e getTo == vertex {
+                r add: e
+            }
+        }
+        return r
+    }
+    
+    override
+    func asString -> String {
+        var s = "{ ";
+        var count = edgeArray size;
+        for elem in edgeArray {
+            s = s ++ "(" ++ elem getFrom ++ ", " ++ elem getTo ++ ")";
+            --count;
+            if count > 0 {
+                s = s ++ ", ";
+            }
+        }
+        s = s ++ " }";
+        return s
+    }
+ @pushCompilationContextStatement(pp1, pp) 
+
+    // Methods added by the compiler
+    override    func prototype -> Graph {
+        @javacode{* return prototype;
+        *}
+    } 
+ @popCompilationContext(pp1) 
+ @pushCompilationContextStatement(atisemAn_id_3, "init", graph, "C:\Dropbox\Cyan\mix\cyanSite\exemplos codigo Renato\exemplo 01\graph\Graph.cyan", 3, "    func init:  Int numVertices,  Array<graph.Edge> edgeArray;") 
+    func init:  Int numVertices,  Array<graph.Edge> edgeArray {
+        self.numVertices = numVertices;
+        self.edgeArray = edgeArray;
+    }
+ 
+ @popCompilationContext(atisemAn_id_3) 
+ @pushCompilationContextStatement(atisemAn_id_4, "property", graph, "C:\Dropbox\Cyan\mix\cyanSite\exemplos codigo Renato\exemplo 01\graph\Graph.cyan", 7, "    func getNumVertices -> cyan.lang.Int;      func setNumVertices: cyan.lang.Int other;") 
+    func getNumVertices -> cyan.lang.Int = numVertices;
+    func setNumVertices: cyan.lang.Int other { self.numVertices = other; }
+
+ @popCompilationContext(atisemAn_id_4) 
+ @pushCompilationContextStatement(atisemAn_id_5, "property", graph, "C:\Dropbox\Cyan\mix\cyanSite\exemplos codigo Renato\exemplo 01\graph\Graph.cyan", 9, "    func getEdgeArray -> cyan.lang.Array<graph.Edge>;      func setEdgeArray: cyan.lang.Array<graph.Edge> other;") 
+    func getEdgeArray -> cyan.lang.Array<graph.Edge> = edgeArray;
+    func setEdgeArray: cyan.lang.Array<graph.Edge> other { self.edgeArray = other; }
+
+ @popCompilationContext(atisemAn_id_5) 
+ @pushCompilationContextStatement(new16, new) 
+    // Methods added by the compiler
+
+    override    func clone -> Graph {
+        @javacode<<*
+        try {
+            return (_Graph ) this.clone(); 
+        } catch (CloneNotSupportedException e) { }
+        return null;
+        *>>    } 
+
+    func new -> Graph {
+         @javacode<**< 
+            return new _Graph();         >**>
+    }
+
+    func new: ( Int p0, Array<graph.Edge> p1 ) -> Graph {
+        @javacode<**< 
+            return new _Graph(_p0, _p1);
+        >**>
+    }
+ @popCompilationContext(new16) 
+end
+
+

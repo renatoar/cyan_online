@@ -1,0 +1,9 @@
+package cyan.lang
+
+@doc{*
+    See the Cyan manual for help with this prototype
+*}
+@createCatchWarning
+object CatchWarning<T+>
+    
+end

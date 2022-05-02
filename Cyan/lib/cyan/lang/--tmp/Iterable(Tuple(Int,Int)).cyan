@@ -1,0 +1,8 @@
+package cyan.lang
+
+
+public interface Iterable<Tuple<Int, Int>>
+    func iterator -> Iterator<Tuple<Int, Int>> 
+    func foreach: Function<Tuple<Int, Int>, Nil>  
+end
+

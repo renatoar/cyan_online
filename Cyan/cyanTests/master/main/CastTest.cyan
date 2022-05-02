@@ -1,0 +1,47 @@
+package main
+
+object CastTest
+
+    func run { 
+        var a;
+        a = 0;
+        var String|Nil sn = "abc";
+        cast Int n = a, String s = sn, s2 = sn {
+            var nn = (n+1)*2 + n;
+            assert n == 0 && nn == 2;
+            var ss = s substring: 1;
+            assert ss == "bc";
+            ss = ss substring: 1;
+            assert ss == "c";
+        }
+        var Any any = "abcde";
+        var Any number = 3.14;
+        cast String s = any {
+            assert "cde" == (s substring: 2);
+        }
+        cast Int s = any, Double d = number {
+            assert false;
+        }
+        else {
+            assert true;
+        }
+        cast String s = any, Double d = number {
+            assert true;
+        }
+        else {
+            assert false;
+        }
+        
+        var Nil|CastTest np = main.CastTest();
+        var Dyn dyn = np;
+        
+        cast main.CastTest p = np, p2 = np, 
+             main.CastTest p3 = dyn {
+            assert p == p2 && p2 == p3;
+        }
+        
+
+
+    }
+    
+end

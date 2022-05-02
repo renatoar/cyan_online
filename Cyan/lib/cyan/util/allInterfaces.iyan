@@ -1,0 +1,39 @@
+package cyan.util
+
+
+object Date(Int month, Int day, Int year) 
+
+    func init: (Int month, Int day, Int year)  
+    func new: (Int month, Int day, Int year)  -> cyan.util.Date 
+    override func asString -> String 
+    override func prototype -> cyan.util.Date 
+    override func clone -> cyan.util.Date 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+
+
+open object FSM 
+
+    func init 
+    func init: (String str)  
+    func new -> cyan.util.FSM 
+    func new: (String p0)  -> cyan.util.FSM 
+    func add: (String srcState, String inp, String dstState, Function<Nil> anonFunc)  
+    func getCurrentState -> String 
+    func setCurrentState: (String str)  
+    func getInitialState -> String 
+    func setInitialState: (String inSt)  
+    func processInput: (String inp)  -> String 
+    func eval: (String inp)  -> Boolean 
+    func eval: (Array<String> arr)  -> Boolean 
+    override func prototype -> cyan.util.FSM 
+    override func clone -> cyan.util.FSM 
+    override func getFeatureListNameDoesNotCollide__ -> Array<Tuple<key,String,value,Any>> 
+    override func getAnnotListNameDoesNotCollide__ -> Array<Any> 
+    override func getSlotFeatureListNameDoesNotCollide__ -> Array<Tuple<slotName,String,key,String,value,Any>> 
+end
+
+

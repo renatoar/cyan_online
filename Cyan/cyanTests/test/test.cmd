@@ -1,0 +1,1 @@
+"C:\Program Files\Amazon Corretto\jdk1.8.0_302\bin\java" -cp "C:\Cyan\lib\cyan.lang.jar";"C:\Cyan\lib";"C:\Cyan\cyanTests\java-for-test";"C:\Cyan\lib\cyanruntime.jar"  main.Project

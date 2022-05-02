@@ -1,0 +1,7 @@
+package generic02.ga
+
+object One<Int>
+    func getInt -> Int = 11;
+    func strOne -> String = "Int Int";
+    
+end

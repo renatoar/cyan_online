@@ -1,0 +1,55 @@
+package generic02.gb
+
+/*
+   test the rules 
+       QualifId ::= Id { "." Id }
+       ExprPrimary ::= "self" [ "." Id ]  |
+                       "super" UnaryId |
+                       QualifId { "<" TypeList ">" }+ [ ObjectCreation ] |
+                       "typeof" "(" QualifId [ "<" TypeList ">" ] ")"
+       MetSigUnary ::= Id
+       SelecWithParam ::= IdColon |
+                          IdColon [ "[]" ] ParamList 
+       MessageSendNonUnary ::= { [ BACKQUOTE ] IdColon [ RealParamters ] }+
+       SingleType ::= QualifId { "<" TypeList ">" } | BasicType |
+                      "typeof" "(" QualifId [ "<" TypeList ">" ] ")"
+*/
+
+object IdPackage<M> extends IdPackageSuper<M>
+      // M should be "mult"
+    @firstBelongsTo(M, "mult")
+    fun init {
+    }
+    fun test {
+        var M.MultiA a = M.MultiA new;
+        const M.MultiA b = M.MultiA();
+        var typeof( M.MultiA ) c = M.MultiA();
+        
+        assert (a sum: 0) == 0;
+        assert (c sum: 1) == 1;
+        
+        const selfM = self M;
+        const superM = super M;
+        const stringM = ( @paramToString(M) );
+        const superMdot = super M:;
+        const superMdotabcde = super M: "abcde";
+        const selfMdotabc = M: "abc";
+        const selfMdot = M: ;
+        const selfMdotabcExplicit = self M: "abc";
+        const selfMdotExplicit = self M:;
+        
+        assert selfM == "mult";
+        assert superM == "" + stringM + stringM &&
+               (superMdot) == "ab" &&
+               superMdotabcde == "abcde";
+        
+        assert selfMdotabc == "mult:abc" &&
+               selfMdot == "abc";
+        assert selfMdotabcExplicit == "mult:abc" &&
+               selfMdotExplicit == "abc";
+    }
+    fun M -> String = ( @paramToString(M) );
+    fun M: -> String = "abc";
+    fun M: String s = "mult:" + s;
+end
+

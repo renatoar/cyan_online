@@ -1,0 +1,11 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+interface IAction_dpp
+
+    func dpp_action: ICompiler_dpp project
+    
+end

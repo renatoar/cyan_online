@@ -1,0 +1,5 @@
+package main
+
+interface IProgram
+    func theSuperOne: String s -> String
+end

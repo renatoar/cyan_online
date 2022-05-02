@@ -1,0 +1,15 @@
+package abstractPackage
+
+open
+object C extends B
+
+    override
+    func run  -> Int = 1;
+    
+    override
+    func run: Int a -> Int = a + 1;
+    override
+    func run: Int a with: String s -> Int = a + 1;
+    override
+    func m0: Int a -> Int = a + 1;
+end

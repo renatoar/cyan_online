@@ -1,0 +1,61 @@
+package cyan.lang
+
+object Stack<T>
+    
+    func isEmpty -> Boolean { 
+        @javacode{*
+            return new CyBoolean(stack.empty());
+        *}
+    }
+    
+    func peek -> T {
+        if isEmpty {
+            throw: ExceptionStackEmpty();
+        }
+        else {
+            @javacode{*
+                return stack.peek();            
+            *}
+        }
+    }
+    
+    func pop -> T {
+        @javacode{*
+            return stack.pop();
+        *}
+    }
+    
+    func push: T item {
+        @javacode{*
+            stack.push(_item);
+        *}
+        return Nil
+    }
+    /* return -1 if 'item' was not found in the stack, 0 if it is in
+       the top, 1 if it is just below top, and so on
+    */
+    func search: T item -> Int {
+        let size = 0;
+        @javacode{*
+            _size = new CyInt(stack.size());
+        *}
+        for i in 0..< size {
+            if elementAt: size - 1 - i == item {
+                return i
+            }
+        }
+        return -1
+    }
+    
+    func elementAt: Int n -> T {
+        @javacode{*
+            return stack.elementAt(_n.n);
+        *}
+    }
+    
+    @javacode{**
+        static public java.util.Stack<T> stack = new java.util.Stack<>();
+    **}
+    
+end
+

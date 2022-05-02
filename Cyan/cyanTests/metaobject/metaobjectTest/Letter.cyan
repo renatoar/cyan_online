@@ -1,0 +1,28 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'letter' should be attached to a Char in a variable
+  declaration. It checks whether a value assigned to the
+  variable is a letter.
+*}
+object Letter
+
+    func run {
+        var Char@letter ch;
+        ch = 'a'; // ok
+        // compile-time error if uncommented
+        // ch = '#';
+        var Char other = '#';
+        var ok = false;
+        { 
+            ch = other; // runtime error
+        } catch: { (: CyException e :) 
+             ok = true
+        };
+        assert ok;
+    
+    }
+
+end
+

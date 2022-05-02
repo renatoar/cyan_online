@@ -1,0 +1,19 @@
+/*
+    compile all interfaces of package cyan.lang in
+    a file so that cyan.lang does not need to be
+    recompiled in every compilation.
+*/
+
+// false: use compiled cyan.lang
+@feature("compilePackageCyanLang", true)
+program 
+
+/*
+    @annot("compilePackage")
+    package cyan.math at "C:\Dropbox\Cyan\lib\cyan\math"
+    @annot("compilePackage")
+    package cyan.reflect at "C:\Dropbox\Cyan\lib\cyan\reflect"
+    @annot("compilePackage")
+    package cyan.io at "C:\Dropbox\Cyan\lib\cyan\io"
+  
+*/  

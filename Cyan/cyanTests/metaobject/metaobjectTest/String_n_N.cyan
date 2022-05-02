@@ -1,0 +1,23 @@
+package metaobjectTest
+
+
+@doc{*
+    This is a literal string annotation, an identifier precedes a literal
+    string. In the string, escape characters are not considered.
+    The algorithm used for not-escaping the characters is not perfect.
+    It only considers letters such as \n and \r. An alternative to 
+    this metaobject is to use triple quotes:
+          assert """\n""" == n"\n";
+*}
+object String_n_N
+
+    func run {
+        var s = n"\r\n";
+        assert s size == 4;
+        assert s == """\r\n""";
+        
+        assert """\n""" == n"\n";
+    }
+
+end
+

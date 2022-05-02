@@ -1,0 +1,72 @@
+package cyan.reflect
+
+import meta
+import java.lang
+
+
+open 
+object CyanMetaobjectMacro extends CyanMetaobject 
+          implements IParseMacro_parsing, IAction_semAn
+
+    func init: Array<String> startKeywords, Array<String> macroKeywords {
+        @javacode{*
+            super( new meta.CyanMetaobjectMacro(
+               meta.CyanMetaobjectAtAnnot.fromCyanArrayStringToJavaArrayString(_startKeywords),
+               meta.CyanMetaobjectAtAnnot.fromCyanArrayStringToJavaArrayString(_macroKeywords)
+             ));
+        *}
+    }
+    override
+    func getHidden -> meta.CyanMetaobjectMacro { @javacode{* return (meta.CyanMetaobjectMacro) super._getHidden(); *} } 
+
+
+    override
+    func getName  -> String {
+        return self getHidden getName
+    }
+
+    override
+    func getAnnotation  -> meta.WrAnnotationMacroCall {
+        return self getHidden getAnnotation
+    }
+
+    override
+    func getPackageOfType  -> String {
+        return self getHidden getPackageOfType
+    }
+
+    override
+    func semAn_codeToAdd: meta.ICompiler_semAn arg0 -> String {
+        let StringBuffer s = self getHidden semAn_codeToAdd: arg0;
+        @javacode{*
+        return new CyString(_s.toString());
+        *}
+
+    }
+
+    override
+    func getPrototypeOfType  -> String {
+        return self getHidden getPrototypeOfType
+    }
+
+    func myClone  -> meta.CyanMetaobjectMacro {
+        return self getHidden myClone
+    }
+
+    func getMacroKeywords  -> java.lang.String[] {
+        return self getHidden getMacroKeywords
+    }
+
+    func getStartKeywords  -> java.lang.String[] {
+        return self getHidden getStartKeywords
+    }
+
+    func getColorTokenList: meta.WrAnnotationMacroCall arg0 -> java.util.List {
+        return self getHidden getColorTokenList: arg0
+    }
+
+    override
+    func parsing_parseMacro: meta.ICompilerMacro_parsing arg0 {
+        self getHidden parsing_parseMacro: arg0
+    }
+end

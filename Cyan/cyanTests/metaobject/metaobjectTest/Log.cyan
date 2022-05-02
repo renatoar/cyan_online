@@ -1,0 +1,53 @@
+package metaobjectTest
+
+
+@doc{*
+    Annotation 'log', when attached to a prototype P, without paramters,
+    adds a statement to each method 'm':
+        "Calling method 'm' of prototype 'P'" println
+        
+    The same result is got by attaching 'log' to method 'm'
+    
+    Annotation may take a single parameter that is either an identifier 
+    or a String. The metaobject creates a hashtable HmetCount of type 
+        HashMap<String, Int>
+    and inserts it in the global table with the key that is the identifier.
+    In the hashtable HmetCount, each key is a full method name of the form
+          packageName.prototypeName::methodName
+    The value is an Int with the number of times the method was called.
+    See the example below to discover how to use the tables.
+*}
+@log(mylog)
+object Log
+
+    func run {
+    
+        zero;
+        one: 0 two: 1;
+        self one: 0 two: 1;
+        self three: "a", "b", "c";
+        self three: "a", "b", "c";
+        self three: "a", "b", "c";
+        
+        
+        cast mapStrDyn = System globalTable get: "mylog" {
+            var HashMap<String, Int> logMap = mapStrDyn;
+            for elem in logMap asArray {
+                // Tuple<key, K, value, V>
+                Out println: "Method: " ++ elem key ++ 
+                    " Count: " ++ elem value;
+            }
+        }
+
+    }
+    
+    func zero  {    
+    }
+    func one: Int n two: Int nn { }
+    func three: String a, String b, String  c {
+        var s = "after calling 'three'";
+        assert s size > 10;
+    }
+
+end
+

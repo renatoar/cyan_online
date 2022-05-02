@@ -1,0 +1,13 @@
+package generic02.ga
+
+object G1<String>
+    func init {
+    }
+    func nameGP -> String {
+        return String prototypeName
+    }
+    func name -> String = "generic02.ga." ++ prototypeName;
+    func value -> String = "String";
+    
+    func getString -> String = "String";
+end

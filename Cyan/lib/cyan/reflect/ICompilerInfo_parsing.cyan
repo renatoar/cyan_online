@@ -1,0 +1,9 @@
+package cyan.reflect
+
+import meta
+
+interface ICompilerInfo_parsing
+
+    func action_parsing: ICompilerAction_parsing compiler_parsing
+
+end

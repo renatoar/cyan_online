@@ -1,0 +1,6 @@
+package cyan.lang
+
+
+object ExceptionIterator extends CyException
+end
+

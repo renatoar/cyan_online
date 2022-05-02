@@ -1,0 +1,62 @@
+package metaobjectTest
+
+
+@doc{*
+    Annotations of this metaobject should be attached to a method or
+    method signature (of an interface). 
+    The attached DSL code is made in Myan, which supports interpreted Cyan
+    within parameterless methods declared with 'func': 
+    
+        func afterResTypes_codeToAdd {    
+            // interpreted Cyan code
+        }
+    
+    According to the method name, the Cyan code is interpreted in phase
+    afterResTypes or semAn. Methods of interfaces
+        IAction_semAn
+        IActionNewPrototypes_semAn
+        IAction_afterResTypes
+        IActionNewPrototypes_afterResTypes
+        IParseWithCyanCompiler_parsing 
+        ICommunicateInPrototype_afterResTypes_semAn_afterSemAn    
+        ICheckMessageSend_afterSemAn
+        
+    can be implemented. To better understand this, see the documentation 
+    for action_afterResTypes_semAn.
+*}
+object OnMessageSend_afterSemAn
+
+    func run {
+        var Int k = 0;
+        // error if uncommented: the first parameter should be literal
+        // self at: k, "";
+        
+        // ok
+        self at: 5, "";
+    }
+    
+    /*
+        This annotation demands that the first parameter to 
+        the message passing should be a literal Int
+    */
+    @onMessageSend_afterSemAn{*
+        func afterSemAn_checkKeywordMessageSend {
+              // first parameter
+            var expr = (message getkeywordParameterList
+                         get: 0) getExprList get: 0;
+            if ! (Null instanceof: expr, "meta.WrExprLiteral") {
+                var s = message getFirstSymbol;
+                var Int lineNumber = s getLineNumber;
+                var String fn = s getCompilationUnit getFullFileNamePath;            
+                metaobject addError: "In line " ++ lineNumber ++ " of file " ++
+                     fn ++ ": the first parameter to this " ++
+                   "message passing should be a literal Int"
+            }        
+        }
+    *}
+    func at: Int n, String s {
+    }
+
+
+end
+

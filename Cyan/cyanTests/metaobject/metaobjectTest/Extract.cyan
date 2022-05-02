@@ -1,0 +1,29 @@
+package metaobjectTest
+
+
+@doc{*
+  Annotation 'extract' is replaced by an Int value corresponding to
+  its argument, which should be of the form 'int_value' or 'intvalue'.
+  Example:
+    assert extract(int5) == 5;
+    assert extract(int_555) == 555;
+    
+  This annotation is used inside a generic prototype to simulate
+  the passage of an Int as argument:
+        var v = MyVector(Int, int_100) new;
+        
+  MyVector could have been declared as
+  
+        object MyVector<T, V>
+            var Array<T> array = Array<T> new: @extract(V);
+            ...
+        end
+*}
+object Extract
+
+    func run {
+        var v = generic.MyVector<Int, int_100> new;
+    }
+
+end
+

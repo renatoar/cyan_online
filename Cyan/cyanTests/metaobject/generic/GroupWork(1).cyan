@@ -1,0 +1,84 @@
+package generic
+
+@concept{*
+    T has [ func * (T other) -> T
+            func unit -> T
+            func inverse -> T ],
+        "T should have methods *, unit, and inverse in order to be considered element of a Group",
+        
+    axiom opTest: T a, T b, T c {%
+
+        if (a * (b * c) != (a * b) * c) ||
+           (c * (b * a) != (c * b) * a {
+            ^"T is not associative"
+        }
+        ^Nil
+    %},
+
+    axiom unitTest: T a, T b, T c {%
+
+        if (a * a unit != a unit * a) ||
+           (b * a unit != b unit * b) ||
+           (a unit * b unit != c unit * c unit) {
+            ^"The unit element of T is not an identity"
+        }
+        ^Nil
+    %},
+
+    axiom inverseTest: T a, T b, T c {%
+
+        if (a * a inverse != b unit) ||
+           (a unit != b inverse * b) ||
+           (c inverse * c != T unit) {
+            ^"The inverse operation is not working properly"
+        }
+        ^Nil
+    %}
+
+
+*}
+object GroupWork<T>
+
+    func work: T a, T b, T c {
+    
+        assert (a inverse * a ) asInt == 0;
+        assert (a * a inverse) asInt == 0;
+        assert (a unit * b) == b && (a unit * b unit * c unit) == a unit;
+        assert ((c inverse * b inverse * a inverse) * a * b * c) asInt == 0;
+        assert ((c inverse * b inverse * a inverse) * a * b * c) == a unit;
+        assert ((c inverse * b inverse * a inverse) * a * b * c) asInt == 0;
+        assert ((c inverse * b inverse * a inverse) * a * b * c) == a unit;
+        /*
+        printexpr a asInt;
+        printexpr a inverse asInt;
+        printexpr a unit asInt;
+        printexpr (a * a inverse) asInt;
+        printexpr (a * a unit) asInt;
+        printexpr ((b inverse * a inverse) * a * b) asInt;
+        printexpr ((c inverse * b inverse * a inverse) * a * b * c) asInt;
+
+        printexpr (b inverse * b) asInt;
+        printexpr (c * b * a * ( a inverse * b inverse * c inverse )) asInt;
+        */
+    }
+    
+    
+    func workout: T a, T b, T c {
+        /*
+        printexpr ((b inverse * a inverse) * a * b) asInt;
+        printexpr ((c inverse * b inverse * a inverse) * a * b * c) asInt;
+
+        printexpr (b inverse * b) asInt;
+        printexpr (c * b * a * ( a inverse * b inverse * c inverse )) asInt;
+        */
+
+        let tunit = T unit;
+        assert c * b * a * ( a inverse * b inverse * c inverse ) == tunit;
+        assert a*(b*c) == (a*b)*c;
+        assert c*(b*a) == (c*b)*a;
+
+        
+    }
+    
+    
+end

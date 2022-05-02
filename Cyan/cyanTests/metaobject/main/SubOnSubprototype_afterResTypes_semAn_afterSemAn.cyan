@@ -1,0 +1,7 @@
+package main
+
+
+object SubOnSubprototype_afterResTypes_semAn_afterSemAn 
+          extends metaobjectTest.OnSubprototype_afterResTypes_semAn_afterSemAn
+
+end

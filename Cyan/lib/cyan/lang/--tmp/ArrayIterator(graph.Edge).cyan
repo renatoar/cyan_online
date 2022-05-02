@@ -1,0 +1,31 @@
+package cyan.lang
+
+
+open object ArrayIterator<graph.Edge> 
+          implements Iterator<graph.Edge>
+
+    func init: (Array<graph.Edge> s)   {
+        self.s = s; 
+        index = 0
+    } 
+
+    override func hasNext -> Boolean  {
+        return index < (s size)
+    } 
+
+    override func next -> graph.Edge  {
+                if index < (s size) {
+            ++index; 
+            return s[index - 1]
+        }
+        else {
+            throw: ExceptionIterator
+        }
+
+    } 
+
+    private let Array<graph.Edge> s
+    private var Int index
+
+end
+

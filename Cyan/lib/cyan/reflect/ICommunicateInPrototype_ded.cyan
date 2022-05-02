@@ -1,0 +1,12 @@
+package cyan.reflect
+
+import meta
+
+interface ICommunicateInPrototype_ded
+
+    func ded_shareInfoPrototype -> Dyn
+
+    func ded_receiveInfoPrototype:
+            Set<Tuple<String, Int, Int, Dyn>> annotationInfoSet
+            
+end

@@ -1,0 +1,8 @@
+package cyan.lang
+
+@createFunction 
+abstract open object Function<Tuple<Int, Int>, Boolean> 
+
+
+end
+

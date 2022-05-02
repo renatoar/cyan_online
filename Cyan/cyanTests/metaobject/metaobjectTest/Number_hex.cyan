@@ -1,0 +1,34 @@
+package metaobjectTest
+
+
+@doc{*
+    This is a literal number annotation, an identifier follows a literal
+    number. The syntax for this annotation is
+         n_hex  or n_Hex  or n_HEX
+    in which 'n' is a literal number in base 16. 'n' can have numbers, 
+    underscores, and letters from A to F but, if it has letters, it should 
+    start with a number (otherwise the compiler will consider it as an 
+    identifier). The '_' in n_hex is optional if 'n' does not end with a
+    letter. The metaobject uses method 
+        Integer.valueOf(n, 16)
+    to parse the number 'n' in base 16.
+    
+*}
+object Number_hex
+
+    func run {
+        assert 0A_hex == 10;
+        
+        assert 0FF_HEX == 255;
+        
+        assert 0FF_FF_Hex == 65535;
+        
+        assert 11hex == 17;
+        
+        // 0FFHex is illegal because the compiler would 
+        // look for a metaobject called FFHex
+        
+    }
+
+end
+

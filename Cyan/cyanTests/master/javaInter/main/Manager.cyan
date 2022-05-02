@@ -1,0 +1,9 @@
+package javaInter.main
+
+object Manager extends Worker 
+
+    override
+    func myprint: String s {
+    }
+
+end

@@ -1,0 +1,18 @@
+package other
+
+open
+object SuperA
+      // from 'A has [ ... ]'
+    func repAB { }
+    func repAB: String -> Char = 'a';
+      // from I1   
+    func i1_m2: Int i1_m3: String { }
+    
+      // equal to B
+    func runB: Array<String> { }
+       
+
+    func run: Array<Any> args { }
+    func print: String s, Char ch { } 
+
+end

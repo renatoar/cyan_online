@@ -1,0 +1,233 @@
+package cyan.lang
+
+@javacode{*
+import java.util.*;
+*}
+
+@immutable
+object ImArray<T> implements Iterable<T>
+
+
+
+    @javacode[*{
+           // very inefficient, I know that
+        public ArrayList<T> array = new ArrayList<T>();
+        public THISPROTOTYPE999( T []anArray ) {
+            array = new ArrayList<T>();
+            for (int i = 0; i < anArray.length; ++i) {
+                array.add(anArray[i]);
+            }
+        }
+    }*]
+
+    
+    func init: Array<T> mutableArray {
+        @javacode[*{
+            array = new ArrayList<T>();
+            for (int i = 0; i < _mutableArray.array.size(); ++i) {
+                array.add(_mutableArray.array.get(i));
+            }
+        }*]
+    }
+
+    
+    override
+    func == (Dyn other) -> Boolean {
+        var Boolean ret = false;
+        type other
+            case ImArray<T> another {
+                if size != another size { return false }
+                var Int i = 0;
+                for elem in another {
+                    if self[i] != elem {
+                        return false
+                    }
+                    ++i
+                }
+                return true
+            }
+        return false;
+    }
+
+    override
+    func != (Dyn other) -> Boolean {
+        return !(self == other)
+    }        
+    
+    override
+    func hashCode -> Int {
+        @javacode{*
+            return new CyInt( array.hashCode() );
+        *}
+    }
+    
+    func isEmpty -> Boolean {
+         @javacode<<<
+             return new CyBoolean(array.isEmpty());
+         >>>
+    }
+    
+    
+    func [] at: Int index -> T {
+        @javacode[*{
+             try {
+                return array.get(_index.n);
+             } 
+             catch ( IndexOutOfBoundsException  e ) {
+                 throw new ExceptionContainer__( new _ExceptionIndexOutOfBounds(_index));
+             }
+        }*]
+    }
+
+    func last -> T {
+        return at: (size - 1);
+    }
+
+    
+    override
+    func asString: (Int ident) -> String {
+        var String s = "";
+        for i in 1..ident  { s = s ++ " " }
+        s = s ++ "[ ";
+        var Int size2 = size;
+        for elem in self {
+            s = s ++ elem asStringQuoteIfString;
+            /*
+            if elem isA: String {
+                s = s ++ "\"" ++ elem asString ++ "\"";
+            }
+            else {
+            }
+            */
+            --size2;
+            if size2 > 0 { s = s ++ ", " }
+        }
+        s = s ++ " ]";
+        return s
+    }    
+    
+    func slice: (Interval<Int> interval) -> ImArray<T> {
+        var newArray22 = Array<T> new: (interval size);
+        interval foreach: { (: Int i :) 
+            newArray22 add: (self at: i)
+        };
+        return ImArray<T>(newArray22);
+    }
+    
+    
+    func size -> Int {
+        @javacode[*{
+            return new CyInt(array.size());
+        }*]
+    }
+    
+    override
+    func foreach: Function<T, Nil> b {
+        0..< size foreach: { (: Int i :) 
+            b eval: (self at: i)
+        }
+    }
+
+    func filter: Function<T, Boolean> f -> ImArray<T> {
+        let other = Array<T> new;
+        self foreach: { (: T elem :) 
+            if f eval: elem {
+                other add: elem
+            }
+        };
+        return ImArray<T>(other);
+    }
+    
+    func filter: Function<T, Boolean> f foreach: Function<T, Nil> b {
+        self foreach: { (: T elem :) 
+            if f eval: elem {
+                b eval: elem
+            }
+        };
+    }
+    
+
+    func map: Function<T, T> f -> ImArray<T> {
+        let mapped = Array<T>();
+        for elem in self {
+            mapped add: (f eval: elem)
+        }
+        return ImArray<T>(mapped)
+    }
+
+    func |> Function<ImArray<T>, ImArray<T>> f -> ImArray<T> {
+        return f eval: self
+    }
+
+    override
+    func iterator -> Iterator<T> {
+        return ImArrayIterator<T> new: self
+    }
+    
+    func contains: T elem -> Boolean {
+        for other in self {
+            if other == elem {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func indexOf: T elem -> Int {
+        var index = 0;
+        for other in self {
+            if other == elem {
+                return index
+            }
+            ++index
+        }
+        return -1
+    }
+
+    
+    /*  Examples: 
+          anArray apply: #print;
+          anArray apply: #add:
+        this last applies add: to all elements, like inject
+    */
+    func apply: (String message) {
+
+        self foreach: { (: T elem :)
+            elem `message
+        };
+    }
+
+
+    func apply: (String message) select: (String slot) -> Dyn {
+        var Dyn sum = self[0] `slot;
+        var Int i = 1;
+        while i < size {
+            let T elem = self[i];
+            sum = sum `message: (elem `slot);
+            ++i
+        }
+        return sum
+    }
+
+
+    /*
+        Example:
+             [ 1, 2, 3  ] .* #print; // print all array elements
+    */
+
+    func .* (String message) {
+        self apply: message
+    }
+    
+    //  usage:  v .+ "+"  would sum all array elements if
+    // the element type is Int
+    func .+ (String message) -> Dyn {
+        var T sum = self[0];
+        1 ..< size foreach: { 
+                (: Int i :)
+                 sum = sum `message: self[i]
+             }; 
+        return sum
+    }
+    
+end  

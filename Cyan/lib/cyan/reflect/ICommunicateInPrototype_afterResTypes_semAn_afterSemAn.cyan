@@ -1,0 +1,12 @@
+package cyan.reflect
+
+import meta
+
+interface ICommunicateInPrototype_afterResTypes_semAn_afterSemAn
+
+    func afterResTypes_semAn_afterSemAn_shareInfoPrototype: WrEnv env -> Dyn
+
+    func afterResTypes_semAn_afterSemAn_receiveInfoPrototype:
+            Set<Tuple<String, Int, Int, Dyn>> annotationInfoSet, 
+            WrEnv env
+end
